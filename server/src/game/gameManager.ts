@@ -1,16 +1,31 @@
 import { Game } from "./game";
+import { Game1, Game2 } from "./game1/game1";
 
 export class GameManager {
-  games: Game[] = [];
+  games: Game<unknown>[] = [];
 
   getGame(pin: string) {
     return this.games.find((game) => game.pin === pin);
   }
 
-  createGame() {
-    const game = new Game();
-    this.games.push(game);
-    return game;
+  createGame(gameType: string) {
+    if (gameType === "1") {
+      const game = new Game1(this);
+      this.games.push(game);
+      return game;
+    }
+
+    if (gameType === "2") {
+      const game = new Game2(this);
+      this.games.push(game);
+      return game;
+    }
+
+    throw new Error("Game type not found: " + gameType);
+  }
+
+  closeGame(pin: string) {
+    this.games = this.games.filter((i) => i.pin !== pin);
   }
 
   hasPlayerInGame(id: string) {

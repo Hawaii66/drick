@@ -1,10 +1,10 @@
-import { z } from "zod";
 import { Event } from "./event";
 
-export type Player = {
+export type Player<T> = {
   name: string;
   id: string;
   socket: Socket;
+  metadata: T;
 };
 
 export interface Socket {

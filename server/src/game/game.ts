@@ -1,22 +1,33 @@
 import { Event } from "./event";
+import { GameManager } from "./gameManager";
 import { GameState } from "./gameState";
 import { Data, Player } from "./player";
 
-export class Game {
-  players: Player[] = [];
+export abstract class Game<T> {
+  gameManager: GameManager;
+  players: Player<T>[] = [];
   pin: string;
   hostId: string;
-  state: GameState | null = null;
+  state: GameState<T> | null = null;
 
-  constructor() {
+  constructor(gameManager: GameManager) {
     this.pin = Math.floor(Math.random() * 1000000)
       .toString()
       .padStart(6, "0");
     this.hostId = "";
+    this.gameManager = gameManager;
   }
 
   setHost(id: string) {
     this.hostId = id;
+  }
+
+  getHost() {
+    const host = this.getPlayer(this.hostId);
+
+    if (!host) throw new Error("No host found");
+
+    return host;
   }
 
   sendEventToPlayer<T>(id: string, event: Event, data: T) {
@@ -33,6 +44,13 @@ export class Game {
     this.players.forEach((player) => player.socket.emit(event, data));
   }
 
+  sendEventToHost<T>(event: Event, data: T) {
+    const host = this.getPlayer(this.hostId);
+    if (!host) throw new Error("Host not found");
+
+    this.sendEventToPlayer(host.id, event, data);
+  }
+
   getPlayer(id: string) {
     return this.players.find((player) => player.id === id);
   }
@@ -41,19 +59,28 @@ export class Game {
     return this.players.some((player) => player.id === id);
   }
 
-  onPlayerEvent(player: Player, event: Event, data: Data) {
+  onPlayerEvent(player: Player<T>, event: Event, data: Data) {
     if (!this.state) throw new Error("State not set");
 
-    return this.state.onPlayerEvent(player, event, data);
+    return this.state.onPlayerEvent(this, player, event, data);
   }
 
   onServerEvent(event: Event, data: Data) {
     if (!this.state) throw new Error("State not set");
 
-    return this.state.onServerEvent(event, data);
+    return this.state.onServerEvent(this, event, data);
   }
 
-  changeState(state: GameState) {
+  changeState(state: GameState<T>) {
     this.state = state;
+  }
+
+  addPlayer(player: Player<T>) {
+    this.players.push(player);
+
+    this.sendEventToAllPlayers(Event.GAME_PLAYER_JOIN_GAME, {
+      pin: this.pin,
+      players: this.players.map((i) => ({ id: i.id, name: i.name })),
+    });
   }
 }
