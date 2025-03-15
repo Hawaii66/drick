@@ -1,9 +1,9 @@
 import { z } from "zod";
-import { JoinGameState } from "./game/game1/joinGameState";
+import { JoinGameState } from "./game/exposed/joinGameState";
 import { GameManager } from "./game/gameManager";
 import { Data } from "./game/player";
 import { FakeSocket } from "./game/test";
-import { Game1 } from "./game/game1/game1";
+import { Game1 } from "./game/exposed/game1";
 import { CTSEvent, STCEvent } from "./game/event";
 
 const gameManager = new GameManager();
