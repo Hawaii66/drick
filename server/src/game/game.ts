@@ -1,3 +1,4 @@
+import { Event } from "./event";
 import { GameState } from "./gameState";
 import { Data, Player } from "./player";
 
@@ -18,7 +19,7 @@ export class Game {
     this.hostId = id;
   }
 
-  sendEventToPlayer<T>(id: string, event: string, data: T) {
+  sendEventToPlayer<T>(id: string, event: Event, data: T) {
     const player = this.players.find((player) => player.id === id);
     if (player) {
       player.socket.emit(event, data);
@@ -28,7 +29,7 @@ export class Game {
     return false;
   }
 
-  sendEventToAllPlayers<T>(event: string, data: T) {
+  sendEventToAllPlayers<T>(event: Event, data: T) {
     this.players.forEach((player) => player.socket.emit(event, data));
   }
 
@@ -40,13 +41,13 @@ export class Game {
     return this.players.some((player) => player.id === id);
   }
 
-  onPlayerEvent(player: Player, event: string, data: Data) {
+  onPlayerEvent(player: Player, event: Event, data: Data) {
     if (!this.state) throw new Error("State not set");
 
     return this.state.onPlayerEvent(player, event, data);
   }
 
-  onServerEvent(event: string, data: Data) {
+  onServerEvent(event: Event, data: Data) {
     if (!this.state) throw new Error("State not set");
 
     return this.state.onServerEvent(event, data);

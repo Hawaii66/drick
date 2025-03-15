@@ -1,13 +1,14 @@
+import { Event } from "./event";
 import { Data } from "./player";
 
 class EventLog {
-  eventLog: { event: string; data: Data }[] = [];
+  eventLog: { event: Event; data: Data }[] = [];
 
   getLatets() {
     return this.eventLog[this.eventLog.length - 1];
   }
 
-  addLog(data: { event: string; data: Data }) {
+  addLog(data: { event: Event; data: Data }) {
     this.eventLog.push(data);
   }
 
@@ -18,8 +19,8 @@ class EventLog {
 
 export class FakeSocket {
   id: string;
-  listeners: { event: string; callback: (data: Data) => void }[] = [];
-  onAnyListeners: ((event: string, data: Data) => void)[] = [];
+  listeners: { event: Event; callback: (data: Data) => void }[] = [];
+  onAnyListeners: ((event: Event, data: Data) => void)[] = [];
   eventLog: EventLog;
 
   constructor(id: string) {
@@ -27,23 +28,23 @@ export class FakeSocket {
     this.eventLog = new EventLog();
   }
 
-  sendEvent(event: string, data: Data) {
+  sendEvent(event: Event, data: Data) {
     this.onAnyListeners.forEach((d) => d(event, data));
     this.listeners.forEach((d) => d.event === event && d.callback(data));
   }
 
-  emit(event: string, data: Data) {
+  emit(event: Event, data: Data) {
     this.eventLog.addLog({ event, data });
   }
 
-  on(event: string, callback: (data: Data) => void) {
+  on(event: Event, callback: (data: Data) => void) {
     this.listeners.push({
       callback,
       event,
     });
   }
 
-  onAny(callback: (event: string, data: Data) => void) {
+  onAny(callback: (event: Event, data: Data) => void) {
     this.onAnyListeners.push(callback);
   }
 }

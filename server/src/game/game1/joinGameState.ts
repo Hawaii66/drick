@@ -2,6 +2,7 @@ import { z } from "zod";
 import { Game } from "../game";
 import { GameState } from "../gameState";
 import { Data, Player } from "../player";
+import { Event } from "../event";
 
 export class JoinGameState extends GameState {
   constructor(game: Game) {
@@ -11,14 +12,14 @@ export class JoinGameState extends GameState {
   addPlayer(player: Player) {
     this.game.players.push(player);
 
-    player.socket.emit("game-player-join-game", {
+    player.socket.emit(Event.GAME_PLAYER_JOIN_GAME, {
       pin: this.game.pin,
       players: this.game.players.map((i) => ({ id: i.id, name: i.name })),
     });
   }
 
-  onServerEvent(event: string, data: Data): boolean {
-    if (event === "host-game") {
+  onServerEvent(event: Event, data: Data): boolean {
+    if (event === Event.HOST_GAME) {
       if (this.game.players.length > 0) {
         return false;
       }
@@ -45,7 +46,7 @@ export class JoinGameState extends GameState {
       return true;
     }
 
-    if (event === "join-game") {
+    if (event === Event.JOIN_GAME) {
       if (this.game.players.length === 0) {
         return false;
       }
@@ -68,7 +69,7 @@ export class JoinGameState extends GameState {
     return false;
   }
 
-  onPlayerEvent(player: Player, event: string, data: Data) {
+  onPlayerEvent(player: Player, event: Event, data: Data) {
     return false;
   }
 }

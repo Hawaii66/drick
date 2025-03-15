@@ -1,3 +1,4 @@
+import { Event } from "./event";
 import { Game } from "./game";
 import { Data, Player } from "./player";
 
@@ -10,6 +11,6 @@ export abstract class GameState {
     this.state = state;
   }
 
-  abstract onPlayerEvent(player: Player, event: string, data: Data): boolean;
-  abstract onServerEvent(event: string, data: Data): boolean;
+  abstract onPlayerEvent(player: Player, event: Event, data: Data): boolean;
+  abstract onServerEvent(event: Event, data: Data): boolean;
 }

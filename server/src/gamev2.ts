@@ -3,18 +3,15 @@ import { JoinGameState } from "./game/game1/joinGameState";
 import { GameManager } from "./game/gameManager";
 import { Data } from "./game/player";
 import { FakeSocket } from "./game/test";
+import { Event } from "./game/event";
 
 const gameManager = new GameManager();
 
-const handleSocketCallback = (
-  socket: FakeSocket,
-  event: string,
-  data: Data
-) => {
+const handleSocketCallback = (socket: FakeSocket, event: Event, data: Data) => {
   const game = gameManager.getGameFromPlayer(socket.id);
 
   // Debug
-  if (event === "debug") {
+  if (event === Event.DEBUG) {
     gameManager.games.forEach((game) => {
       console.log({
         players: game.players,
@@ -34,16 +31,16 @@ const handleSocketCallback = (
       throw new Error("Wrong game event: " + event);
     }
   } else {
-    if (event === "host-game") {
+    if (event === Event.HOST_GAME) {
       const game = gameManager.createGame();
 
       game.state = new JoinGameState(game);
 
-      game.onServerEvent("host-game", {
+      game.onServerEvent(Event.HOST_GAME, {
         data,
         socket,
       });
-    } else if (event === "join-game") {
+    } else if (event === Event.JOIN_GAME) {
       const { pin, name } = z
         .object({
           name: z.string().min(3),
@@ -54,7 +51,7 @@ const handleSocketCallback = (
       const game = gameManager.getGame(pin);
 
       if (game) {
-        game.onServerEvent("join-game", {
+        game.onServerEvent(Event.JOIN_GAME, {
           name,
           socket,
         });
@@ -76,14 +73,14 @@ const run = () => {
     handleSocketCallback(playerSocket, event, data)
   );
 
-  hostSocket.sendEvent("host-game", { name: "Host player", rounds: 20 });
+  hostSocket.sendEvent(Event.HOST_GAME, { name: "Host player", rounds: 20 });
   const { data: data1, event } = hostSocket.eventLog.getLatets();
   const { pin } = z.object({ pin: z.string().length(6) }).parse(data1);
 
-  if (event !== "game-player-join-game")
+  if (event !== Event.GAME_PLAYER_JOIN_GAME)
     throw new Error("Wrong event: " + event);
 
-  playerSocket.sendEvent("join-game", { name: "Person player", pin });
+  playerSocket.sendEvent(Event.JOIN_GAME, { name: "Person player", pin });
 
   const { data: data2 } = playerSocket.eventLog.getLatets();
   const { players } = z

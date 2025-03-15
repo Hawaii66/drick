@@ -1,4 +1,5 @@
 import { z } from "zod";
+import { Event } from "./event";
 
 export type Player = {
   name: string;
@@ -7,7 +8,7 @@ export type Player = {
 };
 
 export interface Socket {
-  emit: <T>(event: string, data: T) => void;
+  emit: <T>(event: Event, data: T) => void;
 }
 
 export type Data = unknown;
