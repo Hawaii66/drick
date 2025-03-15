@@ -1,11 +1,7 @@
-import { Button } from "@/components/ui/button";
+import PageAnswerQuestions from "./pages/PageAnswerQuestions";
 
 function App() {
-  return (
-    <div className="flex flex-col justify-center items-center min-h-svh">
-      <Button>Click me</Button>
-    </div>
-  );
+  return <PageAnswerQuestions />;
 }
 
 export default App;
