@@ -1,7 +1,7 @@
-import PageAnswerQuestions from "./pages/PageAnswerQuestions";
+import PageHostGame from "./pages/PageHostGame";
 
 function App() {
-  return <PageAnswerQuestions />;
+  return <PageHostGame />;
 }
 
 export default App;

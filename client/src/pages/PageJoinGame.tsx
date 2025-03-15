@@ -19,7 +19,7 @@ export default function PageJoinGame() {
       <Card>
         <CardContent className="flex flex-col items-center gap-8">
           <div className="flex flex-col gap-2 w-full">
-            <Label>Name</Label>
+            <Label>Username</Label>
             <Input
               value={name}
               onChange={(e) => setName(e.target.value)}
