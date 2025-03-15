@@ -1,4 +1,4 @@
-import { Event } from "./event";
+import { CTSEvent, STCEvent } from "./event";
 import { GameManager } from "./gameManager";
 import { GameState } from "./gameState";
 import { Data, Player } from "./player";
@@ -30,7 +30,7 @@ export abstract class Game<T> {
     return host;
   }
 
-  sendEventToPlayer<T>(id: string, event: Event, data: T) {
+  sendEventToPlayer<T>(id: string, event: STCEvent, data: T) {
     const player = this.players.find((player) => player.id === id);
     if (player) {
       player.socket.emit(event, data);
@@ -40,11 +40,11 @@ export abstract class Game<T> {
     return false;
   }
 
-  sendEventToAllPlayers<T>(event: Event, data: T) {
+  sendEventToAllPlayers<T>(event: STCEvent, data: T) {
     this.players.forEach((player) => player.socket.emit(event, data));
   }
 
-  sendEventToHost<T>(event: Event, data: T) {
+  sendEventToHost<T>(event: STCEvent, data: T) {
     const host = this.getPlayer(this.hostId);
     if (!host) throw new Error("Host not found");
 
@@ -59,13 +59,13 @@ export abstract class Game<T> {
     return this.players.some((player) => player.id === id);
   }
 
-  onPlayerEvent(player: Player<T>, event: Event, data: Data) {
+  onPlayerEvent(player: Player<T>, event: CTSEvent, data: Data) {
     if (!this.state) throw new Error("State not set");
 
     return this.state.onPlayerEvent(this, player, event, data);
   }
 
-  onServerEvent(event: Event, data: Data) {
+  onServerEvent(event: CTSEvent, data: Data) {
     if (!this.state) throw new Error("State not set");
 
     return this.state.onServerEvent(this, event, data);
@@ -78,9 +78,13 @@ export abstract class Game<T> {
   addPlayer(player: Player<T>) {
     this.players.push(player);
 
-    this.sendEventToAllPlayers(Event.GAME_PLAYER_JOIN_GAME, {
+    this.sendEventToAllPlayers(STCEvent.COMMON.PLAYER_JOINED_GAME, {
       pin: this.pin,
-      players: this.players.map((i) => ({ id: i.id, name: i.name })),
+      players: this.players.map((i) => ({
+        id: i.id,
+        name: i.name,
+        isHost: this.hostId === i.id,
+      })),
     });
   }
 }

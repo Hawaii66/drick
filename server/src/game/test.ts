@@ -1,14 +1,14 @@
-import { Event } from "./event";
+import { CTSEvent, STCEvent } from "./event";
 import { Data } from "./player";
 
 class EventLog {
-  eventLog: { event: Event; data: Data }[] = [];
+  eventLog: { event: CTSEvent; data: Data }[] = [];
 
   getLatets() {
     return this.eventLog[this.eventLog.length - 1];
   }
 
-  addLog(data: { event: Event; data: Data }) {
+  addLog(data: { event: CTSEvent; data: Data }) {
     this.eventLog.push(data);
   }
 
@@ -19,8 +19,8 @@ class EventLog {
 
 export class FakeSocket {
   id: string;
-  listeners: { event: Event; callback: (data: Data) => void }[] = [];
-  onAnyListeners: ((event: Event, data: Data) => void)[] = [];
+  listeners: { event: CTSEvent; callback: (data: Data) => void }[] = [];
+  onAnyListeners: ((event: CTSEvent, data: Data) => void)[] = [];
   eventLog: EventLog;
   logAll: boolean;
 
@@ -30,7 +30,7 @@ export class FakeSocket {
     this.logAll = logAll;
   }
 
-  sendEvent(event: Event, data: Data) {
+  sendEvent(event: CTSEvent, data: Data) {
     if (this.logAll) {
       console.log("To server: ", this.id, event, data);
     }
@@ -39,7 +39,7 @@ export class FakeSocket {
     this.listeners.forEach((d) => d.event === event && d.callback(data));
   }
 
-  emit(event: Event, data: Data) {
+  emit(event: CTSEvent, data: Data) {
     if (this.logAll) {
       console.log("To client: ", this.id, event, data);
     }
@@ -47,14 +47,14 @@ export class FakeSocket {
     this.eventLog.addLog({ event, data });
   }
 
-  on(event: Event, callback: (data: Data) => void) {
+  on(event: CTSEvent, callback: (data: Data) => void) {
     this.listeners.push({
       callback,
       event,
     });
   }
 
-  onAny(callback: (event: Event, data: Data) => void) {
+  onAny(callback: (event: CTSEvent, data: Data) => void) {
     this.onAnyListeners.push(callback);
   }
 }

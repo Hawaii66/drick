@@ -1,17 +1,16 @@
 import { z } from "zod";
-import { Game } from "../game";
 import { GameState } from "../gameState";
 import { Data, Player } from "../player";
-import { Event } from "../event";
 import { Game1, Game1Player } from "./game1";
 import { AnswerQuestionState } from "./answerQuestions";
+import { CTSEvent } from "../event";
 
 export class JoinGameState extends GameState<Game1Player> {
   constructor(game: Game1) {
     super(game, "join");
   }
 
-  onHostGame(game: Game1, _: Event, data: Data): boolean {
+  onHostGame(game: Game1, _: CTSEvent, data: Data): boolean {
     if (game.players.length > 0) {
       return false;
     }
@@ -29,6 +28,8 @@ export class JoinGameState extends GameState<Game1Player> {
       })
       .parse(data);
 
+    game.setHost(socket.id);
+
     game.addPlayer({
       socket,
       name: name,
@@ -39,11 +40,10 @@ export class JoinGameState extends GameState<Game1Player> {
     });
     game.rounds = rounds;
 
-    game.setHost(socket.id);
     return true;
   }
 
-  onJoinGame(game: Game1, _: Event, data: Data): boolean {
+  onJoinGame(game: Game1, _: CTSEvent, data: Data): boolean {
     if (game.players.length === 0) {
       return false;
     }
@@ -66,7 +66,7 @@ export class JoinGameState extends GameState<Game1Player> {
     return true;
   }
 
-  onStartGame(game: Game1, _: Event, data: Data): boolean {
+  onStartGame(game: Game1, _: CTSEvent, data: Data): boolean {
     if (game.players.length < 3) {
       return false;
     }
@@ -75,11 +75,11 @@ export class JoinGameState extends GameState<Game1Player> {
     return true;
   }
 
-  onServerEvent(game: Game1, event: Event, data: Data): boolean {
+  onServerEvent(game: Game1, event: CTSEvent, data: Data): boolean {
     switch (event) {
-      case Event.HOST_GAME:
+      case CTSEvent.COMMON.HOST_GAME:
         return this.onHostGame(game, event, data);
-      case Event.JOIN_GAME:
+      case CTSEvent.COMMON.JOIN_GAME:
         return this.onJoinGame(game, event, data);
     }
 
@@ -89,11 +89,11 @@ export class JoinGameState extends GameState<Game1Player> {
   onPlayerEvent(
     game: Game1,
     player: Player<Game1Player>,
-    event: Event,
+    event: CTSEvent,
     data: Data
   ) {
     switch (event) {
-      case Event.START_GAME:
+      case CTSEvent.COMMON.START_GAME:
         return this.onStartGame(game, event, data);
     }
     return false;

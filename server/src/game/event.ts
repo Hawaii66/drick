@@ -1,17 +1,31 @@
-export const Event = {
-  DEBUG: "debug",
-  HOST_GAME: "host-game",
-  JOIN_GAME: "join-game",
-  START_GAME: "start-game",
-  GAME_PLAYER_JOIN_GAME: "game-player-join-game",
-  GAME_PLAYER_ANSWER_QUESTIONS: "game-player-answer-questions",
-  GAME_PLAYER_ANSWERED_QUESTIONS: "game-player-answered-questions",
-  GAME_PLAYER_READY_ANSWERED: "game-player-ready-answered",
-  GAME_SHOW_QUESTION: "game-show-question",
-  GAME_NEXT_QUESTION: "game-next-question",
-  GAME_FINISHED: "game-finished",
-  GAME_HOST_END_GAME: "game-end-game",
-  GAME_ENDED: "game-ended",
-} as const;
+type Flatten<T, build extends string[] = []> = T extends Record<string, any>
+  ? Flatten<T[keyof T], build>
+  : [...build, T];
 
-export type Event = (typeof Event)[keyof typeof Event];
+export const STCEvent = {
+  COMMON: {
+    PLAYER_JOINED_GAME: "player-joined-game",
+  },
+  EXPOSED: {
+    ANSWER_QUESTIONS: "answer-questions",
+    PLAYER_ANSWERED_QUESTIONS: "player-answered-questions",
+    SHOW_QUESTION: "show-question",
+    FINISHED: "game-finished",
+    ENDED: "game-ended",
+  },
+} as const;
+export type STCEvent = Flatten<typeof STCEvent>[number];
+
+export const CTSEvent = {
+  COMMON: {
+    HOST_GAME: "host-game",
+    JOIN_GAME: "join-game",
+    START_GAME: "start-game",
+  },
+  EXPOSED: {
+    ANSWERED_QUESTIONS: "answered-questions",
+    NEXT_QUESTION: "next-question",
+    END_GAME: "end-game",
+  },
+};
+export type CTSEvent = Flatten<typeof CTSEvent>[number];

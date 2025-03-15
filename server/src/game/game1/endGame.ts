@@ -1,4 +1,4 @@
-import { Event } from "../event";
+import { CTSEvent, STCEvent } from "../event";
 import { Game } from "../game";
 import { GameState } from "../gameState";
 import { Player, Data } from "../player";
@@ -8,13 +8,13 @@ export class EndGameState extends GameState<Game1Player> {
   onEndGame(
     game: Game<Game1Player>,
     player: Player<Game1Player>,
-    event: Event,
+    event: CTSEvent,
     data: Data
   ) {
     const host = game.getHost();
     if (host.id !== player.id) return false;
 
-    game.sendEventToAllPlayers(Event.GAME_ENDED, {});
+    game.sendEventToAllPlayers(STCEvent.EXPOSED.ENDED, {});
     game.gameManager.closeGame(game.pin);
     return true;
   }
@@ -22,18 +22,18 @@ export class EndGameState extends GameState<Game1Player> {
   onPlayerEvent(
     game: Game<Game1Player>,
     player: Player<Game1Player>,
-    event: Event,
+    event: CTSEvent,
     data: Data
   ): boolean {
     switch (event) {
-      case Event.GAME_HOST_END_GAME: {
+      case CTSEvent.EXPOSED.END_GAME: {
         return this.onEndGame(game, player, event, data);
       }
     }
 
     return false;
   }
-  onServerEvent(game: Game<Game1Player>, event: Event, data: Data): boolean {
+  onServerEvent(game: Game<Game1Player>, event: CTSEvent, data: Data): boolean {
     return false;
   }
 }

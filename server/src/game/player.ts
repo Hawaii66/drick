@@ -1,4 +1,4 @@
-import { Event } from "./event";
+import { STCEvent } from "./event";
 
 export type Player<T> = {
   name: string;
@@ -8,7 +8,7 @@ export type Player<T> = {
 };
 
 export interface Socket {
-  emit: <T>(event: Event, data: T) => void;
+  emit: <T>(event: STCEvent, data: T) => void;
 }
 
 export type Data = unknown;

@@ -3,12 +3,16 @@ import { JoinGameState } from "./game/game1/joinGameState";
 import { GameManager } from "./game/gameManager";
 import { Data } from "./game/player";
 import { FakeSocket } from "./game/test";
-import { Event } from "./game/event";
 import { Game1 } from "./game/game1/game1";
+import { CTSEvent, STCEvent } from "./game/event";
 
 const gameManager = new GameManager();
 
-const handleSocketCallback = (socket: FakeSocket, event: Event, data: Data) => {
+const handleSocketCallback = (
+  socket: FakeSocket,
+  event: CTSEvent,
+  data: Data
+) => {
   const game = gameManager.getGameFromPlayer(socket.id);
 
   if (game) {
@@ -20,7 +24,7 @@ const handleSocketCallback = (socket: FakeSocket, event: Event, data: Data) => {
       throw new Error("Wrong game event: " + event);
     }
   } else {
-    if (event === Event.HOST_GAME) {
+    if (event === CTSEvent.COMMON.HOST_GAME) {
       const game = gameManager.createGame("1");
 
       if (game instanceof Game1) {
@@ -29,11 +33,11 @@ const handleSocketCallback = (socket: FakeSocket, event: Event, data: Data) => {
         throw new Error("Game init state not set");
       }
 
-      game.onServerEvent(Event.HOST_GAME, {
+      game.onServerEvent(CTSEvent.COMMON.HOST_GAME, {
         data,
         socket,
       });
-    } else if (event === Event.JOIN_GAME) {
+    } else if (event === CTSEvent.COMMON.JOIN_GAME) {
       const { pin, name } = z
         .object({
           name: z.string().min(3),
@@ -44,7 +48,7 @@ const handleSocketCallback = (socket: FakeSocket, event: Event, data: Data) => {
       const game = gameManager.getGame(pin);
 
       if (game) {
-        game.onServerEvent(Event.JOIN_GAME, {
+        game.onServerEvent(CTSEvent.COMMON.JOIN_GAME, {
           name,
           socket,
         });
@@ -70,19 +74,28 @@ const run = () => {
     handleSocketCallback(player2Socket, event, data)
   );
 
-  hostSocket.sendEvent(Event.HOST_GAME, { name: "Host player", rounds: 20 });
+  hostSocket.sendEvent(CTSEvent.COMMON.HOST_GAME, {
+    name: "Host player",
+    rounds: 20,
+  });
   const { data: data1, event } = hostSocket.eventLog.getLatets();
   const { pin } = z.object({ pin: z.string().length(6) }).parse(data1);
 
-  if (event !== Event.GAME_PLAYER_JOIN_GAME)
+  if (event !== STCEvent.COMMON.PLAYER_JOINED_GAME)
     throw new Error("Wrong event: " + event);
 
-  player1Socket.sendEvent(Event.JOIN_GAME, { name: "Person 1 player", pin });
-  player2Socket.sendEvent(Event.JOIN_GAME, { name: "Person 2 player", pin });
+  player1Socket.sendEvent(CTSEvent.COMMON.JOIN_GAME, {
+    name: "Person 1 player",
+    pin,
+  });
+  player2Socket.sendEvent(CTSEvent.COMMON.JOIN_GAME, {
+    name: "Person 2 player",
+    pin,
+  });
 
-  hostSocket.sendEvent(Event.START_GAME, {});
+  hostSocket.sendEvent(CTSEvent.COMMON.START_GAME, {});
 
-  hostSocket.sendEvent(Event.GAME_PLAYER_ANSWERED_QUESTIONS, {
+  hostSocket.sendEvent(CTSEvent.EXPOSED.ANSWERED_QUESTIONS, {
     answers: [
       {
         type: "write-something",
@@ -110,7 +123,7 @@ const run = () => {
       },
     ],
   });
-  player1Socket.sendEvent(Event.GAME_PLAYER_ANSWERED_QUESTIONS, {
+  player1Socket.sendEvent(CTSEvent.EXPOSED.ANSWERED_QUESTIONS, {
     answers: [
       {
         type: "write-something",
@@ -138,7 +151,7 @@ const run = () => {
       },
     ],
   });
-  player2Socket.sendEvent(Event.GAME_PLAYER_ANSWERED_QUESTIONS, {
+  player2Socket.sendEvent(CTSEvent.EXPOSED.ANSWERED_QUESTIONS, {
     answers: [
       {
         type: "write-something",
@@ -167,27 +180,27 @@ const run = () => {
     ],
   });
 
-  hostSocket.sendEvent(Event.GAME_NEXT_QUESTION, {});
-  hostSocket.sendEvent(Event.GAME_NEXT_QUESTION, {});
-  hostSocket.sendEvent(Event.GAME_NEXT_QUESTION, {});
-  hostSocket.sendEvent(Event.GAME_NEXT_QUESTION, {});
-  hostSocket.sendEvent(Event.GAME_NEXT_QUESTION, {});
-  hostSocket.sendEvent(Event.GAME_NEXT_QUESTION, {});
+  hostSocket.sendEvent(CTSEvent.EXPOSED.NEXT_QUESTION, {});
+  hostSocket.sendEvent(CTSEvent.EXPOSED.NEXT_QUESTION, {});
+  hostSocket.sendEvent(CTSEvent.EXPOSED.NEXT_QUESTION, {});
+  hostSocket.sendEvent(CTSEvent.EXPOSED.NEXT_QUESTION, {});
+  hostSocket.sendEvent(CTSEvent.EXPOSED.NEXT_QUESTION, {});
+  hostSocket.sendEvent(CTSEvent.EXPOSED.NEXT_QUESTION, {});
 
-  hostSocket.sendEvent(Event.GAME_NEXT_QUESTION, {});
-  hostSocket.sendEvent(Event.GAME_NEXT_QUESTION, {});
-  hostSocket.sendEvent(Event.GAME_NEXT_QUESTION, {});
-  hostSocket.sendEvent(Event.GAME_NEXT_QUESTION, {});
-  hostSocket.sendEvent(Event.GAME_NEXT_QUESTION, {});
-  hostSocket.sendEvent(Event.GAME_NEXT_QUESTION, {});
+  hostSocket.sendEvent(CTSEvent.EXPOSED.NEXT_QUESTION, {});
+  hostSocket.sendEvent(CTSEvent.EXPOSED.NEXT_QUESTION, {});
+  hostSocket.sendEvent(CTSEvent.EXPOSED.NEXT_QUESTION, {});
+  hostSocket.sendEvent(CTSEvent.EXPOSED.NEXT_QUESTION, {});
+  hostSocket.sendEvent(CTSEvent.EXPOSED.NEXT_QUESTION, {});
+  hostSocket.sendEvent(CTSEvent.EXPOSED.NEXT_QUESTION, {});
 
-  hostSocket.sendEvent(Event.GAME_NEXT_QUESTION, {});
-  hostSocket.sendEvent(Event.GAME_NEXT_QUESTION, {});
-  hostSocket.sendEvent(Event.GAME_NEXT_QUESTION, {});
-  hostSocket.sendEvent(Event.GAME_NEXT_QUESTION, {});
-  hostSocket.sendEvent(Event.GAME_NEXT_QUESTION, {});
-  hostSocket.sendEvent(Event.GAME_NEXT_QUESTION, {});
+  hostSocket.sendEvent(CTSEvent.EXPOSED.NEXT_QUESTION, {});
+  hostSocket.sendEvent(CTSEvent.EXPOSED.NEXT_QUESTION, {});
+  hostSocket.sendEvent(CTSEvent.EXPOSED.NEXT_QUESTION, {});
+  hostSocket.sendEvent(CTSEvent.EXPOSED.NEXT_QUESTION, {});
+  hostSocket.sendEvent(CTSEvent.EXPOSED.NEXT_QUESTION, {});
+  hostSocket.sendEvent(CTSEvent.EXPOSED.NEXT_QUESTION, {});
 
-  hostSocket.sendEvent(Event.GAME_HOST_END_GAME, {});
+  hostSocket.sendEvent(CTSEvent.EXPOSED.END_GAME, {});
 };
 run();
