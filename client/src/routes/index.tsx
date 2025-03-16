@@ -9,7 +9,7 @@ function Index() {
   return (
     <div className="p-2">
       <h3>Welcome Home!</h3>
-      <Link to="/select-game-join-type">
+      <Link to="/exposed/select-game-join-type">
         <Button>Exposed v2</Button>
       </Link>
     </div>

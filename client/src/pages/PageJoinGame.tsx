@@ -8,7 +8,12 @@ import {
   InputOTPSlot,
 } from "@/components/ui/input-otp";
 import { Label } from "@/components/ui/label";
-import { useState } from "react";
+import { CTSEvent, STCEvent } from "@/lib/event";
+import { useExposedGame } from "@/lib/exposed";
+import { useSocket, useSocketEvent } from "@/lib/socket";
+import { LobbyPlayer } from "@/types/player";
+import { useNavigate } from "@tanstack/react-router";
+import { useEffect, useState } from "react";
 
 type Props = {
   defaultPin?: string;
@@ -17,6 +22,27 @@ type Props = {
 export default function PageJoinGame({ defaultPin }: Props) {
   const [name, setName] = useState("");
   const [pin, setPin] = useState(defaultPin ?? "");
+
+  const socket = useSocket();
+  const navigate = useNavigate();
+  const { setState } = useExposedGame();
+
+  const onConnect = useSocketEvent<{ players: LobbyPlayer[]; pin: string }>(
+    STCEvent.COMMON.PLAYER_JOINED_GAME,
+    { pin: "", players: [] }
+  );
+  useEffect(() => {
+    if (onConnect.pin !== "") {
+      setState({
+        inGame: true,
+        pin: onConnect.pin,
+        players: onConnect.players,
+      });
+      navigate({
+        to: "/exposed/active/lobby",
+      });
+    }
+  }, [onConnect, navigate, setState]);
 
   return (
     <div className="flex justify-center items-center bg-[url(/bg.svg)] w-screen h-screen">
@@ -49,6 +75,12 @@ export default function PageJoinGame({ defaultPin }: Props) {
           <Button
             disabled={name.trim().length < 3 || pin.length !== 6}
             className="bg-purple-600 px-8 py-2 text-lg"
+            onClick={() =>
+              socket.emit(CTSEvent.COMMON.JOIN_GAME, {
+                pin,
+                name,
+              })
+            }
           >
             Join Game
           </Button>

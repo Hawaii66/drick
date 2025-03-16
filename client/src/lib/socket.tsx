@@ -4,7 +4,10 @@ import { io, Socket } from "socket.io-client";
 export class SocketHandler {
   private socket: Socket;
   private listeners: (() => void)[] = [];
-  private state: { isConnected: boolean } = { isConnected: false };
+  private state: { isConnected: boolean; id: string } = {
+    isConnected: false,
+    id: "",
+  };
 
   setState(data: Partial<typeof this.state>) {
     this.state = {
@@ -18,12 +21,13 @@ export class SocketHandler {
     this.socket = io("http://localhost:3000");
 
     this.socket.on("connect", () => {
-      this.setState({ isConnected: true });
+      this.setState({ isConnected: true, id: this.socket.id });
     });
 
     this.socket.on("disconnect", () => {
       this.setState({
         isConnected: false,
+        id: "",
       });
     });
   }
