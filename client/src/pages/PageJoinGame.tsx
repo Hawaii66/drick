@@ -10,9 +10,13 @@ import {
 import { Label } from "@/components/ui/label";
 import { useState } from "react";
 
-export default function PageJoinGame() {
+type Props = {
+  defaultPin?: string;
+};
+
+export default function PageJoinGame({ defaultPin }: Props) {
   const [name, setName] = useState("");
-  const [pin, setPin] = useState("");
+  const [pin, setPin] = useState(defaultPin ?? "");
 
   return (
     <div className="flex justify-center items-center bg-[url(/bg.svg)] w-screen h-screen">
@@ -28,7 +32,7 @@ export default function PageJoinGame() {
           </div>
           <div className="flex flex-col gap-2 w-full">
             <Label>Game PIN</Label>
-            <InputOTP onChange={(e) => setPin(e)} maxLength={6}>
+            <InputOTP value={pin} onChange={(e) => setPin(e)} maxLength={6}>
               <InputOTPGroup>
                 <InputOTPSlot index={0} />
                 <InputOTPSlot index={1} />

@@ -13,44 +13,15 @@ import {
   InputOTPSlot,
   InputOTPSeparator,
 } from "@/components/ui/input-otp";
+import { LobbyPlayer } from "@/types/player";
 import { Label } from "@radix-ui/react-label";
-import { useEffect, useRef, useState } from "react";
 
-type Player = {
-  name: string;
-  id: string;
+type Props = {
+  players: LobbyPlayer[];
+  pin: string;
 };
 
-const useConnection = () => {
-  const [players, setPlayers] = useState<Player[]>([]);
-  const pin = useRef(
-    Array.from({ length: 6 })
-      .map(() => Math.floor(Math.random() * 10))
-      .join("")
-  ).current;
-
-  useEffect(() => {
-    const t = setInterval(() => {
-      setPlayers((p) => [
-        ...p,
-        { name: "player" + p.length, id: (Math.random() * 10000).toString() },
-      ]);
-    }, 2000);
-
-    return () => {
-      clearInterval(t);
-    };
-  }, []);
-
-  return {
-    players,
-    pin,
-  };
-};
-
-export default function PageLobby() {
-  const { players, pin } = useConnection();
-
+export default function PageLobby({ players, pin }: Props) {
   return (
     <div className="flex flex-col justify-center items-center gap-8 bg-[url(/bg.svg)] px-8 w-screen h-screen">
       <Card className="w-full">

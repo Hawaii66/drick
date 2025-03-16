@@ -1,115 +1,87 @@
 import express from "express";
 import { createServer } from "http";
-import { Server } from "socket.io";
-import { Game } from "./game";
+import { Server, Socket } from "socket.io";
 import { z } from "zod";
+import cors from "cors";
+import { CTSEvent } from "./game/event";
+import { Game1 } from "./game/exposed/game1";
+import { JoinGameState } from "./game/exposed/joinGameState";
+import { GameManager } from "./game/gameManager";
+import { Data } from "./game/player";
 
 const app = express();
 const server = createServer(app);
-const io = new Server(server);
+const io = new Server(server, {
+  cors: {
+    origin: "*",
+  },
+});
+
+app.use(
+  cors({
+    origin: "*",
+  })
+);
 
 app.get("/", (_, res) => res.send("Server is running"));
 
-let games: Game[] = [];
+const gameManager = new GameManager();
+
+const handleSocketCallback = (socket: Socket, event: CTSEvent, data: Data) => {
+  console.log("incoming event", socket.id, event);
+  const game = gameManager.getGameFromPlayer(socket.id);
+
+  if (game) {
+    const player = game.getPlayer(socket.id);
+    if (!player) throw new Error("Something went wrong");
+
+    const successfullyHandeled = game.onPlayerEvent(player, event, data);
+    if (!successfullyHandeled) {
+      throw new Error("Wrong game event: " + event);
+    }
+  } else {
+    if (event === CTSEvent.COMMON.HOST_GAME) {
+      const game = gameManager.createGame("1");
+
+      if (game instanceof Game1) {
+        game.state = new JoinGameState(game);
+      } else {
+        throw new Error("Game init state not set");
+      }
+
+      game.onServerEvent(CTSEvent.COMMON.HOST_GAME, {
+        data,
+        socket,
+      });
+    } else if (event === CTSEvent.COMMON.JOIN_GAME) {
+      const { pin, name } = z
+        .object({
+          name: z.string().min(3),
+          pin: z.string().length(6),
+        })
+        .parse(data);
+
+      const game = gameManager.getGame(pin);
+
+      if (game) {
+        game.onServerEvent(CTSEvent.COMMON.JOIN_GAME, {
+          name,
+          socket,
+        });
+      }
+    } else {
+      throw new Error("Wrong no game event: " + event);
+    }
+  }
+};
 
 io.on("connection", (socket) => {
-  console.log("A user connected");
-
-  socket.on("debug-games", () => {
-    socket.emit("debug-games", games);
-  });
-
-  socket.on("host-game", (data) => {
-    const { rounds, name } = z
-      .object({
-        rounds: z.number().int().positive().min(5).max(100),
-        name: z.string().min(3).max(20),
-      })
-      .parse(data);
-
-    const game = new Game(rounds);
-    games.push(game);
-
-    game.addPlayer({
-      host: true,
-      id: socket.id,
-      name,
-      socket,
-      needsAnswers: [],
-    });
-
-    socket.emit("game-created", {
-      pin: game.pin,
-    });
-  });
-
-  socket.on("join-game", (data) => {
-    const { name, pin } = z
-      .object({
-        name: z.string().min(3).max(20),
-        pin: z.string().length(6),
-      })
-      .parse(data);
-
-    const game = games.find((game) => game.pin === pin);
-    if (!game) {
-      socket.emit("game-not-found");
-      return;
-    }
-
-    game.addPlayer({
-      host: false,
-      id: socket.id,
-      name,
-      socket,
-      needsAnswers: [],
-    });
-
-    game.sendEvent("player-joined", {
-      players: game.serializePlayers(),
-    });
-  });
-
-  const callback = () => {
-    socket.removeListener("start-game", callback);
-    const game = games.find((game) =>
-      game.players.some((player) => player.id === socket.id)
-    );
-    if (!game) return;
-
-    const player = game.players.find((player) => player.id === socket.id);
-    if (!player) return;
-
-    if (!player.host) return;
-
-    game.startAnswerQuestions();
-  };
-  socket.on("start-game", callback);
-
-  socket.onAny((event, ...args) => {
-    console.log("event incomming", event, args);
-    console.log(socket.listeners(event));
-    if (socket.listeners(event).length === 0) {
-      // This means no other listener has handled this event
-      console.log(`Unhandled event: ${event}`, args);
-      socket.emit("unhandled", { event, data: args });
-    }
-  });
-
   socket.on("disconnect", () => {
-    const game = games.find((game) =>
-      game.players.some((player) => player.id === socket.id)
-    );
+    console.log("Socket disconnected", socket.id);
+  });
 
-    if (!game) return;
-
-    const player = game.players.find((player) => player.id === socket.id);
-    if (!player) return;
-
-    game.sendEvent("stop-game", {
-      reason: player.host ? "Host disconnected" : "Player disconnected",
-    });
-    games = games.filter((g) => g !== game);
+  socket.onAny((event, data) => {
+    handleSocketCallback(socket, event, data);
   });
 });
 
