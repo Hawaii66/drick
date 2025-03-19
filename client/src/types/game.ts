@@ -35,6 +35,7 @@ export type SmallGame =
       type: "2-truths-1-lie";
       truths: string[];
       lie: string;
+      person: string;
     };
 
 export const NeedsAnswers: SmallGame["type"][] = [

@@ -8,7 +8,7 @@ export type Game1Player = {
 export class Game1 extends Game<Game1Player> {
   rounds: number = 0;
   questions: SmallGame[] = [];
-  currentQuestionIndex: number = 0;
+  currentQuestionIndex: number = -1;
   playersWhoAnswered: string[] = [];
 }
 

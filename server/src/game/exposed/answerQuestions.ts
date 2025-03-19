@@ -53,12 +53,6 @@ export class AnswerQuestionState extends GameState<Game1Player> {
       })
     );
 
-    if (game.players.length === game.playersWhoAnswered.length) {
-      game.sendEventToAllPlayers(STCEvent.EXPOSED.SHOW_QUESTION, {
-        question: game.questions[game.currentQuestionIndex],
-      });
-    }
-
     return true;
   }
 
@@ -75,6 +69,10 @@ export class AnswerQuestionState extends GameState<Game1Player> {
     }
 
     game.currentQuestionIndex += 1;
+    if (game.currentQuestionIndex === 0) {
+      game.questions = game.questions.sort(() => Math.random() - 0.5);
+    }
+
     if (game.currentQuestionIndex === game.questions.length) {
       game.sendEventToAllPlayers(STCEvent.EXPOSED.FINISHED, {});
       game.changeState(new EndGameState(game, "end-game"));
@@ -83,6 +81,8 @@ export class AnswerQuestionState extends GameState<Game1Player> {
 
     game.sendEventToAllPlayers(STCEvent.EXPOSED.SHOW_QUESTION, {
       question: game.questions[game.currentQuestionIndex],
+      currentQuestion: game.currentQuestionIndex + 1,
+      totalQuestions: game.questions.length,
     });
 
     return true;

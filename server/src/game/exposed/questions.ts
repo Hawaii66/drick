@@ -27,6 +27,7 @@ export const SmallGame = z.union([
     type: z.literal("2-truths-1-lie"),
     truths: z.string().array(),
     lie: z.string(),
+    person: z.string(),
   }),
 ]);
 

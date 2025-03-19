@@ -3,6 +3,7 @@ import GroupQuestion from "@/components/answer/GroupQuestion";
 import PersonChallenge from "@/components/answer/PersonChallenge";
 import PersonQuestion from "@/components/answer/PersonQuestion";
 import TwoTruthsOneLie from "@/components/answer/TwoTruthsOneLie";
+import WriteSomething from "@/components/answer/WriteSomething";
 import { Accordion } from "@/components/ui/accordion";
 import { Button } from "@/components/ui/button";
 import {
@@ -12,8 +13,11 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import { CTSEvent } from "@/lib/event";
+import { useSocket, useSocketData } from "@/lib/socket";
 import { SmallGame } from "@/types/game";
 import { LobbyPlayer } from "@/types/player";
+import { useNavigate } from "@tanstack/react-router";
 import { useState } from "react";
 
 type Props = {
@@ -42,6 +46,10 @@ export default function PageAnswerQuestions({ players, questions }: Props) {
 
     return obj[key] ?? "";
   };
+
+  const socket = useSocket();
+  const { id } = useSocketData();
+  const navigate = useNavigate();
 
   return (
     <div className="flex flex-col justify-center items-center gap-8 bg-[url(/bg.svg)] px-8 w-screen h-screen">
@@ -106,6 +114,17 @@ export default function PageAnswerQuestions({ players, questions }: Props) {
                       updateAnswer={updateData}
                     />
                   );
+                case "write-something":
+                  return (
+                    <WriteSomething
+                      key={i}
+                      getAnswer={getData}
+                      updateAnswer={updateData}
+                    />
+                  );
+                default: {
+                  throw new Error("Invalid question type: " + i);
+                }
               }
             })}
           </Accordion>
@@ -113,7 +132,36 @@ export default function PageAnswerQuestions({ players, questions }: Props) {
       </Card>
       <Card>
         <CardContent>
-          <Button>Submit</Button>
+          <Button
+            onClick={() => {
+              const toSend = {
+                answers: Object.keys(data).map((key) => {
+                  if (key === "2-truths-1-lie") {
+                    return {
+                      type: "2-truths-1-lie",
+                      lie: data["2-truths-1-lie"]["lie"],
+                      truths: [
+                        data["2-truths-1-lie"]["truth-1"],
+                        data["2-truths-1-lie"]["truth-2"],
+                      ],
+                      person: id,
+                    };
+                  }
+                  return {
+                    type: key,
+                    ...data[key],
+                  };
+                }),
+              };
+              socket.emit(CTSEvent.EXPOSED.ANSWERED_QUESTIONS, toSend);
+              navigate({
+                to: "/exposed/active/$pin/has-answered",
+                from: "/exposed/active/$pin/answer",
+              });
+            }}
+          >
+            Submit
+          </Button>
         </CardContent>
       </Card>
     </div>

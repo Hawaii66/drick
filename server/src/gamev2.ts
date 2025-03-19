@@ -181,6 +181,8 @@ const run = () => {
   });
 
   hostSocket.sendEvent(CTSEvent.EXPOSED.NEXT_QUESTION, {});
+
+  hostSocket.sendEvent(CTSEvent.EXPOSED.NEXT_QUESTION, {});
   hostSocket.sendEvent(CTSEvent.EXPOSED.NEXT_QUESTION, {});
   hostSocket.sendEvent(CTSEvent.EXPOSED.NEXT_QUESTION, {});
   hostSocket.sendEvent(CTSEvent.EXPOSED.NEXT_QUESTION, {});
