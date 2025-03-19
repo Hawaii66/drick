@@ -13,10 +13,13 @@ import {
   InputOTPSlot,
   InputOTPSeparator,
 } from "@/components/ui/input-otp";
-import { useSocketData } from "@/lib/socket";
+import { CTSEvent, STCEvent } from "@/lib/event";
+import { useSocket, useSocketData, useSocketEvent } from "@/lib/socket";
 import { LobbyPlayer } from "@/types/player";
 import { Label } from "@radix-ui/react-label";
+import { useNavigate } from "@tanstack/react-router";
 import { Share } from "lucide-react";
+import { useEffect } from "react";
 
 type Props = {
   players: LobbyPlayer[];
@@ -27,6 +30,23 @@ export default function PageLobby({ players, pin }: Props) {
   const { id } = useSocketData();
   const isHost = players.some((i) => i.isHost && i.id === id);
 
+  const socket = useSocket();
+  const data = useSocketEvent<{ pin: string }>(STCEvent.COMMON.START_GAME, {
+    pin: "",
+  });
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (data.pin !== "") {
+      navigate({
+        to: "/exposed/active/$pin/answer",
+        params: {
+          pin: data.pin,
+        },
+      });
+    }
+  }, [data, navigate]);
+
   return (
     <div className="flex flex-col justify-center items-center gap-8 bg-[url(/bg.svg)] px-8 w-screen h-screen">
       <Card className="w-full">
@@ -35,14 +55,23 @@ export default function PageLobby({ players, pin }: Props) {
           <CardDescription>
             Waiting for players to join the game.
           </CardDescription>
-          {players.length < 4 && (
+          {players.length < 3 && (
             <CardDescription>
-              At least 4 players are required to start the game.
+              At least 3 players are required to start the game.
             </CardDescription>
           )}
         </CardHeader>
         <CardContent>
-          {isHost && <Button disabled={players.length < 4}>Start Game</Button>}
+          {isHost && (
+            <Button
+              onClick={() => {
+                socket.emit(CTSEvent.COMMON.START_GAME, {});
+              }}
+              disabled={players.length < 3}
+            >
+              Start Game
+            </Button>
+          )}
         </CardContent>
       </Card>
       <Card className="w-full">

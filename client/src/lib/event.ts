@@ -5,6 +5,7 @@ type Flatten<T, build extends string[] = []> =
 export const STCEvent = {
   COMMON: {
     PLAYER_JOINED_GAME: "player-joined-game",
+    START_GAME: "on-start-game",
   },
   EXPOSED: {
     ANSWER_QUESTIONS: "answer-questions",

@@ -3,7 +3,7 @@ import { GameState } from "../gameState";
 import { Data, Player } from "../player";
 import { Game1, Game1Player } from "./game1";
 import { AnswerQuestionState } from "./answerQuestions";
-import { CTSEvent } from "../event";
+import { CTSEvent, STCEvent } from "../event";
 
 export class JoinGameState extends GameState<Game1Player> {
   constructor(game: Game1) {
@@ -70,6 +70,8 @@ export class JoinGameState extends GameState<Game1Player> {
     if (game.players.length < 3) {
       return false;
     }
+
+    game.sendEventToAllPlayers(STCEvent.COMMON.START_GAME, { pin: game.pin });
 
     game.changeState(new AnswerQuestionState(game));
     return true;

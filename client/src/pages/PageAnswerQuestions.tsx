@@ -12,36 +12,16 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { NeedsAnswers, Player, SmallGame } from "@/types/game";
-import { useRef, useState } from "react";
+import { SmallGame } from "@/types/game";
+import { LobbyPlayer } from "@/types/player";
+import { useState } from "react";
 
-const players: Player[] = [
-  {
-    id: "123",
-    name: "123",
-  },
-  {
-    id: "123123",
-    name: "123123",
-  },
-  {
-    id: "abs",
-    name: "qdasd",
-  },
-];
-
-const temp = NeedsAnswers.sort(() => Math.random() - 0.5);
-
-const useQuestions = () => {
-  const questions = useRef(temp).current;
-
-  return {
-    questions,
-  };
+type Props = {
+  players: LobbyPlayer[];
+  questions: string[];
 };
 
-export default function PageAnswerQuestions() {
-  const { questions } = useQuestions();
+export default function PageAnswerQuestions({ players, questions }: Props) {
   const [data, setData] = useState<{
     [key in string]: { [key in string]: string };
   }>({});

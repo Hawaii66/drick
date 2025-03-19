@@ -18,7 +18,8 @@ import { Route as ExposedSelectGameJoinTypeImport } from './routes/exposed/selec
 import { Route as ExposedJoinGameImport } from './routes/exposed/join-game'
 import { Route as ExposedHostGameImport } from './routes/exposed/host-game'
 import { Route as ExposedActiveLobbyImport } from './routes/exposed/active/lobby'
-import { Route as ExposedActivePinImport } from './routes/exposed/active/$pin'
+import { Route as ExposedActivePinShowImport } from './routes/exposed/active/$pin/show'
+import { Route as ExposedActivePinAnswerImport } from './routes/exposed/active/$pin/answer'
 
 // Create/Update Routes
 
@@ -64,9 +65,15 @@ const ExposedActiveLobbyRoute = ExposedActiveLobbyImport.update({
   getParentRoute: () => ExposedRouteRoute,
 } as any)
 
-const ExposedActivePinRoute = ExposedActivePinImport.update({
-  id: '/active/$pin',
-  path: '/active/$pin',
+const ExposedActivePinShowRoute = ExposedActivePinShowImport.update({
+  id: '/active/$pin/show',
+  path: '/active/$pin/show',
+  getParentRoute: () => ExposedRouteRoute,
+} as any)
+
+const ExposedActivePinAnswerRoute = ExposedActivePinAnswerImport.update({
+  id: '/active/$pin/answer',
+  path: '/active/$pin/answer',
   getParentRoute: () => ExposedRouteRoute,
 } as any)
 
@@ -116,18 +123,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ExposedSelectGameJoinTypeImport
       parentRoute: typeof ExposedRouteImport
     }
-    '/exposed/active/$pin': {
-      id: '/exposed/active/$pin'
-      path: '/active/$pin'
-      fullPath: '/exposed/active/$pin'
-      preLoaderRoute: typeof ExposedActivePinImport
-      parentRoute: typeof ExposedRouteImport
-    }
     '/exposed/active/lobby': {
       id: '/exposed/active/lobby'
       path: '/active/lobby'
       fullPath: '/exposed/active/lobby'
       preLoaderRoute: typeof ExposedActiveLobbyImport
+      parentRoute: typeof ExposedRouteImport
+    }
+    '/exposed/active/$pin/answer': {
+      id: '/exposed/active/$pin/answer'
+      path: '/active/$pin/answer'
+      fullPath: '/exposed/active/$pin/answer'
+      preLoaderRoute: typeof ExposedActivePinAnswerImport
+      parentRoute: typeof ExposedRouteImport
+    }
+    '/exposed/active/$pin/show': {
+      id: '/exposed/active/$pin/show'
+      path: '/active/$pin/show'
+      fullPath: '/exposed/active/$pin/show'
+      preLoaderRoute: typeof ExposedActivePinShowImport
       parentRoute: typeof ExposedRouteImport
     }
   }
@@ -139,16 +153,18 @@ interface ExposedRouteRouteChildren {
   ExposedHostGameRoute: typeof ExposedHostGameRoute
   ExposedJoinGameRoute: typeof ExposedJoinGameRoute
   ExposedSelectGameJoinTypeRoute: typeof ExposedSelectGameJoinTypeRoute
-  ExposedActivePinRoute: typeof ExposedActivePinRoute
   ExposedActiveLobbyRoute: typeof ExposedActiveLobbyRoute
+  ExposedActivePinAnswerRoute: typeof ExposedActivePinAnswerRoute
+  ExposedActivePinShowRoute: typeof ExposedActivePinShowRoute
 }
 
 const ExposedRouteRouteChildren: ExposedRouteRouteChildren = {
   ExposedHostGameRoute: ExposedHostGameRoute,
   ExposedJoinGameRoute: ExposedJoinGameRoute,
   ExposedSelectGameJoinTypeRoute: ExposedSelectGameJoinTypeRoute,
-  ExposedActivePinRoute: ExposedActivePinRoute,
   ExposedActiveLobbyRoute: ExposedActiveLobbyRoute,
+  ExposedActivePinAnswerRoute: ExposedActivePinAnswerRoute,
+  ExposedActivePinShowRoute: ExposedActivePinShowRoute,
 }
 
 const ExposedRouteRouteWithChildren = ExposedRouteRoute._addFileChildren(
@@ -162,8 +178,9 @@ export interface FileRoutesByFullPath {
   '/exposed/host-game': typeof ExposedHostGameRoute
   '/exposed/join-game': typeof ExposedJoinGameRoute
   '/exposed/select-game-join-type': typeof ExposedSelectGameJoinTypeRoute
-  '/exposed/active/$pin': typeof ExposedActivePinRoute
   '/exposed/active/lobby': typeof ExposedActiveLobbyRoute
+  '/exposed/active/$pin/answer': typeof ExposedActivePinAnswerRoute
+  '/exposed/active/$pin/show': typeof ExposedActivePinShowRoute
 }
 
 export interface FileRoutesByTo {
@@ -173,8 +190,9 @@ export interface FileRoutesByTo {
   '/exposed/host-game': typeof ExposedHostGameRoute
   '/exposed/join-game': typeof ExposedJoinGameRoute
   '/exposed/select-game-join-type': typeof ExposedSelectGameJoinTypeRoute
-  '/exposed/active/$pin': typeof ExposedActivePinRoute
   '/exposed/active/lobby': typeof ExposedActiveLobbyRoute
+  '/exposed/active/$pin/answer': typeof ExposedActivePinAnswerRoute
+  '/exposed/active/$pin/show': typeof ExposedActivePinShowRoute
 }
 
 export interface FileRoutesById {
@@ -185,8 +203,9 @@ export interface FileRoutesById {
   '/exposed/host-game': typeof ExposedHostGameRoute
   '/exposed/join-game': typeof ExposedJoinGameRoute
   '/exposed/select-game-join-type': typeof ExposedSelectGameJoinTypeRoute
-  '/exposed/active/$pin': typeof ExposedActivePinRoute
   '/exposed/active/lobby': typeof ExposedActiveLobbyRoute
+  '/exposed/active/$pin/answer': typeof ExposedActivePinAnswerRoute
+  '/exposed/active/$pin/show': typeof ExposedActivePinShowRoute
 }
 
 export interface FileRouteTypes {
@@ -198,8 +217,9 @@ export interface FileRouteTypes {
     | '/exposed/host-game'
     | '/exposed/join-game'
     | '/exposed/select-game-join-type'
-    | '/exposed/active/$pin'
     | '/exposed/active/lobby'
+    | '/exposed/active/$pin/answer'
+    | '/exposed/active/$pin/show'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -208,8 +228,9 @@ export interface FileRouteTypes {
     | '/exposed/host-game'
     | '/exposed/join-game'
     | '/exposed/select-game-join-type'
-    | '/exposed/active/$pin'
     | '/exposed/active/lobby'
+    | '/exposed/active/$pin/answer'
+    | '/exposed/active/$pin/show'
   id:
     | '__root__'
     | '/'
@@ -218,8 +239,9 @@ export interface FileRouteTypes {
     | '/exposed/host-game'
     | '/exposed/join-game'
     | '/exposed/select-game-join-type'
-    | '/exposed/active/$pin'
     | '/exposed/active/lobby'
+    | '/exposed/active/$pin/answer'
+    | '/exposed/active/$pin/show'
   fileRoutesById: FileRoutesById
 }
 
@@ -259,8 +281,9 @@ export const routeTree = rootRoute
         "/exposed/host-game",
         "/exposed/join-game",
         "/exposed/select-game-join-type",
-        "/exposed/active/$pin",
-        "/exposed/active/lobby"
+        "/exposed/active/lobby",
+        "/exposed/active/$pin/answer",
+        "/exposed/active/$pin/show"
       ]
     },
     "/error": {
@@ -278,12 +301,16 @@ export const routeTree = rootRoute
       "filePath": "exposed/select-game-join-type.tsx",
       "parent": "/exposed"
     },
-    "/exposed/active/$pin": {
-      "filePath": "exposed/active/$pin.tsx",
-      "parent": "/exposed"
-    },
     "/exposed/active/lobby": {
       "filePath": "exposed/active/lobby.tsx",
+      "parent": "/exposed"
+    },
+    "/exposed/active/$pin/answer": {
+      "filePath": "exposed/active/$pin/answer.tsx",
+      "parent": "/exposed"
+    },
+    "/exposed/active/$pin/show": {
+      "filePath": "exposed/active/$pin/show.tsx",
       "parent": "/exposed"
     }
   }
