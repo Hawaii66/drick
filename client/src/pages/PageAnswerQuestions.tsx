@@ -1,7 +1,7 @@
 import GroupChallenge from "@/components/answer/GroupChallenge";
 import GroupQuestion from "@/components/answer/GroupQuestion";
-import PersonChallenge from "@/components/answer/PersonChallenge";
-import PersonQuestion from "@/components/answer/PersonQuestion";
+import PlayerChallenge from "@/components/answer/PlayerChallenge";
+import PlayerQuestion from "@/components/answer/PlayerQuestion";
 import TwoTruthsOneLie from "@/components/answer/TwoTruthsOneLie";
 import WriteSomething from "@/components/answer/WriteSomething";
 import { Accordion } from "@/components/ui/accordion";
@@ -88,18 +88,18 @@ export default function PageAnswerQuestions({ players, questions }: Props) {
                       updateAnswer={updateData}
                     />
                   );
-                case "person-challenge":
+                case "player-challenge":
                   return (
-                    <PersonChallenge
+                    <PlayerChallenge
                       key={i}
                       getAnswer={getData}
                       updateAnswer={updateData}
                       players={players}
                     />
                   );
-                case "person-question":
+                case "player-question":
                   return (
-                    <PersonQuestion
+                    <PlayerQuestion
                       key={i}
                       getAnswer={getData}
                       updateAnswer={updateData}
@@ -144,7 +144,7 @@ export default function PageAnswerQuestions({ players, questions }: Props) {
                         data["2-truths-1-lie"]["truth-1"],
                         data["2-truths-1-lie"]["truth-2"],
                       ],
-                      person: id,
+                      player: id,
                     };
                   }
                   return {

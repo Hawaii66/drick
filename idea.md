@@ -9,9 +9,9 @@ Name + profile pic + pin code
 ## Setup
 
 Write a challenge to the whole group
-Write a challenge to one person
+Write a challenge to one player
 Write a question to the whole group
-Write a question to one person
+Write a question to one player
 Just write something
 Select spotify song
 2 truths one lie
@@ -36,12 +36,12 @@ Select a spotify song
 
 Truth or drink
 Question to whole group
-Question to one person
+Question to one player
 Challenge to whole group
-Challenge to one person
+Challenge to one player
 Music quiz (title and artist)
 Point at someone
-Random person takes a shot
+Random player takes a shot
 Random word to sneak into a conversation
 Waterfall
 Forbidden word

@@ -6,11 +6,11 @@ type Props = {
   player: LobbyPlayer;
 };
 
-export default function PersonQuestion({ question, player }: Props) {
+export default function PlayerQuestion({ question, player }: Props) {
   return (
     <Card className="w-full">
       <CardHeader>
-        <CardTitle>Person Question</CardTitle>
+        <CardTitle>Player Question</CardTitle>
       </CardHeader>
       <CardContent>
         <p>{player.name}: </p>

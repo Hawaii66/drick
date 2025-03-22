@@ -10,14 +10,14 @@ export const SmallGame = z.union([
     challenge: z.string(),
   }),
   z.object({
-    type: z.literal("person-question"),
+    type: z.literal("player-question"),
     question: z.string(),
-    person: z.string(),
+    player: z.string(),
   }),
   z.object({
-    type: z.literal("person-challenge"),
+    type: z.literal("player-challenge"),
     challenge: z.string(),
-    person: z.string(),
+    player: z.string(),
   }),
   z.object({
     type: z.literal("write-something"),
@@ -27,7 +27,7 @@ export const SmallGame = z.union([
     type: z.literal("2-truths-1-lie"),
     truths: z.string().array(),
     lie: z.string(),
-    person: z.string(),
+    player: z.string(),
   }),
 ]);
 
@@ -36,8 +36,8 @@ export type SmallGame = z.infer<typeof SmallGame>;
 export const NeedsAnswers: SmallGame["type"][] = [
   "group-challenge",
   "group-question",
-  "person-challenge",
-  "person-question",
+  "player-challenge",
+  "player-question",
   "write-something",
   "2-truths-1-lie",
 ];

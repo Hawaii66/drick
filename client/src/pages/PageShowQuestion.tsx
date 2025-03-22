@@ -1,7 +1,7 @@
 import GroupChallenge from "@/components/question/GroupChallenge";
 import GroupQuestion from "@/components/question/GroupQuestion";
-import PersonChallenge from "@/components/question/PersonChallenge";
-import PersonQuestion from "@/components/question/PersonQuestion";
+import PlayerChallenge from "@/components/question/PlayerChallenge";
+import PlayerQuestion from "@/components/question/PlayerQuestion";
 import TwoTruthsOneLie from "@/components/question/TwoTruthsOneLie";
 import WriteSomething from "@/components/question/WriteSomething";
 import { Button } from "@/components/ui/button";
@@ -68,21 +68,21 @@ export default function PageShowQuestion({
       {question.type === "group-challenge" && (
         <GroupChallenge challenge={question.challenge} />
       )}
-      {question.type === "person-question" && (
-        <PersonQuestion
-          player={idToPlayer(question.person)}
-          question={question.question}
+      {question.type === "player-question" && (
+        <PlayerQuestion
+          player={idToPlayer(question.player)}
+          question={question.player}
         />
       )}
-      {question.type === "person-challenge" && (
-        <PersonChallenge
+      {question.type === "player-challenge" && (
+        <PlayerChallenge
           challenge={question.challenge}
-          player={idToPlayer(question.person)}
+          player={idToPlayer(question.player)}
         />
       )}
       {question.type === "2-truths-1-lie" && (
         <TwoTruthsOneLie
-          player={idToPlayer(question.person)}
+          player={idToPlayer(question.player)}
           lie={question.lie}
           truths={question.truths}
         />

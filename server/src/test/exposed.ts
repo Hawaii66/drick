@@ -85,11 +85,11 @@ const run = () => {
     throw new Error("Wrong event: " + event);
 
   player1Socket.sendEvent(CTSEvent.COMMON.JOIN_GAME, {
-    name: "Person 1 player",
+    name: "Player 1",
     pin,
   });
   player2Socket.sendEvent(CTSEvent.COMMON.JOIN_GAME, {
-    name: "Person 2 player",
+    name: "Player 2",
     pin,
   });
 

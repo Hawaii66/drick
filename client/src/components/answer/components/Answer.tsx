@@ -16,10 +16,10 @@ const typeToStr = (type: SmallGame["type"]) => {
       return "Group Challenge";
     case "group-question":
       return "Group Question";
-    case "person-challenge":
-      return "Person Challenge";
-    case "person-question":
-      return "Person Question";
+    case "player-challenge":
+      return "Player Challenge";
+    case "player-question":
+      return "Player Question";
     case "write-something":
       return "Write Something";
     case "2-truths-1-lie":

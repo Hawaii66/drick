@@ -11,29 +11,29 @@ type Props = {
   players: Player[];
 };
 
-export default function PersonChallenge({
+export default function PlayerQuestion({
   updateAnswer,
   getAnswer,
   players,
 }: Props) {
   return (
-    <Answer question="person-challenge">
-      <p>Write a challenge for one person</p>
+    <Answer question="player-question">
+      <p>Write a question for one player</p>
       <AnswerSelectInput
-        label="Person"
-        onChange={(val) => updateAnswer("person-challenge", "person", val)}
+        label="Player"
+        onChange={(val) => updateAnswer("player-question", "player", val)}
         selectable={players.map((player) => ({
           id: player.id,
           label: player.name,
         }))}
-        selected={getAnswer("person-challenge", "person")}
+        selected={getAnswer("player-question", "player")}
       />
       <AnswerTextAreaInput
-        label="Challenge"
+        label="Question"
         lines={3}
-        onChange={(val) => updateAnswer("person-challenge", "challenge", val)}
-        value={getAnswer("person-challenge", "challenge")}
-        help={Help.PersonChallenges}
+        onChange={(val) => updateAnswer("player-question", "question", val)}
+        value={getAnswer("player-question", "question")}
+        help={Help.PlayerQuestions}
       />
     </Answer>
   );
