@@ -1,5 +1,5 @@
-import { CTSEvent, STCEvent } from "./event";
-import { Data } from "./player";
+import { CTSEvent } from "../game/event";
+import { Data } from "../game/player";
 
 class EventLog {
   eventLog: { event: CTSEvent; data: Data }[] = [];

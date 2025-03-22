@@ -4,7 +4,7 @@
   "main": "index.js",
   "scripts": {
     "dev": "nodemon --exec npx tsx src/index.ts",
-    "test-socket": "nodemon --exec npx tsx src/gamev2.ts",
+    "test-exposed": "nodemon --exec npx tsx src/test/exposed.ts",
     "build": "tsc",
     "type-check": "tsc --noEmit",
     "lint": "eslint",

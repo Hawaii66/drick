@@ -18,7 +18,7 @@ Select spotify song
 
 ### Setup host
 
-Select number of rounds
+Select number of questions per player
 
 ## Games
 

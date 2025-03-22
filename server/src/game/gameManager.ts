@@ -1,5 +1,6 @@
 import { Game } from "./game";
-import { Game1, Game2 } from "./exposed/game1";
+import { Game1 } from "./exposed/exposed";
+import { Game2 } from "./2/game";
 
 export class GameManager {
   games: Game<unknown>[] = [];

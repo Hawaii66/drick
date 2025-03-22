@@ -1,7 +1,7 @@
 import { z } from "zod";
 import { GameState } from "../gameState";
 import { Data, Player } from "../player";
-import { Game1, Game1Player } from "./game1";
+import { Game1, Game1Player } from "./exposed";
 import { AnswerQuestionState } from "./answerQuestions";
 import { CTSEvent, STCEvent } from "../event";
 
@@ -17,13 +17,13 @@ export class JoinGameState extends GameState<Game1Player> {
 
     const {
       socket,
-      data: { name, rounds },
+      data: { name, questionsPerPlayer },
     } = z
       .object({
         socket: z.any(),
         data: z.object({
           name: z.string().min(3),
-          rounds: z.number().min(5),
+          questionsPerPlayer: z.number().min(5),
         }),
       })
       .parse(data);
@@ -38,7 +38,7 @@ export class JoinGameState extends GameState<Game1Player> {
         questions: [],
       },
     });
-    game.rounds = rounds;
+    game.questionsPerPlayer = questionsPerPlayer;
 
     return true;
   }

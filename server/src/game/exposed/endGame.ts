@@ -2,7 +2,7 @@ import { CTSEvent, STCEvent } from "../event";
 import { Game } from "../game";
 import { GameState } from "../gameState";
 import { Player, Data } from "../player";
-import { Game1Player } from "./game1";
+import { Game1Player } from "./exposed";
 
 export class EndGameState extends GameState<Game1Player> {
   onEndGame(

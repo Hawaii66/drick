@@ -4,7 +4,7 @@ import { Server, Socket } from "socket.io";
 import { z } from "zod";
 import cors from "cors";
 import { CTSEvent } from "./game/event";
-import { Game1 } from "./game/exposed/game1";
+import { Game1 } from "./game/exposed/exposed";
 import { JoinGameState } from "./game/exposed/joinGameState";
 import { GameManager } from "./game/gameManager";
 import { Data } from "./game/player";

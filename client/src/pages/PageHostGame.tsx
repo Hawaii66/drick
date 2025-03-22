@@ -11,8 +11,8 @@ import { useEffect, useState } from "react";
 
 export default function PageHostGame() {
   const [name, setName] = useState("");
-  const [roundsStr, setRoundsStr] = useState("20");
-  const rounds = parseInt(roundsStr);
+  const [questionsPerPlayerStr, setQuestionsPerPlayerStr] = useState("20");
+  const questionsPerPlayer = parseInt(questionsPerPlayerStr);
 
   const socket = useSocket();
   const navigate = useNavigate();
@@ -49,28 +49,28 @@ export default function PageHostGame() {
           </div>
 
           <div className="flex flex-col gap-2 w-full">
-            <Label>Number of rounds</Label>
+            <Label>Number of questions for each player</Label>
             <Input
               type="number"
               inputMode="numeric"
-              value={roundsStr}
-              onChange={(e) => setRoundsStr(e.target.value)}
+              value={questionsPerPlayerStr}
+              onChange={(e) => setQuestionsPerPlayerStr(e.target.value)}
             />
             <p className="px-2 text-sm">
-              Recomended to select at least 5 rounds per person
+              Recomended to select 3 - 5 questions per player
             </p>
           </div>
           <Button
             disabled={
               name.trim().length < 3 ||
-              isNaN(rounds) ||
-              rounds < 3 ||
-              rounds > 100
+              isNaN(questionsPerPlayer) ||
+              questionsPerPlayer < 2 ||
+              questionsPerPlayer > 100
             }
             className="bg-purple-600 px-8 py-2 text-lg"
             onClick={() => {
               socket.emit(CTSEvent.COMMON.HOST_GAME, {
-                rounds,
+                questionsPerPlayer,
                 name,
               });
             }}

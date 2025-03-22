@@ -1,10 +1,10 @@
 import { z } from "zod";
-import { JoinGameState } from "./game/exposed/joinGameState";
-import { GameManager } from "./game/gameManager";
-import { Data } from "./game/player";
-import { FakeSocket } from "./game/test";
-import { Game1 } from "./game/exposed/game1";
-import { CTSEvent, STCEvent } from "./game/event";
+import { JoinGameState } from "../game/exposed/joinGameState";
+import { GameManager } from "../game/gameManager";
+import { Data } from "../game/player";
+import { FakeSocket } from "./socket";
+import { Game1 } from "../game/exposed/exposed";
+import { CTSEvent, STCEvent } from "../game/event";
 
 const gameManager = new GameManager();
 
@@ -76,7 +76,7 @@ const run = () => {
 
   hostSocket.sendEvent(CTSEvent.COMMON.HOST_GAME, {
     name: "Host player",
-    rounds: 20,
+    questionsPerPlayer: 20,
   });
   const { data: data1, event } = hostSocket.eventLog.getLatets();
   const { pin } = z.object({ pin: z.string().length(6) }).parse(data1);

@@ -1,7 +1,7 @@
 import { z } from "zod";
 import { GameState } from "../gameState";
 import { Player, Data } from "../player";
-import { Game1, Game1Player } from "./game1";
+import { Game1, Game1Player } from "./exposed";
 import { NeedsAnswers, SmallGame } from "./questions";
 import { EndGameState } from "./endGame";
 import { CTSEvent, STCEvent } from "../event";
@@ -10,12 +10,9 @@ export class AnswerQuestionState extends GameState<Game1Player> {
   constructor(game: Game1) {
     super(game, "answer-questions");
 
-    const roundsPerPlayerMax = Math.ceil(game.rounds / game.players.length) + 2;
-    const roundsPerPlayer = Math.min(NeedsAnswers.length, roundsPerPlayerMax);
-
     game.players.forEach((player) => {
       const temp = [...NeedsAnswers].sort(() => Math.random() - 0.5);
-      player.metadata.questions = temp.slice(0, roundsPerPlayer);
+      player.metadata.questions = temp.slice(0, game.questionsPerPlayer);
 
       game.sendEventToPlayer(player.id, STCEvent.EXPOSED.ANSWER_QUESTIONS, {
         questions: player.metadata.questions,
