@@ -68,7 +68,7 @@ export default function PageAnswerQuestions({ players, questions }: Props) {
       </Card>
       <Card className="w-full">
         <CardContent>
-          <Accordion type="multiple">
+          <Accordion type="single">
             {questions.map((i) => {
               switch (i) {
                 case "group-challenge":

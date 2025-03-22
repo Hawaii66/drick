@@ -11,6 +11,10 @@ type Props = {
 export default function TwoTruthsOneLie({ getAnswer, updateAnswer }: Props) {
   return (
     <Answer question="2-truths-1-lie">
+      <p>
+        Write 2 truths and 1 lie about yourself, the other in the group will
+        guess which is the lie
+      </p>
       <p>This question is not anonymous. People will see your name</p>
       <AnswerTextAreaInput
         label="Truth"

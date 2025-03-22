@@ -11,6 +11,7 @@ type Props = {
 export default function GroupChallenge({ updateAnswer, getAnswer }: Props) {
   return (
     <Answer question="group-challenge">
+      <p>Write a challenge that the whole group will have to do</p>
       <AnswerTextAreaInput
         label="Challenge"
         lines={3}

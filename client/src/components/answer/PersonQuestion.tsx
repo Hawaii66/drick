@@ -18,6 +18,7 @@ export default function PersonQuestion({
 }: Props) {
   return (
     <Answer question="person-question">
+      <p>Write a question for one person</p>
       <AnswerSelectInput
         label="Person"
         onChange={(val) => updateAnswer("person-question", "person", val)}

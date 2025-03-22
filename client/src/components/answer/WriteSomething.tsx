@@ -10,6 +10,7 @@ type Props = {
 export default function WriteSomething({ getAnswer, updateAnswer }: Props) {
   return (
     <Answer question="write-something">
+      <p>Write something, anything that you want to share</p>
       <AnswerTextAreaInput
         label="Write something"
         lines={3}

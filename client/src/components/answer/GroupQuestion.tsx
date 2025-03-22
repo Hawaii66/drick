@@ -11,6 +11,7 @@ type Props = {
 export default function GroupQuestion({ updateAnswer, getAnswer }: Props) {
   return (
     <Answer question="group-question">
+      <p>Write a question that the whole group will have to answer</p>
       <AnswerTextAreaInput
         label="Question"
         lines={3}
