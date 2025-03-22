@@ -1,6 +1,5 @@
-type Flatten<T, build extends string[] = []> = T extends Record<string, any>
-  ? Flatten<T[keyof T], build>
-  : [...build, T];
+type Flatten<T, build extends string[] = []> =
+  T extends Record<string, any> ? Flatten<T[keyof T], build> : [...build, T];
 
 export const STCEvent = {
   COMMON: {

@@ -92,7 +92,7 @@ export class JoinGameState extends GameState<Game1Player> {
     game: Game1,
     player: Player<Game1Player>,
     event: CTSEvent,
-    data: Data
+    data: Data,
   ) {
     switch (event) {
       case CTSEvent.COMMON.START_GAME:

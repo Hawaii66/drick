@@ -15,7 +15,7 @@ export abstract class GameState<T> {
     game: Game<T>,
     player: Player<T>,
     event: CTSEvent,
-    data: Data
+    data: Data,
   ): boolean;
   abstract onServerEvent(game: Game<T>, event: CTSEvent, data: Data): boolean;
 }

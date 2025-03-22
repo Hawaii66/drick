@@ -9,7 +9,7 @@ export class EndGameState extends GameState<Game1Player> {
     game: Game<Game1Player>,
     player: Player<Game1Player>,
     event: CTSEvent,
-    data: Data
+    data: Data,
   ) {
     const host = game.getHost();
     if (host.id !== player.id) return false;
@@ -23,7 +23,7 @@ export class EndGameState extends GameState<Game1Player> {
     game: Game<Game1Player>,
     player: Player<Game1Player>,
     event: CTSEvent,
-    data: Data
+    data: Data,
   ): boolean {
     switch (event) {
       case CTSEvent.EXPOSED.END_GAME: {

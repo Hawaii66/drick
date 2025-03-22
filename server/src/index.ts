@@ -16,7 +16,7 @@ const io = new Server(server, {
 app.use(
   cors({
     origin: "*",
-  })
+  }),
 );
 
 app.get("/", (_, res) => res.send("Server is running"));

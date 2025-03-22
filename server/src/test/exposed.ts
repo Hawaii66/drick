@@ -16,11 +16,11 @@ const run = () => {
 
   const player1Socket = new FakeSocket("Socket 2", true);
   player1Socket.onAny((event, data) =>
-    handleSocketCallback(player1Socket, event, data)
+    handleSocketCallback(player1Socket, event, data),
   );
   const player2Socket = new FakeSocket("Socket 3", true);
   player2Socket.onAny((event, data) =>
-    handleSocketCallback(player2Socket, event, data)
+    handleSocketCallback(player2Socket, event, data),
   );
 
   hostSocket.sendEvent(CTSEvent.COMMON.HOST_GAME, {

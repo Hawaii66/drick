@@ -24,7 +24,7 @@ export class AnswerQuestionState extends GameState<Game1Player> {
     game: Game1,
     player: Player<Game1Player>,
     _: CTSEvent,
-    data: Data
+    data: Data,
   ): boolean {
     if (game.playersWhoAnswered.includes(player.id)) {
       return false;
@@ -47,7 +47,7 @@ export class AnswerQuestionState extends GameState<Game1Player> {
     game.playersWhoAnswered.forEach((i) =>
       game.sendEventToPlayer(i, STCEvent.EXPOSED.PLAYER_ANSWERED_QUESTIONS, {
         playersWhoAnswered: game.playersWhoAnswered,
-      })
+      }),
     );
 
     return true;
@@ -57,7 +57,7 @@ export class AnswerQuestionState extends GameState<Game1Player> {
     game: Game1,
     player: Player<Game1Player>,
     _: CTSEvent,
-    _1: Data
+    _1: Data,
   ) {
     const host = game.getHost();
 
@@ -89,7 +89,7 @@ export class AnswerQuestionState extends GameState<Game1Player> {
     game: Game1,
     player: Player<Game1Player>,
     event: CTSEvent,
-    data: Data
+    data: Data,
   ): boolean {
     switch (event) {
       case CTSEvent.EXPOSED.ANSWERED_QUESTIONS: {
