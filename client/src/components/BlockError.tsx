@@ -20,7 +20,7 @@ export default function BlockError({ children }: Props) {
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
   const event = useSocketLatestEvent<{ message: string }>(
-    STCEvent.COMMON.ERROR
+    STCEvent.COMMON.ERROR,
   );
 
   useEffect(() => {

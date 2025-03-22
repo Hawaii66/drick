@@ -8,7 +8,7 @@ export const Route = createFileRoute("/exposed/join-game")({
   validateSearch: zodValidator(
     z.object({
       pin: z.coerce.string().length(6).catch(""),
-    })
+    }),
   ),
 });
 

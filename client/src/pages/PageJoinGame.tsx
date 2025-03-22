@@ -29,7 +29,7 @@ export default function PageJoinGame({ defaultPin }: Props) {
 
   const onConnect = useSocketEvent<{ players: LobbyPlayer[]; pin: string }>(
     STCEvent.COMMON.PLAYER_JOINED_GAME,
-    { pin: "", players: [] }
+    { pin: "", players: [] },
   );
   useEffect(() => {
     if (onConnect.pin !== "") {

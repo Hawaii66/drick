@@ -18,7 +18,7 @@ function RouteComponent() {
   return (
     <PageAnsweredQuestions
       players={players.filter((i) =>
-        onConnect?.playersWhoAnswered.includes(i.id)
+        onConnect?.playersWhoAnswered.includes(i.id),
       )}
       totalPlayers={players.length}
     />

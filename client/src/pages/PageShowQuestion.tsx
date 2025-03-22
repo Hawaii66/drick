@@ -42,7 +42,7 @@ export default function PageShowQuestion({
 
   const onFinished = useSocketEvent<object | null>(
     STCEvent.EXPOSED.FINISHED,
-    null
+    null,
   );
   useEffect(() => {
     if (!onFinished) return;
@@ -57,7 +57,7 @@ export default function PageShowQuestion({
     (id: string) => {
       return players.find((i) => i.id === id)!;
     },
-    [players]
+    [players],
   );
 
   return (

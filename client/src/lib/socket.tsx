@@ -80,7 +80,7 @@ export const useSocket = () => socketHandler;
 export const useSocketLatestEvent = <T,>(event: STCEvent) => {
   const a = useSyncExternalStore(
     (callback) => socketHandler.addListener(callback),
-    socketHandler.getSnapshot
+    socketHandler.getSnapshot,
   );
 
   const memoized = useMemo(() => a.latestEvent.get(event), [a, event]) ?? null;
@@ -91,7 +91,7 @@ export const useSocketLatestEvent = <T,>(event: STCEvent) => {
 export const useSocketData = () => {
   const a = useSyncExternalStore(
     (callback) => socketHandler.addListener(callback),
-    socketHandler.getSnapshot
+    socketHandler.getSnapshot,
   );
 
   return useMemo(() => a, [a]);

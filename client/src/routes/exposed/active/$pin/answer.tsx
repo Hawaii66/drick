@@ -10,7 +10,7 @@ export const Route = createFileRoute("/exposed/active/$pin/answer")({
 
 function RouteComponent() {
   const answerQuestions = useSocketLatestEvent<{ questions: string[] } | null>(
-    STCEvent.EXPOSED.ANSWER_QUESTIONS
+    STCEvent.EXPOSED.ANSWER_QUESTIONS,
   );
   const { players } = useExposedGame();
 

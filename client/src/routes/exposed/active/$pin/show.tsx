@@ -22,7 +22,7 @@ function RouteComponent() {
 
   const onFinished = useSocketEvent<object | null>(
     STCEvent.EXPOSED.FINISHED,
-    null
+    null,
   );
   useEffect(() => {
     if (!onFinished) return;

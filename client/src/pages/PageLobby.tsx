@@ -83,7 +83,7 @@ export default function PageLobby({ players, pin }: Props) {
                 variant={"link"}
                 onClick={() =>
                   navigator.clipboard.writeText(
-                    `http://localhost:5173/exposed/join-game?pin=${pin}`
+                    `http://localhost:5173/exposed/join-game?pin=${pin}`,
                   )
                 }
               >
