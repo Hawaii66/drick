@@ -23,7 +23,7 @@ export class JoinGameState extends GameState<Game1Player> {
         socket: z.any(),
         data: z.object({
           name: z.string().min(3),
-          questionsPerPlayer: z.number().min(5),
+          questionsPerPlayer: z.number().min(2),
         }),
       })
       .parse(data);

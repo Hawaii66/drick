@@ -6,6 +6,7 @@ export const STCEvent = {
   COMMON: {
     PLAYER_JOINED_GAME: "player-joined-game",
     START_GAME: "on-start-game",
+    ERROR: "error",
   },
   EXPOSED: {
     ANSWER_QUESTIONS: "answer-questions",

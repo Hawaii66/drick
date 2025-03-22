@@ -1,6 +1,7 @@
 import { Game } from "./game";
 import { Game1 } from "./exposed/exposed";
 import { Game2 } from "./2/game";
+import { STCEvent } from "./event";
 
 export class GameManager {
   games: Game<unknown>[] = [];
@@ -27,6 +28,16 @@ export class GameManager {
 
   closeGame(pin: string) {
     this.games = this.games.filter((i) => i.pin !== pin);
+  }
+
+  errorCloseGame(pin: string, message: string) {
+    const game = this.games.find((i) => i.pin === pin);
+    if (!game) {
+      throw new Error("Game not found: " + pin);
+    }
+
+    game.sendEventToAllPlayers(STCEvent.COMMON.ERROR, { message });
+    this.closeGame(pin);
   }
 
   hasPlayerInGame(id: string) {

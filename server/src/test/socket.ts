@@ -1,5 +1,5 @@
 import { CTSEvent } from "../game/event";
-import { Data } from "../game/player";
+import { BasicSocket, Data } from "../game/player";
 
 class EventLog {
   eventLog: { event: CTSEvent; data: Data }[] = [];
@@ -17,7 +17,7 @@ class EventLog {
   }
 }
 
-export class FakeSocket {
+export class FakeSocket implements BasicSocket {
   id: string;
   listeners: { event: CTSEvent; callback: (data: Data) => void }[] = [];
   onAnyListeners: ((event: CTSEvent, data: Data) => void)[] = [];

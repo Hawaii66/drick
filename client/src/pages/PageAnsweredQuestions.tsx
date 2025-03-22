@@ -43,9 +43,9 @@ export default function PageAnsweredQuestions({
     <div className="flex flex-col justify-center items-center gap-8 bg-[url(/bg.svg)] px-8 w-screen h-screen">
       <Card className="w-full">
         <CardHeader>
-          <CardTitle>Lobby</CardTitle>
+          <CardTitle>Waiting lounge</CardTitle>
           <CardDescription>
-            Waiting for players to join the game.
+            Waiting for players to answer all questions.
           </CardDescription>
           {players.length !== totalPlayers && (
             <CardDescription>
@@ -73,7 +73,8 @@ export default function PageAnsweredQuestions({
             Players that have answered the questions: {players.length}
           </CardDescription>
           <CardDescription>
-            Waiting for: {totalPlayers - players.length}
+            Players that have not answered the questions:{" "}
+            {totalPlayers - players.length}
           </CardDescription>
         </CardHeader>
         <CardContent className="flex flex-row flex-wrap gap-2">

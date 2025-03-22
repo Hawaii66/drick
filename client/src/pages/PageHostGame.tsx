@@ -11,7 +11,7 @@ import { useEffect, useState } from "react";
 
 export default function PageHostGame() {
   const [name, setName] = useState("");
-  const [questionsPerPlayerStr, setQuestionsPerPlayerStr] = useState("20");
+  const [questionsPerPlayerStr, setQuestionsPerPlayerStr] = useState("4");
   const questionsPerPlayer = parseInt(questionsPerPlayerStr);
 
   const socket = useSocket();

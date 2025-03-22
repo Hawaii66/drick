@@ -33,9 +33,15 @@ export default function PageFinished() {
       <Card className="w-full">
         <CardHeader>
           <CardTitle>Thanks for playing!</CardTitle>
-          <CardDescription>
-            The game has ended. Wait for the host to close the game.
-          </CardDescription>
+          {isHost ? (
+            <CardDescription>
+              The game has ended. You can close the game now.
+            </CardDescription>
+          ) : (
+            <CardDescription>
+              The game has ended. Wait for the host to close the game.
+            </CardDescription>
+          )}
         </CardHeader>
         {isHost && (
           <CardFooter>

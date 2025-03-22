@@ -45,8 +45,7 @@ export abstract class Game<T> {
   }
 
   sendEventToHost<T>(event: STCEvent, data: T) {
-    const host = this.getPlayer(this.hostId);
-    if (!host) throw new Error("Host not found");
+    const host = this.getHost();
 
     this.sendEventToPlayer(host.id, event, data);
   }

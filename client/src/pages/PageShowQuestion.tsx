@@ -71,13 +71,13 @@ export default function PageShowQuestion({
       {question.type === "player-question" && (
         <PlayerQuestion
           player={idToPlayer(question.player)}
-          question={question.player}
+          question={question.question}
         />
       )}
       {question.type === "player-challenge" && (
         <PlayerChallenge
-          challenge={question.challenge}
           player={idToPlayer(question.player)}
+          challenge={question.challenge}
         />
       )}
       {question.type === "2-truths-1-lie" && (
