@@ -1,6 +1,5 @@
 import { Game } from "./game";
 import { Game1 } from "./exposed/exposed";
-import { Game2 } from "./2/game";
 import { STCEvent } from "src/common/event";
 
 export class GameManager {
@@ -13,12 +12,6 @@ export class GameManager {
   createGame(gameType: string) {
     if (gameType === "1") {
       const game = new Game1(this);
-      this.games.push(game);
-      return game;
-    }
-
-    if (gameType === "2") {
-      const game = new Game2(this);
       this.games.push(game);
       return game;
     }
