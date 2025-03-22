@@ -66,7 +66,7 @@ export class JoinGameState extends GameState<Game1Player> {
     return true;
   }
 
-  onStartGame(game: Game1, _: CTSEvent, data: Data): boolean {
+  onStartGame(game: Game1): boolean {
     if (game.players.length < 3) {
       return false;
     }
@@ -88,15 +88,10 @@ export class JoinGameState extends GameState<Game1Player> {
     return false;
   }
 
-  onPlayerEvent(
-    game: Game1,
-    player: Player<Game1Player>,
-    event: CTSEvent,
-    data: Data,
-  ) {
+  onPlayerEvent(game: Game1, _: Player<Game1Player>, event: CTSEvent) {
     switch (event) {
       case CTSEvent.COMMON.START_GAME:
-        return this.onStartGame(game, event, data);
+        return this.onStartGame(game);
     }
     return false;
   }

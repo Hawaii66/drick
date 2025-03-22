@@ -12,10 +12,14 @@ export abstract class GameState<T> {
   }
 
   abstract onPlayerEvent(
-    game: Game<T>,
-    player: Player<T>,
-    event: CTSEvent,
-    data: Data,
+    _game: Game<T>,
+    _player: Player<T>,
+    _event: CTSEvent,
+    _data: Data,
   ): boolean;
-  abstract onServerEvent(game: Game<T>, event: CTSEvent, data: Data): boolean;
+  abstract onServerEvent(
+    _game: Game<T>,
+    _event: CTSEvent,
+    _data: Data,
+  ): boolean;
 }

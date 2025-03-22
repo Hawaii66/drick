@@ -8,12 +8,12 @@ export type Player<T> = {
 };
 
 export interface Socket {
-  emit: <T>(event: STCEvent, data: T) => void;
+  emit: <T>(_event: STCEvent, _data: T) => void;
 }
 
 export type BasicSocket = {
   id: string;
-  emit: (event: CTSEvent, data: Data) => void;
+  emit: (_event: CTSEvent, _data: Data) => void;
 };
 
 export type Data = unknown;

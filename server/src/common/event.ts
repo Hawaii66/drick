@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 type Flatten<T, build extends string[] = []> =
   T extends Record<string, any> ? Flatten<T[keyof T], build> : [...build, T];
 

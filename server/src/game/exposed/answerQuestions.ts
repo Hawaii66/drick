@@ -53,12 +53,7 @@ export class AnswerQuestionState extends GameState<Game1Player> {
     return true;
   }
 
-  onNextQuestion(
-    game: Game1,
-    player: Player<Game1Player>,
-    _: CTSEvent,
-    _1: Data,
-  ) {
+  onNextQuestion(game: Game1, player: Player<Game1Player>) {
     const host = game.getHost();
 
     if (host.id !== player.id) {
@@ -96,13 +91,13 @@ export class AnswerQuestionState extends GameState<Game1Player> {
         return this.onPlayerAnsweredQuestion(game, player, event, data);
       }
       case CTSEvent.EXPOSED.NEXT_QUESTION: {
-        return this.onNextQuestion(game, player, event, data);
+        return this.onNextQuestion(game, player);
       }
     }
 
     return false;
   }
-  onServerEvent(game: Game1, event: CTSEvent, data: Data): boolean {
+  onServerEvent(): boolean {
     return false;
   }
 }

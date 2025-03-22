@@ -19,8 +19,8 @@ class EventLog {
 
 export class FakeSocket implements BasicSocket {
   id: string;
-  listeners: { event: CTSEvent; callback: (data: Data) => void }[] = [];
-  onAnyListeners: ((event: CTSEvent, data: Data) => void)[] = [];
+  listeners: { event: CTSEvent; callback: (_data: Data) => void }[] = [];
+  onAnyListeners: ((_event: CTSEvent, _data: Data) => void)[] = [];
   eventLog: EventLog;
   logAll: boolean;
 
@@ -47,14 +47,14 @@ export class FakeSocket implements BasicSocket {
     this.eventLog.addLog({ event, data });
   }
 
-  on(event: CTSEvent, callback: (data: Data) => void) {
+  on(event: CTSEvent, callback: (_data: Data) => void) {
     this.listeners.push({
       callback,
       event,
     });
   }
 
-  onAny(callback: (event: CTSEvent, data: Data) => void) {
+  onAny(callback: (_event: CTSEvent, _data: Data) => void) {
     this.onAnyListeners.push(callback);
   }
 }
