@@ -1,4 +1,4 @@
-import { CTSEvent } from "../game/event";
+import { CTSEvent } from "src/common/event";
 import { BasicSocket, Data } from "../game/player";
 
 class EventLog {

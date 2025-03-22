@@ -3,7 +3,7 @@ import { GameState } from "../gameState";
 import { Data, Player } from "../player";
 import { Game1, Game1Player } from "./exposed";
 import { AnswerQuestionState } from "./answerQuestions";
-import { CTSEvent, STCEvent } from "../event";
+import { CTSEvent, STCEvent } from "src/common/event";
 
 export class JoinGameState extends GameState<Game1Player> {
   constructor(game: Game1) {

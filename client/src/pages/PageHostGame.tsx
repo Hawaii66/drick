@@ -1,8 +1,8 @@
+import { CTSEvent, STCEvent } from "@/common/event";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { CTSEvent, STCEvent } from "@/lib/event";
 import { useExposedGame } from "@/lib/exposed";
 import { useSocket, useSocketEvent } from "@/lib/socket";
 import { LobbyPlayer } from "@/types/player";

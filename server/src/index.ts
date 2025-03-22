@@ -2,7 +2,6 @@ import express from "express";
 import { createServer } from "http";
 import { Server } from "socket.io";
 import cors from "cors";
-import { STCEvent } from "./game/event";
 import { GameManager } from "./game/gameManager";
 import { generateSocketCallback } from "./game/socketCallback";
 

@@ -1,9 +1,9 @@
-import { CTSEvent, STCEvent } from "./event";
 import { BasicSocket, Data } from "./player";
 import { GameManager } from "./gameManager";
 import { z } from "zod";
 import { Game1 } from "./exposed/exposed";
 import { JoinGameState } from "./exposed/joinGameState";
+import { CTSEvent, STCEvent } from "src/common/event";
 
 export const generateSocketCallback = (gameManager: GameManager) => {
   return (socket: BasicSocket, event: CTSEvent, data: Data) => {

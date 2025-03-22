@@ -1,8 +1,8 @@
 import { z } from "zod";
 import { GameManager } from "../game/gameManager";
 import { FakeSocket } from "./socket";
-import { CTSEvent, STCEvent } from "../game/event";
 import { generateSocketCallback } from "src/game/socketCallback";
+import { CTSEvent, STCEvent } from "src/common/event";
 
 const gameManager = new GameManager();
 

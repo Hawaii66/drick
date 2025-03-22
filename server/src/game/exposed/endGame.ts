@@ -1,4 +1,4 @@
-import { CTSEvent, STCEvent } from "../event";
+import { CTSEvent, STCEvent } from "src/common/event";
 import { Game } from "../game";
 import { GameState } from "../gameState";
 import { Player, Data } from "../player";

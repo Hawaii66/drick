@@ -1,4 +1,4 @@
-import { STCEvent } from "@/lib/event";
+import { STCEvent } from "@/common/event";
 import { useExposedGame } from "@/lib/exposed";
 import { useSocketLatestEvent } from "@/lib/socket";
 import PageAnsweredQuestions from "@/pages/PageAnsweredQuestions";

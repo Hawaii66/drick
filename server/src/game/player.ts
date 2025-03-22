@@ -1,4 +1,4 @@
-import { CTSEvent, STCEvent } from "./event";
+import { STCEvent, CTSEvent } from "src/common/event";
 
 export type Player<T> = {
   name: string;

@@ -1,7 +1,7 @@
 import { Game } from "./game";
 import { Game1 } from "./exposed/exposed";
 import { Game2 } from "./2/game";
-import { STCEvent } from "./event";
+import { STCEvent } from "src/common/event";
 
 export class GameManager {
   games: Game<unknown>[] = [];

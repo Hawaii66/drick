@@ -1,4 +1,3 @@
-import { STCEvent } from "@/lib/event";
 import { useSocketLatestEvent } from "@/lib/socket";
 import { useEffect, useState } from "react";
 import {
@@ -11,6 +10,7 @@ import {
 } from "./ui/dialog";
 import { Link } from "@tanstack/react-router";
 import { Button } from "./ui/button";
+import { STCEvent } from "@/common/event";
 
 type Props = {
   children: React.ReactNode;

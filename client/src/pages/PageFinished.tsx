@@ -1,3 +1,4 @@
+import { CTSEvent, STCEvent } from "@/common/event";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -6,7 +7,6 @@ import {
   CardDescription,
   CardFooter,
 } from "@/components/ui/card";
-import { CTSEvent, STCEvent } from "@/lib/event";
 import { useExposedGame } from "@/lib/exposed";
 import { useSocket, useSocketData, useSocketEvent } from "@/lib/socket";
 import { useNavigate } from "@tanstack/react-router";

@@ -4,7 +4,7 @@ import { Player, Data } from "../player";
 import { Game1, Game1Player } from "./exposed";
 import { NeedsAnswers, SmallGame } from "./questions";
 import { EndGameState } from "./endGame";
-import { CTSEvent, STCEvent } from "../event";
+import { STCEvent, CTSEvent } from "src/common/event";
 
 export class AnswerQuestionState extends GameState<Game1Player> {
   constructor(game: Game1) {

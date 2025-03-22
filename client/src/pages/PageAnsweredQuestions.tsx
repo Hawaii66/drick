@@ -1,3 +1,4 @@
+import { STCEvent, CTSEvent } from "@/common/event";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import {
@@ -7,7 +8,6 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { CTSEvent, STCEvent } from "@/lib/event";
 import { useSocket, useSocketData, useSocketEvent } from "@/lib/socket";
 import { LobbyPlayer } from "@/types/player";
 import { useNavigate } from "@tanstack/react-router";

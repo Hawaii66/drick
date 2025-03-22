@@ -1,3 +1,4 @@
+import { CTSEvent } from "@/common/event";
 import GroupChallenge from "@/components/answer/GroupChallenge";
 import GroupQuestion from "@/components/answer/GroupQuestion";
 import PlayerChallenge from "@/components/answer/PlayerChallenge";
@@ -13,7 +14,6 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { CTSEvent } from "@/lib/event";
 import { useSocket, useSocketData } from "@/lib/socket";
 import { SmallGame } from "@/types/game";
 import { LobbyPlayer } from "@/types/player";

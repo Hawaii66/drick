@@ -1,6 +1,6 @@
+import { STCEvent } from "@/common/event";
 import { useEffect, useMemo, useState, useSyncExternalStore } from "react";
 import { io, Socket } from "socket.io-client";
-import { STCEvent } from "./event";
 
 export class SocketHandler {
   private socket: Socket;

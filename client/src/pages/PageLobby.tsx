@@ -1,3 +1,4 @@
+import { STCEvent, CTSEvent } from "@/common/event";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import {
@@ -13,7 +14,6 @@ import {
   InputOTPSlot,
   InputOTPSeparator,
 } from "@/components/ui/input-otp";
-import { CTSEvent, STCEvent } from "@/lib/event";
 import { useSocket, useSocketData, useSocketEvent } from "@/lib/socket";
 import { LobbyPlayer } from "@/types/player";
 import { Label } from "@radix-ui/react-label";
