@@ -7,8 +7,9 @@
     "dev": "vite --mode dev",
     "dev-host": "vite --mode dev --host",
     "build": "tsc -b && vite build",
-    "lint": "eslint .",
-    "preview": "vite preview"
+    "type-check": "tsc --noEmit",
+    "lint": "npx eslint .",
+    "format": "npx prettier . --check"
   },
   "dependencies": {
     "@radix-ui/react-accordion": "^1.2.3",

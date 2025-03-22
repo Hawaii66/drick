@@ -7,12 +7,8 @@
     "test-exposed": "nodemon --exec npx tsx src/test/exposed.ts",
     "build": "tsc",
     "type-check": "tsc --noEmit",
-    "lint": "eslint",
-    "test": "jest",
-    "start": "npx tsx src/index.ts",
-    "db:generate": "npx drizzle-kit generate",
-    "db:push": "npx drizzle-kit push",
-    "db:studio": "npx drizzle-kit studio"
+    "lint": "npx eslint .",
+    "format": "npx prettier . --check"
   },
   "keywords": [],
   "author": "",
