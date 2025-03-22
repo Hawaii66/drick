@@ -24,7 +24,7 @@ export class SocketHandler {
   }
 
   constructor() {
-    this.socket = io("http://localhost:3000");
+    this.socket = io(import.meta.env.VITE_SERVER_URL);
 
     this.socket.on("connect", () => {
       this.setState({ isConnected: true, id: this.socket.id });
