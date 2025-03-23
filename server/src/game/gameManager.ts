@@ -1,4 +1,5 @@
 import { Game } from "./game";
+import { LiftGame } from "./lift/lift";
 import { PromtPartyGame } from "./promptParty/promptParty";
 import { STCEvent } from "src/common/event";
 
@@ -10,8 +11,13 @@ export class GameManager {
   }
 
   createGame(gameType: string) {
-    if (gameType === "1") {
+    if (gameType === "prompt-party") {
       const game = new PromtPartyGame(this);
+      this.games.push(game);
+      return game;
+    }
+    if (gameType === "lift") {
+      const game = new LiftGame(this);
       this.games.push(game);
       return game;
     }

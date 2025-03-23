@@ -26,6 +26,7 @@ const run = () => {
   hostSocket.sendEvent(CTSEvent.COMMON.HOST_GAME, {
     name: "Host player",
     questionsPerPlayer: 20,
+    gameId: "prompt-party",
   });
   const { data: data1, event } = hostSocket.eventLog.getLatets();
   const { pin } = z.object({ pin: z.string().length(6) }).parse(data1);
