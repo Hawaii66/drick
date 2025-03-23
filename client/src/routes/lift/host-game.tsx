@@ -1,7 +1,7 @@
-import PageHostGame from "@/pages/promptParty/PageHostGame";
+import PageHostGame from "@/pages/lift/PageHostGame";
 import { createFileRoute } from "@tanstack/react-router";
 
-export const Route = createFileRoute("/promptparty/host-game")({
+export const Route = createFileRoute("/lift/host-game")({
   component: RouteComponent,
 });
 

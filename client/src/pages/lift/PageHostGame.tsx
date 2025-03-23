@@ -1,31 +1,22 @@
-import { STCEvent, CTSEvent } from "@/common/event";
+import { CTSEvent, STCEvent } from "@/common/event";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
-import {
-  InputOTP,
-  InputOTPGroup,
-  InputOTPSeparator,
-  InputOTPSlot,
-} from "@/components/ui/input-otp";
 import { Label } from "@/components/ui/label";
-import { usePromptPartyGame } from "@/lib/promptparty";
+import { useLiftGame } from "@/lib/lift";
 import { useSocket, useSocketEvent } from "@/lib/socket";
 import { LobbyPlayer } from "@/types/player";
 import { useNavigate } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 
-type Props = {
-  defaultPin?: string;
-};
-
-export default function PageJoinGame({ defaultPin }: Props) {
+export default function PageHostGame() {
   const [name, setName] = useState("");
-  const [pin, setPin] = useState(defaultPin ?? "");
+  const [roundsStr, setRoundsStr] = useState("10");
+  const rounds = parseInt(roundsStr);
 
   const socket = useSocket();
   const navigate = useNavigate();
-  const { setState } = usePromptPartyGame();
+  const { setState } = useLiftGame();
 
   const onConnect = useSocketEvent<{ players: LobbyPlayer[]; pin: string }>(
     STCEvent.COMMON.PLAYER_JOINED_GAME,
@@ -39,14 +30,14 @@ export default function PageJoinGame({ defaultPin }: Props) {
         players: onConnect.players,
       });
       navigate({
-        to: "/promptparty/active/lobby",
+        to: "/lift/active/lobby",
       });
     }
   }, [onConnect, navigate, setState]);
 
   return (
-    <div className="flex justify-center items-center bg-[url(/bg.svg)] w-screen h-screen">
-      <Card>
+    <div className="flex justify-center items-center bg-[url(/bg/lift.svg)] w-screen h-screen">
+      <Card className="mx-8">
         <CardContent className="flex flex-col items-center gap-8">
           <div className="flex flex-col gap-2 w-full">
             <Label>Username</Label>
@@ -56,33 +47,36 @@ export default function PageJoinGame({ defaultPin }: Props) {
               autoFocus
             />
           </div>
+
           <div className="flex flex-col gap-2 w-full">
-            <Label>Game PIN</Label>
-            <InputOTP value={pin} onChange={(e) => setPin(e)} maxLength={6}>
-              <InputOTPGroup>
-                <InputOTPSlot index={0} />
-                <InputOTPSlot index={1} />
-                <InputOTPSlot index={2} />
-              </InputOTPGroup>
-              <InputOTPSeparator />
-              <InputOTPGroup>
-                <InputOTPSlot index={3} />
-                <InputOTPSlot index={4} />
-                <InputOTPSlot index={5} />
-              </InputOTPGroup>
-            </InputOTP>
+            <Label>Number of rounds</Label>
+            <Input
+              type="number"
+              inputMode="numeric"
+              value={roundsStr}
+              onChange={(e) => setRoundsStr(e.target.value)}
+            />
+            <p className="px-2 text-sm">
+              Recomended to select between 8 - 20 rounds
+            </p>
           </div>
           <Button
-            disabled={name.trim().length < 3 || pin.length !== 6}
-            className="bg-purple-600 px-8 py-2 text-lg"
-            onClick={() =>
-              socket.emit(CTSEvent.COMMON.JOIN_GAME, {
-                pin,
-                name,
-              })
+            disabled={
+              name.trim().length < 3 ||
+              isNaN(rounds) ||
+              rounds < 2 ||
+              rounds > 100
             }
+            className="bg-purple-600 px-8 py-2 text-lg"
+            onClick={() => {
+              socket.emit(CTSEvent.COMMON.HOST_GAME, {
+                rounds,
+                name,
+                gameId: "lift",
+              });
+            }}
           >
-            Join Game
+            Create Game
           </Button>
         </CardContent>
       </Card>

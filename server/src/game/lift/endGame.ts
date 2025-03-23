@@ -5,7 +5,8 @@ import { LiftGame, LiftPlayer } from "./lift";
 export class EndGameState extends GameState<LiftPlayer> {
   constructor(game: LiftGame) {
     super(game, "end");
-    game.sendEventToAllPlayers(STCEvent.PROMPT_PARTY.ENDED, {});
+
+    game.sendEventToAllPlayers(STCEvent.LIFT.ENDED, {});
     game.gameManager.closeGame(game.pin);
   }
 

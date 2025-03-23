@@ -28,8 +28,8 @@ export class LiftState extends GameState<LiftPlayer> {
     Array.from(game.failedPlayers).forEach((id) => {
       const player = game.getPlayer(id);
       if (player) {
-        player.metadata.score += 1000;
-        response.push({ id, time: 1000 });
+        player.metadata.score += 4000;
+        response.push({ id, time: 4000 });
       }
     });
 
@@ -39,6 +39,7 @@ export class LiftState extends GameState<LiftPlayer> {
         id: player.id,
         score: player.metadata.score,
       })),
+      toEarly: Array.from(game.failedPlayers),
     });
 
     game.rounds -= 1;

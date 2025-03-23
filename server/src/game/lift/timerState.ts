@@ -5,18 +5,14 @@ import { Player } from "../player";
 import { LiftState } from "./liftState";
 
 function getDelayMs(): number {
-  return 500;
   const rand = Math.random(); // 0 to 1
 
   if (rand < 0.7) {
-    // 70% chance: 5–10 seconds
-    return 5000 + Math.random() * 5000;
+    return 3000 + Math.random() * 5000;
   } else if (rand < 0.95) {
-    // 25% chance: 10–15 seconds
-    return 10000 + Math.random() * 5000;
+    return 8000 + Math.random() * 3000;
   } else {
-    // 5% chance: 15–20 seconds
-    return 15000 + Math.random() * 5000;
+    return 10000 + Math.random() * 5000;
   }
 }
 

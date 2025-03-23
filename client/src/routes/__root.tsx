@@ -6,7 +6,7 @@ import { TanStackRouterDevtools } from "@tanstack/react-router-devtools";
 
 export const Route = createRootRoute({
   component: () => (
-    <div className="min-h-screen">
+    <div className="flex flex-col justify-start items-start h-screen">
       <Header />
       <BlockError>
         <BlockDisconnected>

@@ -67,7 +67,7 @@ export class JoinLiftGameState extends GameState<LiftPlayer> {
   }
 
   onStartGame(game: LiftGame): boolean {
-    if (game.players.length < 3) {
+    if (game.players.length < 2) {
       return false;
     }
 

@@ -21,6 +21,7 @@ export const STCEvent = {
     TO_EARLY: "lift-to-early",
     COMPLETED: "lift-completed",
     FINGER_STATUS: "lift-finger-status",
+    ENDED: "lift-game-ended",
   },
 } as const;
 export type STCEvent = Flatten<typeof STCEvent>[number];
