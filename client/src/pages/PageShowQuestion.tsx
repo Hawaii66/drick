@@ -41,15 +41,15 @@ export default function PageShowQuestion({
   const navigate = useNavigate();
 
   const onFinished = useSocketEvent<object | null>(
-    STCEvent.EXPOSED.FINISHED,
+    STCEvent.PROMPT_PARTY.FINISHED,
     null,
   );
   useEffect(() => {
     if (!onFinished) return;
 
     navigate({
-      to: "/exposed/active/$pin/finished",
-      from: "/exposed/active/$pin/show",
+      to: "/promptparty/active/$pin/finished",
+      from: "/promptparty/active/$pin/show",
     });
   }, [onFinished, navigate]);
 
@@ -105,7 +105,9 @@ export default function PageShowQuestion({
         <Card>
           <CardFooter>
             <Button
-              onClick={() => socket.emit(CTSEvent.EXPOSED.NEXT_QUESTION, {})}
+              onClick={() =>
+                socket.emit(CTSEvent.PROMPT_PARTY.NEXT_QUESTION, {})
+              }
             >
               Next Question
             </Button>

@@ -2,14 +2,16 @@ import { LobbyPlayer } from "@/types/player";
 import { Navigate, useLocation } from "@tanstack/react-router";
 import React, { createContext, useContext, useState } from "react";
 
-export type ExposedGame = {
+export type PromptPartyGame = {
   pin: string;
   players: LobbyPlayer[];
   inGame: boolean;
 };
 
-const ExpoedGameContext = createContext<
-  ExposedGame & { setState: React.Dispatch<React.SetStateAction<ExposedGame>> }
+const PromptPartyGameContext = createContext<
+  PromptPartyGame & {
+    setState: React.Dispatch<React.SetStateAction<PromptPartyGame>>;
+  }
 >({
   pin: "",
   players: [],
@@ -17,14 +19,14 @@ const ExpoedGameContext = createContext<
   setState: () => {},
 });
 
-export const useExposedGame = () => useContext(ExpoedGameContext);
+export const usePromptPartyGame = () => useContext(PromptPartyGameContext);
 
 type Props = {
   children: React.ReactNode;
 };
 
-export default function ExposedGameWrapper({ children }: Props) {
-  const [state, setState] = useState<ExposedGame>({
+export default function PromptPartyGameWrapper({ children }: Props) {
+  const [state, setState] = useState<PromptPartyGame>({
     inGame: false,
     pin: "",
     players: [],
@@ -36,8 +38,8 @@ export default function ExposedGameWrapper({ children }: Props) {
   }
 
   return (
-    <ExpoedGameContext.Provider value={{ ...state, setState }}>
+    <PromptPartyGameContext.Provider value={{ ...state, setState }}>
       {children}
-    </ExpoedGameContext.Provider>
+    </PromptPartyGameContext.Provider>
   );
 }

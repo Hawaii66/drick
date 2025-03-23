@@ -1,28 +1,32 @@
 import { z } from "zod";
 import { GameState } from "../gameState";
 import { Player, Data } from "../player";
-import { Game1, Game1Player } from "./exposed";
+import { PromtPartyGame, PromptPartyGame } from "./promptParty";
 import { NeedsAnswers, SmallGame } from "./questions";
 import { EndGameState } from "./endGame";
 import { STCEvent, CTSEvent } from "src/common/event";
 
-export class AnswerQuestionState extends GameState<Game1Player> {
-  constructor(game: Game1) {
+export class AnswerQuestionState extends GameState<PromptPartyGame> {
+  constructor(game: PromtPartyGame) {
     super(game, "answer-questions");
 
     game.players.forEach((player) => {
       const temp = [...NeedsAnswers].sort(() => Math.random() - 0.5);
       player.metadata.questions = temp.slice(0, game.questionsPerPlayer);
 
-      game.sendEventToPlayer(player.id, STCEvent.EXPOSED.ANSWER_QUESTIONS, {
-        questions: player.metadata.questions,
-      });
+      game.sendEventToPlayer(
+        player.id,
+        STCEvent.PROMPT_PARTY.ANSWER_QUESTIONS,
+        {
+          questions: player.metadata.questions,
+        },
+      );
     });
   }
 
   onPlayerAnsweredQuestion(
-    game: Game1,
-    player: Player<Game1Player>,
+    game: PromtPartyGame,
+    player: Player<PromptPartyGame>,
     _: CTSEvent,
     data: Data,
   ): boolean {
@@ -45,15 +49,19 @@ export class AnswerQuestionState extends GameState<Game1Player> {
     game.playersWhoAnswered.push(player.id);
 
     game.playersWhoAnswered.forEach((i) =>
-      game.sendEventToPlayer(i, STCEvent.EXPOSED.PLAYER_ANSWERED_QUESTIONS, {
-        playersWhoAnswered: game.playersWhoAnswered,
-      }),
+      game.sendEventToPlayer(
+        i,
+        STCEvent.PROMPT_PARTY.PLAYER_ANSWERED_QUESTIONS,
+        {
+          playersWhoAnswered: game.playersWhoAnswered,
+        },
+      ),
     );
 
     return true;
   }
 
-  onNextQuestion(game: Game1, player: Player<Game1Player>) {
+  onNextQuestion(game: PromtPartyGame, player: Player<PromptPartyGame>) {
     const host = game.getHost();
 
     if (host.id !== player.id) {
@@ -66,12 +74,12 @@ export class AnswerQuestionState extends GameState<Game1Player> {
     }
 
     if (game.currentQuestionIndex === game.questions.length) {
-      game.sendEventToAllPlayers(STCEvent.EXPOSED.FINISHED, {});
+      game.sendEventToAllPlayers(STCEvent.PROMPT_PARTY.FINISHED, {});
       game.changeState(new EndGameState(game, "end-game"));
       return true;
     }
 
-    game.sendEventToAllPlayers(STCEvent.EXPOSED.SHOW_QUESTION, {
+    game.sendEventToAllPlayers(STCEvent.PROMPT_PARTY.SHOW_QUESTION, {
       question: game.questions[game.currentQuestionIndex],
       currentQuestion: game.currentQuestionIndex + 1,
       totalQuestions: game.questions.length,
@@ -81,16 +89,16 @@ export class AnswerQuestionState extends GameState<Game1Player> {
   }
 
   onPlayerEvent(
-    game: Game1,
-    player: Player<Game1Player>,
+    game: PromtPartyGame,
+    player: Player<PromptPartyGame>,
     event: CTSEvent,
     data: Data,
   ): boolean {
     switch (event) {
-      case CTSEvent.EXPOSED.ANSWERED_QUESTIONS: {
+      case CTSEvent.PROMPT_PARTY.ANSWERED_QUESTIONS: {
         return this.onPlayerAnsweredQuestion(game, player, event, data);
       }
-      case CTSEvent.EXPOSED.NEXT_QUESTION: {
+      case CTSEvent.PROMPT_PARTY.NEXT_QUESTION: {
         return this.onNextQuestion(game, player);
       }
     }

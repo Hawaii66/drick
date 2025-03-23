@@ -1,10 +1,10 @@
 import { STCEvent } from "@/common/event";
-import { useExposedGame } from "@/lib/exposed";
+import { usePromptPartyGame } from "@/lib/promptparty";
 import { useSocketLatestEvent } from "@/lib/socket";
 import PageAnsweredQuestions from "@/pages/PageAnsweredQuestions";
 import { createFileRoute } from "@tanstack/react-router";
 
-export const Route = createFileRoute("/exposed/active/$pin/has-answered")({
+export const Route = createFileRoute("/promptparty/active/$pin/has-answered")({
   component: RouteComponent,
 });
 
@@ -12,8 +12,8 @@ function RouteComponent() {
   const onConnect = useSocketLatestEvent<{
     playersWhoAnswered: string[];
     pin: string;
-  } | null>(STCEvent.EXPOSED.PLAYER_ANSWERED_QUESTIONS);
-  const { players } = useExposedGame();
+  } | null>(STCEvent.PROMPT_PARTY.PLAYER_ANSWERED_QUESTIONS);
+  const { players } = usePromptPartyGame();
 
   return (
     <PageAnsweredQuestions

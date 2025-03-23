@@ -1,12 +1,12 @@
 import { STCEvent } from "@/common/event";
-import { useExposedGame } from "@/lib/exposed";
+import { usePromptPartyGame } from "@/lib/promptparty";
 import { useSocketEvent } from "@/lib/socket";
 import PageLobby from "@/pages/PageLobby";
 import { LobbyPlayer } from "@/types/player";
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect } from "react";
 
-export const Route = createFileRoute("/exposed/active/lobby")({
+export const Route = createFileRoute("/promptparty/active/lobby")({
   component: RouteComponent,
 });
 
@@ -15,7 +15,7 @@ function RouteComponent() {
     players: LobbyPlayer[];
     pin: string;
   } | null>(STCEvent.COMMON.PLAYER_JOINED_GAME, null);
-  const { pin, players, setState } = useExposedGame();
+  const { pin, players, setState } = usePromptPartyGame();
 
   useEffect(() => {
     if (!onConnect) return;

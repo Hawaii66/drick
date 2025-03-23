@@ -1,18 +1,18 @@
 import { STCEvent } from "@/common/event";
-import { useExposedGame } from "@/lib/exposed";
+import { usePromptPartyGame } from "@/lib/promptparty";
 import { useSocketLatestEvent } from "@/lib/socket";
 import PageAnswerQuestions from "@/pages/PageAnswerQuestions";
 import { createFileRoute } from "@tanstack/react-router";
 
-export const Route = createFileRoute("/exposed/active/$pin/answer")({
+export const Route = createFileRoute("/promptparty/active/$pin/answer")({
   component: RouteComponent,
 });
 
 function RouteComponent() {
   const answerQuestions = useSocketLatestEvent<{ questions: string[] } | null>(
-    STCEvent.EXPOSED.ANSWER_QUESTIONS,
+    STCEvent.PROMPT_PARTY.ANSWER_QUESTIONS,
   );
-  const { players } = useExposedGame();
+  const { players } = usePromptPartyGame();
 
   if (!answerQuestions) {
     return <p>Loading questions...</p>;

@@ -7,19 +7,22 @@ import {
   CardDescription,
   CardFooter,
 } from "@/components/ui/card";
-import { useExposedGame } from "@/lib/exposed";
+import { usePromptPartyGame } from "@/lib/promptparty";
 import { useSocket, useSocketData, useSocketEvent } from "@/lib/socket";
 import { useNavigate } from "@tanstack/react-router";
 import { useEffect } from "react";
 
 export default function PageFinished() {
   const socket = useSocket();
-  const { players } = useExposedGame();
+  const { players } = usePromptPartyGame();
   const { id } = useSocketData();
   const isHost = players.some((i) => i.isHost && i.id === id);
 
   const navigate = useNavigate();
-  const onEnded = useSocketEvent<object | null>(STCEvent.EXPOSED.ENDED, null);
+  const onEnded = useSocketEvent<object | null>(
+    STCEvent.PROMPT_PARTY.ENDED,
+    null,
+  );
   useEffect(() => {
     if (!onEnded) return;
 
@@ -45,7 +48,9 @@ export default function PageFinished() {
         </CardHeader>
         {isHost && (
           <CardFooter>
-            <Button onClick={() => socket.emit(CTSEvent.EXPOSED.END_GAME, {})}>
+            <Button
+              onClick={() => socket.emit(CTSEvent.PROMPT_PARTY.END_GAME, {})}
+            >
               Quit game
             </Button>
           </CardFooter>

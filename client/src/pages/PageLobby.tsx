@@ -39,7 +39,7 @@ export default function PageLobby({ players, pin }: Props) {
   useEffect(() => {
     if (data.pin !== "") {
       navigate({
-        to: "/exposed/active/$pin/answer",
+        to: "/promptparty/active/$pin/answer",
         params: {
           pin: data.pin,
         },
@@ -83,7 +83,7 @@ export default function PageLobby({ players, pin }: Props) {
                 variant={"link"}
                 onClick={() =>
                   navigator.clipboard.writeText(
-                    `http://localhost:5173/exposed/join-game?pin=${pin}`,
+                    `${import.meta.env.VITE_CLIENT_URL}/promptparty/join-game?pin=${pin}`,
                   )
                 }
               >

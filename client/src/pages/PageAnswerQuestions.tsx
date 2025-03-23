@@ -153,10 +153,10 @@ export default function PageAnswerQuestions({ players, questions }: Props) {
                   };
                 }),
               };
-              socket.emit(CTSEvent.EXPOSED.ANSWERED_QUESTIONS, toSend);
+              socket.emit(CTSEvent.PROMPT_PARTY.ANSWERED_QUESTIONS, toSend);
               navigate({
-                to: "/exposed/active/$pin/has-answered",
-                from: "/exposed/active/$pin/answer",
+                to: "/promptparty/active/$pin/has-answered",
+                from: "/promptparty/active/$pin/answer",
               });
             }}
           >

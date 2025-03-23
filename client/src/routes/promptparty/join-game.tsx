@@ -3,7 +3,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { z } from "zod";
 import { zodValidator } from "@tanstack/zod-adapter";
 
-export const Route = createFileRoute("/exposed/join-game")({
+export const Route = createFileRoute("/promptparty/join-game")({
   component: RouteComponent,
   validateSearch: zodValidator(
     z.object({

@@ -1,11 +1,11 @@
 import { Game } from "../game";
 import { SmallGame } from "./questions";
 
-export type Game1Player = {
+export type PromptPartyGame = {
   questions: string[];
 };
 
-export class Game1 extends Game<Game1Player> {
+export class PromtPartyGame extends Game<PromptPartyGame> {
   questionsPerPlayer: number = 0;
   questions: SmallGame[] = [];
   currentQuestionIndex: number = -1;

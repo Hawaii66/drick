@@ -45,7 +45,7 @@ const run = () => {
   hostSocket.sendEvent(CTSEvent.COMMON.START_GAME, {});
   hostSocket.sendEvent(CTSEvent.COMMON.START_GAME, {});
 
-  hostSocket.sendEvent(CTSEvent.EXPOSED.ANSWERED_QUESTIONS, {
+  hostSocket.sendEvent(CTSEvent.PROMPT_PARTY.ANSWERED_QUESTIONS, {
     answers: [
       {
         type: "write-something",
@@ -73,7 +73,7 @@ const run = () => {
       },
     ],
   });
-  player1Socket.sendEvent(CTSEvent.EXPOSED.ANSWERED_QUESTIONS, {
+  player1Socket.sendEvent(CTSEvent.PROMPT_PARTY.ANSWERED_QUESTIONS, {
     answers: [
       {
         type: "write-something",
@@ -101,7 +101,7 @@ const run = () => {
       },
     ],
   });
-  player2Socket.sendEvent(CTSEvent.EXPOSED.ANSWERED_QUESTIONS, {
+  player2Socket.sendEvent(CTSEvent.PROMPT_PARTY.ANSWERED_QUESTIONS, {
     answers: [
       {
         type: "write-something",
@@ -130,29 +130,29 @@ const run = () => {
     ],
   });
 
-  hostSocket.sendEvent(CTSEvent.EXPOSED.NEXT_QUESTION, {});
+  hostSocket.sendEvent(CTSEvent.PROMPT_PARTY.NEXT_QUESTION, {});
 
-  hostSocket.sendEvent(CTSEvent.EXPOSED.NEXT_QUESTION, {});
-  hostSocket.sendEvent(CTSEvent.EXPOSED.NEXT_QUESTION, {});
-  hostSocket.sendEvent(CTSEvent.EXPOSED.NEXT_QUESTION, {});
-  hostSocket.sendEvent(CTSEvent.EXPOSED.NEXT_QUESTION, {});
-  hostSocket.sendEvent(CTSEvent.EXPOSED.NEXT_QUESTION, {});
-  hostSocket.sendEvent(CTSEvent.EXPOSED.NEXT_QUESTION, {});
+  hostSocket.sendEvent(CTSEvent.PROMPT_PARTY.NEXT_QUESTION, {});
+  hostSocket.sendEvent(CTSEvent.PROMPT_PARTY.NEXT_QUESTION, {});
+  hostSocket.sendEvent(CTSEvent.PROMPT_PARTY.NEXT_QUESTION, {});
+  hostSocket.sendEvent(CTSEvent.PROMPT_PARTY.NEXT_QUESTION, {});
+  hostSocket.sendEvent(CTSEvent.PROMPT_PARTY.NEXT_QUESTION, {});
+  hostSocket.sendEvent(CTSEvent.PROMPT_PARTY.NEXT_QUESTION, {});
 
-  hostSocket.sendEvent(CTSEvent.EXPOSED.NEXT_QUESTION, {});
-  hostSocket.sendEvent(CTSEvent.EXPOSED.NEXT_QUESTION, {});
-  hostSocket.sendEvent(CTSEvent.EXPOSED.NEXT_QUESTION, {});
-  hostSocket.sendEvent(CTSEvent.EXPOSED.NEXT_QUESTION, {});
-  hostSocket.sendEvent(CTSEvent.EXPOSED.NEXT_QUESTION, {});
-  hostSocket.sendEvent(CTSEvent.EXPOSED.NEXT_QUESTION, {});
+  hostSocket.sendEvent(CTSEvent.PROMPT_PARTY.NEXT_QUESTION, {});
+  hostSocket.sendEvent(CTSEvent.PROMPT_PARTY.NEXT_QUESTION, {});
+  hostSocket.sendEvent(CTSEvent.PROMPT_PARTY.NEXT_QUESTION, {});
+  hostSocket.sendEvent(CTSEvent.PROMPT_PARTY.NEXT_QUESTION, {});
+  hostSocket.sendEvent(CTSEvent.PROMPT_PARTY.NEXT_QUESTION, {});
+  hostSocket.sendEvent(CTSEvent.PROMPT_PARTY.NEXT_QUESTION, {});
 
-  hostSocket.sendEvent(CTSEvent.EXPOSED.NEXT_QUESTION, {});
-  hostSocket.sendEvent(CTSEvent.EXPOSED.NEXT_QUESTION, {});
-  hostSocket.sendEvent(CTSEvent.EXPOSED.NEXT_QUESTION, {});
-  hostSocket.sendEvent(CTSEvent.EXPOSED.NEXT_QUESTION, {});
-  hostSocket.sendEvent(CTSEvent.EXPOSED.NEXT_QUESTION, {});
-  hostSocket.sendEvent(CTSEvent.EXPOSED.NEXT_QUESTION, {});
+  hostSocket.sendEvent(CTSEvent.PROMPT_PARTY.NEXT_QUESTION, {});
+  hostSocket.sendEvent(CTSEvent.PROMPT_PARTY.NEXT_QUESTION, {});
+  hostSocket.sendEvent(CTSEvent.PROMPT_PARTY.NEXT_QUESTION, {});
+  hostSocket.sendEvent(CTSEvent.PROMPT_PARTY.NEXT_QUESTION, {});
+  hostSocket.sendEvent(CTSEvent.PROMPT_PARTY.NEXT_QUESTION, {});
+  hostSocket.sendEvent(CTSEvent.PROMPT_PARTY.NEXT_QUESTION, {});
 
-  hostSocket.sendEvent(CTSEvent.EXPOSED.END_GAME, {});
+  hostSocket.sendEvent(CTSEvent.PROMPT_PARTY.END_GAME, {});
 };
 run();

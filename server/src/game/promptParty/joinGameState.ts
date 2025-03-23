@@ -1,16 +1,16 @@
 import { z } from "zod";
 import { GameState } from "../gameState";
 import { Data, Player } from "../player";
-import { Game1, Game1Player } from "./exposed";
+import { PromtPartyGame, PromptPartyGame } from "./promptParty";
 import { AnswerQuestionState } from "./answerQuestions";
 import { CTSEvent, STCEvent } from "src/common/event";
 
-export class JoinGameState extends GameState<Game1Player> {
-  constructor(game: Game1) {
+export class JoinGameState extends GameState<PromptPartyGame> {
+  constructor(game: PromtPartyGame) {
     super(game, "join");
   }
 
-  onHostGame(game: Game1, _: CTSEvent, data: Data): boolean {
+  onHostGame(game: PromtPartyGame, _: CTSEvent, data: Data): boolean {
     if (game.players.length > 0) {
       return false;
     }
@@ -43,7 +43,7 @@ export class JoinGameState extends GameState<Game1Player> {
     return true;
   }
 
-  onJoinGame(game: Game1, _: CTSEvent, data: Data): boolean {
+  onJoinGame(game: PromtPartyGame, _: CTSEvent, data: Data): boolean {
     if (game.players.length === 0) {
       return false;
     }
@@ -66,7 +66,7 @@ export class JoinGameState extends GameState<Game1Player> {
     return true;
   }
 
-  onStartGame(game: Game1): boolean {
+  onStartGame(game: PromtPartyGame): boolean {
     if (game.players.length < 3) {
       return false;
     }
@@ -77,7 +77,7 @@ export class JoinGameState extends GameState<Game1Player> {
     return true;
   }
 
-  onServerEvent(game: Game1, event: CTSEvent, data: Data): boolean {
+  onServerEvent(game: PromtPartyGame, event: CTSEvent, data: Data): boolean {
     switch (event) {
       case CTSEvent.COMMON.HOST_GAME:
         return this.onHostGame(game, event, data);
@@ -88,7 +88,11 @@ export class JoinGameState extends GameState<Game1Player> {
     return false;
   }
 
-  onPlayerEvent(game: Game1, _: Player<Game1Player>, event: CTSEvent) {
+  onPlayerEvent(
+    game: PromtPartyGame,
+    _: Player<PromptPartyGame>,
+    event: CTSEvent,
+  ) {
     switch (event) {
       case CTSEvent.COMMON.START_GAME:
         return this.onStartGame(game);

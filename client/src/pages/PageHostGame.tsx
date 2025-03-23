@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { useExposedGame } from "@/lib/exposed";
+import { usePromptPartyGame } from "@/lib/promptparty";
 import { useSocket, useSocketEvent } from "@/lib/socket";
 import { LobbyPlayer } from "@/types/player";
 import { useNavigate } from "@tanstack/react-router";
@@ -16,7 +16,7 @@ export default function PageHostGame() {
 
   const socket = useSocket();
   const navigate = useNavigate();
-  const { setState } = useExposedGame();
+  const { setState } = usePromptPartyGame();
 
   const onConnect = useSocketEvent<{ players: LobbyPlayer[]; pin: string }>(
     STCEvent.COMMON.PLAYER_JOINED_GAME,
@@ -30,7 +30,7 @@ export default function PageHostGame() {
         players: onConnect.players,
       });
       navigate({
-        to: "/exposed/active/lobby",
+        to: "/promptparty/active/lobby",
       });
     }
   }, [onConnect, navigate, setState]);

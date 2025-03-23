@@ -28,13 +28,16 @@ export default function PageAnsweredQuestions({
   const socket = useSocket();
   const navigate = useNavigate();
 
-  const showQuestion = useSocketEvent(STCEvent.EXPOSED.SHOW_QUESTION, null);
+  const showQuestion = useSocketEvent(
+    STCEvent.PROMPT_PARTY.SHOW_QUESTION,
+    null,
+  );
 
   useEffect(() => {
     if (showQuestion) {
       navigate({
-        to: "/exposed/active/$pin/show",
-        from: "/exposed/active/$pin/has-answered",
+        to: "/promptparty/active/$pin/show",
+        from: "/promptparty/active/$pin/has-answered",
       });
     }
   }, [showQuestion, navigate]);
@@ -57,7 +60,7 @@ export default function PageAnsweredQuestions({
           {isHost && (
             <Button
               onClick={() => {
-                socket.emit(CTSEvent.EXPOSED.NEXT_QUESTION, {});
+                socket.emit(CTSEvent.PROMPT_PARTY.NEXT_QUESTION, {});
               }}
               disabled={players.length !== totalPlayers}
             >

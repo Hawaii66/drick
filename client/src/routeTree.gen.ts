@@ -12,16 +12,16 @@
 
 import { Route as rootRoute } from './routes/__root'
 import { Route as ErrorImport } from './routes/error'
-import { Route as ExposedRouteImport } from './routes/exposed/route'
+import { Route as PromptpartyRouteImport } from './routes/promptparty/route'
 import { Route as IndexImport } from './routes/index'
-import { Route as ExposedSelectGameJoinTypeImport } from './routes/exposed/select-game-join-type'
-import { Route as ExposedJoinGameImport } from './routes/exposed/join-game'
-import { Route as ExposedHostGameImport } from './routes/exposed/host-game'
-import { Route as ExposedActiveLobbyImport } from './routes/exposed/active/lobby'
-import { Route as ExposedActivePinShowImport } from './routes/exposed/active/$pin/show'
-import { Route as ExposedActivePinHasAnsweredImport } from './routes/exposed/active/$pin/has-answered'
-import { Route as ExposedActivePinFinishedImport } from './routes/exposed/active/$pin/finished'
-import { Route as ExposedActivePinAnswerImport } from './routes/exposed/active/$pin/answer'
+import { Route as PromptpartySelectGameJoinTypeImport } from './routes/promptparty/select-game-join-type'
+import { Route as PromptpartyJoinGameImport } from './routes/promptparty/join-game'
+import { Route as PromptpartyHostGameImport } from './routes/promptparty/host-game'
+import { Route as PromptpartyActiveLobbyImport } from './routes/promptparty/active/lobby'
+import { Route as PromptpartyActivePinShowImport } from './routes/promptparty/active/$pin/show'
+import { Route as PromptpartyActivePinHasAnsweredImport } from './routes/promptparty/active/$pin/has-answered'
+import { Route as PromptpartyActivePinFinishedImport } from './routes/promptparty/active/$pin/finished'
+import { Route as PromptpartyActivePinAnswerImport } from './routes/promptparty/active/$pin/answer'
 
 // Create/Update Routes
 
@@ -31,9 +31,9 @@ const ErrorRoute = ErrorImport.update({
   getParentRoute: () => rootRoute,
 } as any)
 
-const ExposedRouteRoute = ExposedRouteImport.update({
-  id: '/exposed',
-  path: '/exposed',
+const PromptpartyRouteRoute = PromptpartyRouteImport.update({
+  id: '/promptparty',
+  path: '/promptparty',
   getParentRoute: () => rootRoute,
 } as any)
 
@@ -43,54 +43,58 @@ const IndexRoute = IndexImport.update({
   getParentRoute: () => rootRoute,
 } as any)
 
-const ExposedSelectGameJoinTypeRoute = ExposedSelectGameJoinTypeImport.update({
-  id: '/select-game-join-type',
-  path: '/select-game-join-type',
-  getParentRoute: () => ExposedRouteRoute,
-} as any)
-
-const ExposedJoinGameRoute = ExposedJoinGameImport.update({
-  id: '/join-game',
-  path: '/join-game',
-  getParentRoute: () => ExposedRouteRoute,
-} as any)
-
-const ExposedHostGameRoute = ExposedHostGameImport.update({
-  id: '/host-game',
-  path: '/host-game',
-  getParentRoute: () => ExposedRouteRoute,
-} as any)
-
-const ExposedActiveLobbyRoute = ExposedActiveLobbyImport.update({
-  id: '/active/lobby',
-  path: '/active/lobby',
-  getParentRoute: () => ExposedRouteRoute,
-} as any)
-
-const ExposedActivePinShowRoute = ExposedActivePinShowImport.update({
-  id: '/active/$pin/show',
-  path: '/active/$pin/show',
-  getParentRoute: () => ExposedRouteRoute,
-} as any)
-
-const ExposedActivePinHasAnsweredRoute =
-  ExposedActivePinHasAnsweredImport.update({
-    id: '/active/$pin/has-answered',
-    path: '/active/$pin/has-answered',
-    getParentRoute: () => ExposedRouteRoute,
+const PromptpartySelectGameJoinTypeRoute =
+  PromptpartySelectGameJoinTypeImport.update({
+    id: '/select-game-join-type',
+    path: '/select-game-join-type',
+    getParentRoute: () => PromptpartyRouteRoute,
   } as any)
 
-const ExposedActivePinFinishedRoute = ExposedActivePinFinishedImport.update({
-  id: '/active/$pin/finished',
-  path: '/active/$pin/finished',
-  getParentRoute: () => ExposedRouteRoute,
+const PromptpartyJoinGameRoute = PromptpartyJoinGameImport.update({
+  id: '/join-game',
+  path: '/join-game',
+  getParentRoute: () => PromptpartyRouteRoute,
 } as any)
 
-const ExposedActivePinAnswerRoute = ExposedActivePinAnswerImport.update({
-  id: '/active/$pin/answer',
-  path: '/active/$pin/answer',
-  getParentRoute: () => ExposedRouteRoute,
+const PromptpartyHostGameRoute = PromptpartyHostGameImport.update({
+  id: '/host-game',
+  path: '/host-game',
+  getParentRoute: () => PromptpartyRouteRoute,
 } as any)
+
+const PromptpartyActiveLobbyRoute = PromptpartyActiveLobbyImport.update({
+  id: '/active/lobby',
+  path: '/active/lobby',
+  getParentRoute: () => PromptpartyRouteRoute,
+} as any)
+
+const PromptpartyActivePinShowRoute = PromptpartyActivePinShowImport.update({
+  id: '/active/$pin/show',
+  path: '/active/$pin/show',
+  getParentRoute: () => PromptpartyRouteRoute,
+} as any)
+
+const PromptpartyActivePinHasAnsweredRoute =
+  PromptpartyActivePinHasAnsweredImport.update({
+    id: '/active/$pin/has-answered',
+    path: '/active/$pin/has-answered',
+    getParentRoute: () => PromptpartyRouteRoute,
+  } as any)
+
+const PromptpartyActivePinFinishedRoute =
+  PromptpartyActivePinFinishedImport.update({
+    id: '/active/$pin/finished',
+    path: '/active/$pin/finished',
+    getParentRoute: () => PromptpartyRouteRoute,
+  } as any)
+
+const PromptpartyActivePinAnswerRoute = PromptpartyActivePinAnswerImport.update(
+  {
+    id: '/active/$pin/answer',
+    path: '/active/$pin/answer',
+    getParentRoute: () => PromptpartyRouteRoute,
+  } as any,
+)
 
 // Populate the FileRoutesByPath interface
 
@@ -103,11 +107,11 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexImport
       parentRoute: typeof rootRoute
     }
-    '/exposed': {
-      id: '/exposed'
-      path: '/exposed'
-      fullPath: '/exposed'
-      preLoaderRoute: typeof ExposedRouteImport
+    '/promptparty': {
+      id: '/promptparty'
+      path: '/promptparty'
+      fullPath: '/promptparty'
+      preLoaderRoute: typeof PromptpartyRouteImport
       parentRoute: typeof rootRoute
     }
     '/error': {
@@ -117,188 +121,187 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ErrorImport
       parentRoute: typeof rootRoute
     }
-    '/exposed/host-game': {
-      id: '/exposed/host-game'
+    '/promptparty/host-game': {
+      id: '/promptparty/host-game'
       path: '/host-game'
-      fullPath: '/exposed/host-game'
-      preLoaderRoute: typeof ExposedHostGameImport
-      parentRoute: typeof ExposedRouteImport
+      fullPath: '/promptparty/host-game'
+      preLoaderRoute: typeof PromptpartyHostGameImport
+      parentRoute: typeof PromptpartyRouteImport
     }
-    '/exposed/join-game': {
-      id: '/exposed/join-game'
+    '/promptparty/join-game': {
+      id: '/promptparty/join-game'
       path: '/join-game'
-      fullPath: '/exposed/join-game'
-      preLoaderRoute: typeof ExposedJoinGameImport
-      parentRoute: typeof ExposedRouteImport
+      fullPath: '/promptparty/join-game'
+      preLoaderRoute: typeof PromptpartyJoinGameImport
+      parentRoute: typeof PromptpartyRouteImport
     }
-    '/exposed/select-game-join-type': {
-      id: '/exposed/select-game-join-type'
+    '/promptparty/select-game-join-type': {
+      id: '/promptparty/select-game-join-type'
       path: '/select-game-join-type'
-      fullPath: '/exposed/select-game-join-type'
-      preLoaderRoute: typeof ExposedSelectGameJoinTypeImport
-      parentRoute: typeof ExposedRouteImport
+      fullPath: '/promptparty/select-game-join-type'
+      preLoaderRoute: typeof PromptpartySelectGameJoinTypeImport
+      parentRoute: typeof PromptpartyRouteImport
     }
-    '/exposed/active/lobby': {
-      id: '/exposed/active/lobby'
+    '/promptparty/active/lobby': {
+      id: '/promptparty/active/lobby'
       path: '/active/lobby'
-      fullPath: '/exposed/active/lobby'
-      preLoaderRoute: typeof ExposedActiveLobbyImport
-      parentRoute: typeof ExposedRouteImport
+      fullPath: '/promptparty/active/lobby'
+      preLoaderRoute: typeof PromptpartyActiveLobbyImport
+      parentRoute: typeof PromptpartyRouteImport
     }
-    '/exposed/active/$pin/answer': {
-      id: '/exposed/active/$pin/answer'
+    '/promptparty/active/$pin/answer': {
+      id: '/promptparty/active/$pin/answer'
       path: '/active/$pin/answer'
-      fullPath: '/exposed/active/$pin/answer'
-      preLoaderRoute: typeof ExposedActivePinAnswerImport
-      parentRoute: typeof ExposedRouteImport
+      fullPath: '/promptparty/active/$pin/answer'
+      preLoaderRoute: typeof PromptpartyActivePinAnswerImport
+      parentRoute: typeof PromptpartyRouteImport
     }
-    '/exposed/active/$pin/finished': {
-      id: '/exposed/active/$pin/finished'
+    '/promptparty/active/$pin/finished': {
+      id: '/promptparty/active/$pin/finished'
       path: '/active/$pin/finished'
-      fullPath: '/exposed/active/$pin/finished'
-      preLoaderRoute: typeof ExposedActivePinFinishedImport
-      parentRoute: typeof ExposedRouteImport
+      fullPath: '/promptparty/active/$pin/finished'
+      preLoaderRoute: typeof PromptpartyActivePinFinishedImport
+      parentRoute: typeof PromptpartyRouteImport
     }
-    '/exposed/active/$pin/has-answered': {
-      id: '/exposed/active/$pin/has-answered'
+    '/promptparty/active/$pin/has-answered': {
+      id: '/promptparty/active/$pin/has-answered'
       path: '/active/$pin/has-answered'
-      fullPath: '/exposed/active/$pin/has-answered'
-      preLoaderRoute: typeof ExposedActivePinHasAnsweredImport
-      parentRoute: typeof ExposedRouteImport
+      fullPath: '/promptparty/active/$pin/has-answered'
+      preLoaderRoute: typeof PromptpartyActivePinHasAnsweredImport
+      parentRoute: typeof PromptpartyRouteImport
     }
-    '/exposed/active/$pin/show': {
-      id: '/exposed/active/$pin/show'
+    '/promptparty/active/$pin/show': {
+      id: '/promptparty/active/$pin/show'
       path: '/active/$pin/show'
-      fullPath: '/exposed/active/$pin/show'
-      preLoaderRoute: typeof ExposedActivePinShowImport
-      parentRoute: typeof ExposedRouteImport
+      fullPath: '/promptparty/active/$pin/show'
+      preLoaderRoute: typeof PromptpartyActivePinShowImport
+      parentRoute: typeof PromptpartyRouteImport
     }
   }
 }
 
 // Create and export the route tree
 
-interface ExposedRouteRouteChildren {
-  ExposedHostGameRoute: typeof ExposedHostGameRoute
-  ExposedJoinGameRoute: typeof ExposedJoinGameRoute
-  ExposedSelectGameJoinTypeRoute: typeof ExposedSelectGameJoinTypeRoute
-  ExposedActiveLobbyRoute: typeof ExposedActiveLobbyRoute
-  ExposedActivePinAnswerRoute: typeof ExposedActivePinAnswerRoute
-  ExposedActivePinFinishedRoute: typeof ExposedActivePinFinishedRoute
-  ExposedActivePinHasAnsweredRoute: typeof ExposedActivePinHasAnsweredRoute
-  ExposedActivePinShowRoute: typeof ExposedActivePinShowRoute
+interface PromptpartyRouteRouteChildren {
+  PromptpartyHostGameRoute: typeof PromptpartyHostGameRoute
+  PromptpartyJoinGameRoute: typeof PromptpartyJoinGameRoute
+  PromptpartySelectGameJoinTypeRoute: typeof PromptpartySelectGameJoinTypeRoute
+  PromptpartyActiveLobbyRoute: typeof PromptpartyActiveLobbyRoute
+  PromptpartyActivePinAnswerRoute: typeof PromptpartyActivePinAnswerRoute
+  PromptpartyActivePinFinishedRoute: typeof PromptpartyActivePinFinishedRoute
+  PromptpartyActivePinHasAnsweredRoute: typeof PromptpartyActivePinHasAnsweredRoute
+  PromptpartyActivePinShowRoute: typeof PromptpartyActivePinShowRoute
 }
 
-const ExposedRouteRouteChildren: ExposedRouteRouteChildren = {
-  ExposedHostGameRoute: ExposedHostGameRoute,
-  ExposedJoinGameRoute: ExposedJoinGameRoute,
-  ExposedSelectGameJoinTypeRoute: ExposedSelectGameJoinTypeRoute,
-  ExposedActiveLobbyRoute: ExposedActiveLobbyRoute,
-  ExposedActivePinAnswerRoute: ExposedActivePinAnswerRoute,
-  ExposedActivePinFinishedRoute: ExposedActivePinFinishedRoute,
-  ExposedActivePinHasAnsweredRoute: ExposedActivePinHasAnsweredRoute,
-  ExposedActivePinShowRoute: ExposedActivePinShowRoute,
+const PromptpartyRouteRouteChildren: PromptpartyRouteRouteChildren = {
+  PromptpartyHostGameRoute: PromptpartyHostGameRoute,
+  PromptpartyJoinGameRoute: PromptpartyJoinGameRoute,
+  PromptpartySelectGameJoinTypeRoute: PromptpartySelectGameJoinTypeRoute,
+  PromptpartyActiveLobbyRoute: PromptpartyActiveLobbyRoute,
+  PromptpartyActivePinAnswerRoute: PromptpartyActivePinAnswerRoute,
+  PromptpartyActivePinFinishedRoute: PromptpartyActivePinFinishedRoute,
+  PromptpartyActivePinHasAnsweredRoute: PromptpartyActivePinHasAnsweredRoute,
+  PromptpartyActivePinShowRoute: PromptpartyActivePinShowRoute,
 }
 
-const ExposedRouteRouteWithChildren = ExposedRouteRoute._addFileChildren(
-  ExposedRouteRouteChildren,
-)
+const PromptpartyRouteRouteWithChildren =
+  PromptpartyRouteRoute._addFileChildren(PromptpartyRouteRouteChildren)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
-  '/exposed': typeof ExposedRouteRouteWithChildren
+  '/promptparty': typeof PromptpartyRouteRouteWithChildren
   '/error': typeof ErrorRoute
-  '/exposed/host-game': typeof ExposedHostGameRoute
-  '/exposed/join-game': typeof ExposedJoinGameRoute
-  '/exposed/select-game-join-type': typeof ExposedSelectGameJoinTypeRoute
-  '/exposed/active/lobby': typeof ExposedActiveLobbyRoute
-  '/exposed/active/$pin/answer': typeof ExposedActivePinAnswerRoute
-  '/exposed/active/$pin/finished': typeof ExposedActivePinFinishedRoute
-  '/exposed/active/$pin/has-answered': typeof ExposedActivePinHasAnsweredRoute
-  '/exposed/active/$pin/show': typeof ExposedActivePinShowRoute
+  '/promptparty/host-game': typeof PromptpartyHostGameRoute
+  '/promptparty/join-game': typeof PromptpartyJoinGameRoute
+  '/promptparty/select-game-join-type': typeof PromptpartySelectGameJoinTypeRoute
+  '/promptparty/active/lobby': typeof PromptpartyActiveLobbyRoute
+  '/promptparty/active/$pin/answer': typeof PromptpartyActivePinAnswerRoute
+  '/promptparty/active/$pin/finished': typeof PromptpartyActivePinFinishedRoute
+  '/promptparty/active/$pin/has-answered': typeof PromptpartyActivePinHasAnsweredRoute
+  '/promptparty/active/$pin/show': typeof PromptpartyActivePinShowRoute
 }
 
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
-  '/exposed': typeof ExposedRouteRouteWithChildren
+  '/promptparty': typeof PromptpartyRouteRouteWithChildren
   '/error': typeof ErrorRoute
-  '/exposed/host-game': typeof ExposedHostGameRoute
-  '/exposed/join-game': typeof ExposedJoinGameRoute
-  '/exposed/select-game-join-type': typeof ExposedSelectGameJoinTypeRoute
-  '/exposed/active/lobby': typeof ExposedActiveLobbyRoute
-  '/exposed/active/$pin/answer': typeof ExposedActivePinAnswerRoute
-  '/exposed/active/$pin/finished': typeof ExposedActivePinFinishedRoute
-  '/exposed/active/$pin/has-answered': typeof ExposedActivePinHasAnsweredRoute
-  '/exposed/active/$pin/show': typeof ExposedActivePinShowRoute
+  '/promptparty/host-game': typeof PromptpartyHostGameRoute
+  '/promptparty/join-game': typeof PromptpartyJoinGameRoute
+  '/promptparty/select-game-join-type': typeof PromptpartySelectGameJoinTypeRoute
+  '/promptparty/active/lobby': typeof PromptpartyActiveLobbyRoute
+  '/promptparty/active/$pin/answer': typeof PromptpartyActivePinAnswerRoute
+  '/promptparty/active/$pin/finished': typeof PromptpartyActivePinFinishedRoute
+  '/promptparty/active/$pin/has-answered': typeof PromptpartyActivePinHasAnsweredRoute
+  '/promptparty/active/$pin/show': typeof PromptpartyActivePinShowRoute
 }
 
 export interface FileRoutesById {
   __root__: typeof rootRoute
   '/': typeof IndexRoute
-  '/exposed': typeof ExposedRouteRouteWithChildren
+  '/promptparty': typeof PromptpartyRouteRouteWithChildren
   '/error': typeof ErrorRoute
-  '/exposed/host-game': typeof ExposedHostGameRoute
-  '/exposed/join-game': typeof ExposedJoinGameRoute
-  '/exposed/select-game-join-type': typeof ExposedSelectGameJoinTypeRoute
-  '/exposed/active/lobby': typeof ExposedActiveLobbyRoute
-  '/exposed/active/$pin/answer': typeof ExposedActivePinAnswerRoute
-  '/exposed/active/$pin/finished': typeof ExposedActivePinFinishedRoute
-  '/exposed/active/$pin/has-answered': typeof ExposedActivePinHasAnsweredRoute
-  '/exposed/active/$pin/show': typeof ExposedActivePinShowRoute
+  '/promptparty/host-game': typeof PromptpartyHostGameRoute
+  '/promptparty/join-game': typeof PromptpartyJoinGameRoute
+  '/promptparty/select-game-join-type': typeof PromptpartySelectGameJoinTypeRoute
+  '/promptparty/active/lobby': typeof PromptpartyActiveLobbyRoute
+  '/promptparty/active/$pin/answer': typeof PromptpartyActivePinAnswerRoute
+  '/promptparty/active/$pin/finished': typeof PromptpartyActivePinFinishedRoute
+  '/promptparty/active/$pin/has-answered': typeof PromptpartyActivePinHasAnsweredRoute
+  '/promptparty/active/$pin/show': typeof PromptpartyActivePinShowRoute
 }
 
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
-    | '/exposed'
+    | '/promptparty'
     | '/error'
-    | '/exposed/host-game'
-    | '/exposed/join-game'
-    | '/exposed/select-game-join-type'
-    | '/exposed/active/lobby'
-    | '/exposed/active/$pin/answer'
-    | '/exposed/active/$pin/finished'
-    | '/exposed/active/$pin/has-answered'
-    | '/exposed/active/$pin/show'
+    | '/promptparty/host-game'
+    | '/promptparty/join-game'
+    | '/promptparty/select-game-join-type'
+    | '/promptparty/active/lobby'
+    | '/promptparty/active/$pin/answer'
+    | '/promptparty/active/$pin/finished'
+    | '/promptparty/active/$pin/has-answered'
+    | '/promptparty/active/$pin/show'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
-    | '/exposed'
+    | '/promptparty'
     | '/error'
-    | '/exposed/host-game'
-    | '/exposed/join-game'
-    | '/exposed/select-game-join-type'
-    | '/exposed/active/lobby'
-    | '/exposed/active/$pin/answer'
-    | '/exposed/active/$pin/finished'
-    | '/exposed/active/$pin/has-answered'
-    | '/exposed/active/$pin/show'
+    | '/promptparty/host-game'
+    | '/promptparty/join-game'
+    | '/promptparty/select-game-join-type'
+    | '/promptparty/active/lobby'
+    | '/promptparty/active/$pin/answer'
+    | '/promptparty/active/$pin/finished'
+    | '/promptparty/active/$pin/has-answered'
+    | '/promptparty/active/$pin/show'
   id:
     | '__root__'
     | '/'
-    | '/exposed'
+    | '/promptparty'
     | '/error'
-    | '/exposed/host-game'
-    | '/exposed/join-game'
-    | '/exposed/select-game-join-type'
-    | '/exposed/active/lobby'
-    | '/exposed/active/$pin/answer'
-    | '/exposed/active/$pin/finished'
-    | '/exposed/active/$pin/has-answered'
-    | '/exposed/active/$pin/show'
+    | '/promptparty/host-game'
+    | '/promptparty/join-game'
+    | '/promptparty/select-game-join-type'
+    | '/promptparty/active/lobby'
+    | '/promptparty/active/$pin/answer'
+    | '/promptparty/active/$pin/finished'
+    | '/promptparty/active/$pin/has-answered'
+    | '/promptparty/active/$pin/show'
   fileRoutesById: FileRoutesById
 }
 
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
-  ExposedRouteRoute: typeof ExposedRouteRouteWithChildren
+  PromptpartyRouteRoute: typeof PromptpartyRouteRouteWithChildren
   ErrorRoute: typeof ErrorRoute
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
-  ExposedRouteRoute: ExposedRouteRouteWithChildren,
+  PromptpartyRouteRoute: PromptpartyRouteRouteWithChildren,
   ErrorRoute: ErrorRoute,
 }
 
@@ -313,60 +316,60 @@ export const routeTree = rootRoute
       "filePath": "__root.tsx",
       "children": [
         "/",
-        "/exposed",
+        "/promptparty",
         "/error"
       ]
     },
     "/": {
       "filePath": "index.tsx"
     },
-    "/exposed": {
-      "filePath": "exposed/route.tsx",
+    "/promptparty": {
+      "filePath": "promptparty/route.tsx",
       "children": [
-        "/exposed/host-game",
-        "/exposed/join-game",
-        "/exposed/select-game-join-type",
-        "/exposed/active/lobby",
-        "/exposed/active/$pin/answer",
-        "/exposed/active/$pin/finished",
-        "/exposed/active/$pin/has-answered",
-        "/exposed/active/$pin/show"
+        "/promptparty/host-game",
+        "/promptparty/join-game",
+        "/promptparty/select-game-join-type",
+        "/promptparty/active/lobby",
+        "/promptparty/active/$pin/answer",
+        "/promptparty/active/$pin/finished",
+        "/promptparty/active/$pin/has-answered",
+        "/promptparty/active/$pin/show"
       ]
     },
     "/error": {
       "filePath": "error.tsx"
     },
-    "/exposed/host-game": {
-      "filePath": "exposed/host-game.tsx",
-      "parent": "/exposed"
+    "/promptparty/host-game": {
+      "filePath": "promptparty/host-game.tsx",
+      "parent": "/promptparty"
     },
-    "/exposed/join-game": {
-      "filePath": "exposed/join-game.tsx",
-      "parent": "/exposed"
+    "/promptparty/join-game": {
+      "filePath": "promptparty/join-game.tsx",
+      "parent": "/promptparty"
     },
-    "/exposed/select-game-join-type": {
-      "filePath": "exposed/select-game-join-type.tsx",
-      "parent": "/exposed"
+    "/promptparty/select-game-join-type": {
+      "filePath": "promptparty/select-game-join-type.tsx",
+      "parent": "/promptparty"
     },
-    "/exposed/active/lobby": {
-      "filePath": "exposed/active/lobby.tsx",
-      "parent": "/exposed"
+    "/promptparty/active/lobby": {
+      "filePath": "promptparty/active/lobby.tsx",
+      "parent": "/promptparty"
     },
-    "/exposed/active/$pin/answer": {
-      "filePath": "exposed/active/$pin/answer.tsx",
-      "parent": "/exposed"
+    "/promptparty/active/$pin/answer": {
+      "filePath": "promptparty/active/$pin/answer.tsx",
+      "parent": "/promptparty"
     },
-    "/exposed/active/$pin/finished": {
-      "filePath": "exposed/active/$pin/finished.tsx",
-      "parent": "/exposed"
+    "/promptparty/active/$pin/finished": {
+      "filePath": "promptparty/active/$pin/finished.tsx",
+      "parent": "/promptparty"
     },
-    "/exposed/active/$pin/has-answered": {
-      "filePath": "exposed/active/$pin/has-answered.tsx",
-      "parent": "/exposed"
+    "/promptparty/active/$pin/has-answered": {
+      "filePath": "promptparty/active/$pin/has-answered.tsx",
+      "parent": "/promptparty"
     },
-    "/exposed/active/$pin/show": {
-      "filePath": "exposed/active/$pin/show.tsx",
-      "parent": "/exposed"
+    "/promptparty/active/$pin/show": {
+      "filePath": "promptparty/active/$pin/show.tsx",
+      "parent": "/promptparty"
     }
   }
 }

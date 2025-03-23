@@ -1,8 +1,8 @@
 import { BasicSocket, Data } from "./player";
 import { GameManager } from "./gameManager";
 import { z } from "zod";
-import { Game1 } from "./exposed/exposed";
-import { JoinGameState } from "./exposed/joinGameState";
+import { PromtPartyGame } from "./promptParty/promptParty";
+import { JoinGameState } from "./promptParty/joinGameState";
 import { CTSEvent, STCEvent } from "src/common/event";
 
 export const generateSocketCallback = (gameManager: GameManager) => {
@@ -19,7 +19,7 @@ export const generateSocketCallback = (gameManager: GameManager) => {
       if (event === CTSEvent.COMMON.HOST_GAME) {
         const game = gameManager.createGame("1");
 
-        if (game instanceof Game1) {
+        if (game instanceof PromtPartyGame) {
           game.state = new JoinGameState(game);
         } else {
           throw new Error("Game init state not set");

@@ -8,7 +8,7 @@ export const STCEvent = {
     START_GAME: "on-start-game",
     ERROR: "error",
   },
-  EXPOSED: {
+  PROMPT_PARTY: {
     ANSWER_QUESTIONS: "answer-questions",
     PLAYER_ANSWERED_QUESTIONS: "player-answered-questions",
     SHOW_QUESTION: "show-question",
@@ -24,7 +24,7 @@ export const CTSEvent = {
     JOIN_GAME: "join-game",
     START_GAME: "start-game",
   },
-  EXPOSED: {
+  PROMPT_PARTY: {
     ANSWERED_QUESTIONS: "answered-questions",
     NEXT_QUESTION: "next-question",
     END_GAME: "end-game",

@@ -2,25 +2,25 @@ import { CTSEvent, STCEvent } from "src/common/event";
 import { Game } from "../game";
 import { GameState } from "../gameState";
 import { Player } from "../player";
-import { Game1Player } from "./exposed";
+import { PromptPartyGame } from "./promptParty";
 
-export class EndGameState extends GameState<Game1Player> {
-  onEndGame(game: Game<Game1Player>, player: Player<Game1Player>) {
+export class EndGameState extends GameState<PromptPartyGame> {
+  onEndGame(game: Game<PromptPartyGame>, player: Player<PromptPartyGame>) {
     const host = game.getHost();
     if (host.id !== player.id) return false;
 
-    game.sendEventToAllPlayers(STCEvent.EXPOSED.ENDED, {});
+    game.sendEventToAllPlayers(STCEvent.PROMPT_PARTY.ENDED, {});
     game.gameManager.closeGame(game.pin);
     return true;
   }
 
   onPlayerEvent(
-    game: Game<Game1Player>,
-    player: Player<Game1Player>,
+    game: Game<PromptPartyGame>,
+    player: Player<PromptPartyGame>,
     event: CTSEvent,
   ): boolean {
     switch (event) {
-      case CTSEvent.EXPOSED.END_GAME: {
+      case CTSEvent.PROMPT_PARTY.END_GAME: {
         return this.onEndGame(game, player);
       }
     }

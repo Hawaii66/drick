@@ -1,5 +1,5 @@
 import { Game } from "./game";
-import { Game1 } from "./exposed/exposed";
+import { PromtPartyGame } from "./promptParty/promptParty";
 import { STCEvent } from "src/common/event";
 
 export class GameManager {
@@ -11,7 +11,7 @@ export class GameManager {
 
   createGame(gameType: string) {
     if (gameType === "1") {
-      const game = new Game1(this);
+      const game = new PromtPartyGame(this);
       this.games.push(game);
       return game;
     }
