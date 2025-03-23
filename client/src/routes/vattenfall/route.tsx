@@ -1,6 +1,5 @@
 import {
   Card,
-  CardContent,
   CardDescription,
   CardHeader,
   CardTitle,
@@ -25,8 +24,8 @@ function RouteComponent() {
             vattenfall. En perfekt blandning av skratt, musik och kaos.
           </CardDescription>
           <CardDescription>
-            <b>OBS:</b> Klicka på bilden inte på "spela" knappen för att lyssna
-            på låtarna.
+            <b>OBS:</b> Klicka på bilden inte på {'"'}spela{'"'} knappen för att
+            lyssna på låtarna.
           </CardDescription>
         </CardHeader>
       </Card>

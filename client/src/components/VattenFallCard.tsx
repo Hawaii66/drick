@@ -30,17 +30,13 @@ export default function VattenFallCard({ song }: Props) {
       <CardHeader>
         <CardTitle>{song.name}</CardTitle>
         <CardDescription>
-          Byt person när låten sjunger "{song.trigger}"
+          Byt person när låten sjunger {'"'}
+          {song.trigger}
+          {'"'}
         </CardDescription>
         <CardDescription>Level: {formatLevel(song.level)}</CardDescription>
       </CardHeader>
-      <CardContent
-        onClick={(a) => {
-          console.log("what");
-          a.stopPropagation();
-          a.preventDefault();
-        }}
-      >
+      <CardContent>
         <iframe
           style={{ borderRadius: "8px" }}
           src={`https://open.spotify.com/embed/track/${song.trackId}?utm_source=generator`}
