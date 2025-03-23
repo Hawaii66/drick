@@ -9,6 +9,7 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "./ui/dialog";
+import { Link } from "@tanstack/react-router";
 
 export default function Header() {
   const { isConnected } = useSocketData();
@@ -16,9 +17,11 @@ export default function Header() {
   return (
     <div className="top-0 sticky shadow-md shadow-neutral-300">
       <div className="flex flex-row justify-between items-center bg-white px-4 py-2 w-full">
-        <h1 className="font-semibold text-md text-purple-700 tracking-wider">
-          PartySpel.com
-        </h1>
+        <Link to="/">
+          <h1 className="font-semibold text-md text-purple-700 tracking-wider">
+            PartySpel.com
+          </h1>
+        </Link>
         <Dialog>
           <DialogTrigger>{isConnected ? "🟢" : "🔴"}</DialogTrigger>
           <DialogContent>
