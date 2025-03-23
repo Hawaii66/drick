@@ -12,6 +12,7 @@
 
 import { Route as rootRoute } from './routes/__root'
 import { Route as ErrorImport } from './routes/error'
+import { Route as VattenfallRouteImport } from './routes/vattenfall/route'
 import { Route as PromptpartyRouteImport } from './routes/promptparty/route'
 import { Route as IndexImport } from './routes/index'
 import { Route as PromptpartySelectGameJoinTypeImport } from './routes/promptparty/select-game-join-type'
@@ -28,6 +29,12 @@ import { Route as PromptpartyActivePinAnswerImport } from './routes/promptparty/
 const ErrorRoute = ErrorImport.update({
   id: '/error',
   path: '/error',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const VattenfallRouteRoute = VattenfallRouteImport.update({
+  id: '/vattenfall',
+  path: '/vattenfall',
   getParentRoute: () => rootRoute,
 } as any)
 
@@ -112,6 +119,13 @@ declare module '@tanstack/react-router' {
       path: '/promptparty'
       fullPath: '/promptparty'
       preLoaderRoute: typeof PromptpartyRouteImport
+      parentRoute: typeof rootRoute
+    }
+    '/vattenfall': {
+      id: '/vattenfall'
+      path: '/vattenfall'
+      fullPath: '/vattenfall'
+      preLoaderRoute: typeof VattenfallRouteImport
       parentRoute: typeof rootRoute
     }
     '/error': {
@@ -210,6 +224,7 @@ const PromptpartyRouteRouteWithChildren =
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/promptparty': typeof PromptpartyRouteRouteWithChildren
+  '/vattenfall': typeof VattenfallRouteRoute
   '/error': typeof ErrorRoute
   '/promptparty/host-game': typeof PromptpartyHostGameRoute
   '/promptparty/join-game': typeof PromptpartyJoinGameRoute
@@ -224,6 +239,7 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/promptparty': typeof PromptpartyRouteRouteWithChildren
+  '/vattenfall': typeof VattenfallRouteRoute
   '/error': typeof ErrorRoute
   '/promptparty/host-game': typeof PromptpartyHostGameRoute
   '/promptparty/join-game': typeof PromptpartyJoinGameRoute
@@ -239,6 +255,7 @@ export interface FileRoutesById {
   __root__: typeof rootRoute
   '/': typeof IndexRoute
   '/promptparty': typeof PromptpartyRouteRouteWithChildren
+  '/vattenfall': typeof VattenfallRouteRoute
   '/error': typeof ErrorRoute
   '/promptparty/host-game': typeof PromptpartyHostGameRoute
   '/promptparty/join-game': typeof PromptpartyJoinGameRoute
@@ -255,6 +272,7 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/promptparty'
+    | '/vattenfall'
     | '/error'
     | '/promptparty/host-game'
     | '/promptparty/join-game'
@@ -268,6 +286,7 @@ export interface FileRouteTypes {
   to:
     | '/'
     | '/promptparty'
+    | '/vattenfall'
     | '/error'
     | '/promptparty/host-game'
     | '/promptparty/join-game'
@@ -281,6 +300,7 @@ export interface FileRouteTypes {
     | '__root__'
     | '/'
     | '/promptparty'
+    | '/vattenfall'
     | '/error'
     | '/promptparty/host-game'
     | '/promptparty/join-game'
@@ -296,12 +316,14 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   PromptpartyRouteRoute: typeof PromptpartyRouteRouteWithChildren
+  VattenfallRouteRoute: typeof VattenfallRouteRoute
   ErrorRoute: typeof ErrorRoute
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   PromptpartyRouteRoute: PromptpartyRouteRouteWithChildren,
+  VattenfallRouteRoute: VattenfallRouteRoute,
   ErrorRoute: ErrorRoute,
 }
 
@@ -317,6 +339,7 @@ export const routeTree = rootRoute
       "children": [
         "/",
         "/promptparty",
+        "/vattenfall",
         "/error"
       ]
     },
@@ -335,6 +358,9 @@ export const routeTree = rootRoute
         "/promptparty/active/$pin/has-answered",
         "/promptparty/active/$pin/show"
       ]
+    },
+    "/vattenfall": {
+      "filePath": "vattenfall/route.tsx"
     },
     "/error": {
       "filePath": "error.tsx"
