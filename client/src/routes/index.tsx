@@ -15,7 +15,26 @@ export const Route = createFileRoute("/")({
 
 function Index() {
   return (
-    <div className="flex flex-col gap-4 p-4">
+    <div className="flex flex-col gap-4 p-4 overflow-y-scroll">
+      <Card className="shadow-md shadow-yellow-800">
+        <CardHeader>
+          <CardTitle>Lift</CardTitle>
+          <CardDescription>
+            The ultimate reaction game. Hold your finger. Wait for green.
+            Release too soon? Drink. Too slow? Drink. Fastest? Give drinks.
+          </CardDescription>
+        </CardHeader>
+        <CardContent>
+          <img className="rounded-2xl" src="/images/lift.png" />
+        </CardContent>
+        <CardFooter className="flex flex-row justify-center items-center">
+          <Link to="/lift/select-game-join-type" className="w-1/2">
+            <Button className="bg-yellow-300 shadow-md shadow-yellow-800 w-full font-semibold text-neutral-700 text-lg tracking-wider active:scale-90 transition-all">
+              Play
+            </Button>
+          </Link>
+        </CardFooter>
+      </Card>
       <Card className="shadow-md shadow-purple-800">
         <CardHeader>
           <CardTitle>Prompt Party</CardTitle>
@@ -29,7 +48,7 @@ function Index() {
         </CardContent>
         <CardFooter className="flex flex-row justify-center items-center">
           <Link to="/promptparty/select-game-join-type" className="w-1/2">
-            <Button className="bg-green-300 shadow-green-800 shadow-md w-full font-semibold text-neutral-700 text-lg tracking-wider active:scale-90 transition-all">
+            <Button className="bg-purple-300 shadow-md shadow-purple-800 w-full font-semibold text-neutral-700 text-lg tracking-wider active:scale-90 transition-all">
               Play
             </Button>
           </Link>

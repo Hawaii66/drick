@@ -8,13 +8,13 @@ import {
 } from "@/components/ui/card";
 import { createFileRoute, Link } from "@tanstack/react-router";
 
-export const Route = createFileRoute("/promptparty/select-game-join-type")({
+export const Route = createFileRoute("/lift/select-game-join-type")({
   component: RouteComponent,
 });
 
 function RouteComponent() {
   return (
-    <div className="flex flex-col justify-center items-center gap-8 bg-[url(/bg/promptparty.svg)] px-8 w-screen h-screen">
+    <div className="flex flex-col justify-center items-center gap-8 bg-[url(/bg/lift.svg)] px-8 w-screen h-screen">
       <Card className="w-full">
         <CardHeader>
           <CardTitle>Join Game</CardTitle>
@@ -24,10 +24,10 @@ function RouteComponent() {
           </CardDescription>
         </CardHeader>
         <CardContent className="flex flex-col justify-center items-center gap-4">
-          <Link to="/promptparty/host-game">
+          <Link to="/lift/host-game">
             <Button>Create Game</Button>
           </Link>
-          <Link to="/promptparty/join-game">
+          <Link to="/lift/join-game">
             <Button>Join Game</Button>
           </Link>
         </CardContent>

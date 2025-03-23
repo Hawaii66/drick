@@ -1,7 +1,7 @@
 import { STCEvent } from "@/common/event";
 import { usePromptPartyGame } from "@/lib/promptparty";
 import { useSocketEvent, useSocketLatestEvent } from "@/lib/socket";
-import PageShowQuestion from "@/pages/PageShowQuestion";
+import PageShowQuestion from "@/pages/promptParty/PageShowQuestion";
 import { SmallGame } from "@/types/game";
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { useEffect } from "react";

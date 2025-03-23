@@ -43,7 +43,7 @@ export default function PageAnsweredQuestions({
   }, [showQuestion, navigate]);
 
   return (
-    <div className="flex flex-col justify-center items-center gap-8 bg-[url(/bg.svg)] px-8 w-screen h-screen">
+    <div className="flex flex-col justify-center items-center gap-8 bg-[url(/bg/promptparty.svg)] px-8 w-screen h-screen">
       <Card className="w-full">
         <CardHeader>
           <CardTitle>Waiting lounge</CardTitle>

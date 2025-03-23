@@ -1,7 +1,7 @@
 import { STCEvent } from "@/common/event";
 import { usePromptPartyGame } from "@/lib/promptparty";
 import { useSocketLatestEvent } from "@/lib/socket";
-import PageAnswerQuestions from "@/pages/PageAnswerQuestions";
+import PageAnswerQuestions from "@/pages/promptParty/PageAnswerQuestions";
 import { createFileRoute } from "@tanstack/react-router";
 
 export const Route = createFileRoute("/promptparty/active/$pin/answer")({

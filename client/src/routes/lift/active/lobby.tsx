@@ -1,12 +1,12 @@
 import { STCEvent } from "@/common/event";
-import { usePromptPartyGame } from "@/lib/promptparty";
+import { useLiftGame } from "@/lib/lift";
 import { useSocketEvent } from "@/lib/socket";
-import PageLobby from "@/pages/promptParty/PageLobby";
+import PageLobby from "@/pages/lift/PageLobby";
 import { LobbyPlayer } from "@/types/player";
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect } from "react";
 
-export const Route = createFileRoute("/promptparty/active/lobby")({
+export const Route = createFileRoute("/lift/active/lobby")({
   component: RouteComponent,
 });
 
@@ -15,7 +15,7 @@ function RouteComponent() {
     players: LobbyPlayer[];
     pin: string;
   } | null>(STCEvent.COMMON.PLAYER_JOINED_GAME, null);
-  const { pin, players, setState } = usePromptPartyGame();
+  const { pin, players, setState } = useLiftGame();
 
   useEffect(() => {
     if (!onConnect) return;

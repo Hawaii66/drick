@@ -4,6 +4,8 @@ import { z } from "zod";
 import { PromtPartyGame } from "./promptParty/promptParty";
 import { JoinGameState } from "./promptParty/joinGameState";
 import { CTSEvent, STCEvent } from "src/common/event";
+import { LiftGame } from "./lift/lift";
+import { JoinLiftGameState } from "./lift/joinGameState";
 
 export const generateSocketCallback = (gameManager: GameManager) => {
   return (socket: BasicSocket, event: CTSEvent, data: Data) => {
@@ -17,10 +19,13 @@ export const generateSocketCallback = (gameManager: GameManager) => {
       success = game.onPlayerEvent(player, event, data);
     } else {
       if (event === CTSEvent.COMMON.HOST_GAME) {
-        const game = gameManager.createGame("1");
+        const { gameId } = z.object({ gameId: z.string() }).parse(data);
+        const game = gameManager.createGame(gameId);
 
         if (game instanceof PromtPartyGame) {
           game.state = new JoinGameState(game);
+        } else if (game instanceof LiftGame) {
+          game.state = new JoinLiftGameState(game);
         } else {
           throw new Error("Game init state not set");
         }

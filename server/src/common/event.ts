@@ -15,6 +15,14 @@ export const STCEvent = {
     FINISHED: "game-finished",
     ENDED: "game-ended",
   },
+  LIFT: {
+    START_ROUND: "lift-start-round",
+    END_ROUND: "lift-end-round",
+    TO_EARLY: "lift-to-early",
+    COMPLETED: "lift-completed",
+    FINGER_STATUS: "lift-finger-status",
+    ENDED: "lift-game-ended",
+  },
 } as const;
 export type STCEvent = Flatten<typeof STCEvent>[number];
 
@@ -28,6 +36,10 @@ export const CTSEvent = {
     ANSWERED_QUESTIONS: "answered-questions",
     NEXT_QUESTION: "next-question",
     END_GAME: "end-game",
+  },
+  LIFT: {
+    FINGER_DOWN: "lift-finger-down",
+    FINGER_UP: "lift-finger-up",
   },
 };
 export type CTSEvent = Flatten<typeof CTSEvent>[number];
