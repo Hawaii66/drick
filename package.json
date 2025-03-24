@@ -3,8 +3,8 @@
   "version": "1.0.0",
   "main": "",
   "scripts": {
-    "build": "cd ./client && npm run build",
-    "start": "cd ./server && npx tsx src/index.ts"
+    "build": "cd ./client && npm ci && npm run build",
+    "start": "cd ./server && npm ci && npx tsx src/index.ts"
   },
   "keywords": [],
   "author": "",
