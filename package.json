@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "main": "",
   "scripts": {
-    "build": "cd ./client && npm ci --force && npm run build",
+    "build": "cd ./client && cp -r ./server/src/common ./client/src/common && npm ci --force && npm run build",
     "start": "cd ./server && npm ci && npx tsx src/index.ts"
   },
   "keywords": [],
