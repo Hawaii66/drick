@@ -16,6 +16,7 @@ import { Route as DebugImport } from './routes/debug'
 import { Route as VattenfallRouteImport } from './routes/vattenfall/route'
 import { Route as PromptpartyRouteImport } from './routes/promptparty/route'
 import { Route as LiftRouteImport } from './routes/lift/route'
+import { Route as DrinkwheelRouteImport } from './routes/drinkwheel/route'
 import { Route as IndexImport } from './routes/index'
 import { Route as PromptpartySelectGameJoinTypeImport } from './routes/promptparty/select-game-join-type'
 import { Route as PromptpartyJoinGameImport } from './routes/promptparty/join-game'
@@ -60,6 +61,12 @@ const PromptpartyRouteRoute = PromptpartyRouteImport.update({
 const LiftRouteRoute = LiftRouteImport.update({
   id: '/lift',
   path: '/lift',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const DrinkwheelRouteRoute = DrinkwheelRouteImport.update({
+  id: '/drinkwheel',
+  path: '/drinkwheel',
   getParentRoute: () => rootRoute,
 } as any)
 
@@ -161,6 +168,13 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexImport
+      parentRoute: typeof rootRoute
+    }
+    '/drinkwheel': {
+      id: '/drinkwheel'
+      path: '/drinkwheel'
+      fullPath: '/drinkwheel'
+      preLoaderRoute: typeof DrinkwheelRouteImport
       parentRoute: typeof rootRoute
     }
     '/lift': {
@@ -341,6 +355,7 @@ const PromptpartyRouteRouteWithChildren =
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/drinkwheel': typeof DrinkwheelRouteRoute
   '/lift': typeof LiftRouteRouteWithChildren
   '/promptparty': typeof PromptpartyRouteRouteWithChildren
   '/vattenfall': typeof VattenfallRouteRoute
@@ -363,6 +378,7 @@ export interface FileRoutesByFullPath {
 
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/drinkwheel': typeof DrinkwheelRouteRoute
   '/lift': typeof LiftRouteRouteWithChildren
   '/promptparty': typeof PromptpartyRouteRouteWithChildren
   '/vattenfall': typeof VattenfallRouteRoute
@@ -386,6 +402,7 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRoute
   '/': typeof IndexRoute
+  '/drinkwheel': typeof DrinkwheelRouteRoute
   '/lift': typeof LiftRouteRouteWithChildren
   '/promptparty': typeof PromptpartyRouteRouteWithChildren
   '/vattenfall': typeof VattenfallRouteRoute
@@ -410,6 +427,7 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/drinkwheel'
     | '/lift'
     | '/promptparty'
     | '/vattenfall'
@@ -431,6 +449,7 @@ export interface FileRouteTypes {
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/drinkwheel'
     | '/lift'
     | '/promptparty'
     | '/vattenfall'
@@ -452,6 +471,7 @@ export interface FileRouteTypes {
   id:
     | '__root__'
     | '/'
+    | '/drinkwheel'
     | '/lift'
     | '/promptparty'
     | '/vattenfall'
@@ -475,6 +495,7 @@ export interface FileRouteTypes {
 
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  DrinkwheelRouteRoute: typeof DrinkwheelRouteRoute
   LiftRouteRoute: typeof LiftRouteRouteWithChildren
   PromptpartyRouteRoute: typeof PromptpartyRouteRouteWithChildren
   VattenfallRouteRoute: typeof VattenfallRouteRoute
@@ -484,6 +505,7 @@ export interface RootRouteChildren {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  DrinkwheelRouteRoute: DrinkwheelRouteRoute,
   LiftRouteRoute: LiftRouteRouteWithChildren,
   PromptpartyRouteRoute: PromptpartyRouteRouteWithChildren,
   VattenfallRouteRoute: VattenfallRouteRoute,
@@ -502,6 +524,7 @@ export const routeTree = rootRoute
       "filePath": "__root.tsx",
       "children": [
         "/",
+        "/drinkwheel",
         "/lift",
         "/promptparty",
         "/vattenfall",
@@ -511,6 +534,9 @@ export const routeTree = rootRoute
     },
     "/": {
       "filePath": "index.tsx"
+    },
+    "/drinkwheel": {
+      "filePath": "drinkwheel/route.tsx"
     },
     "/lift": {
       "filePath": "lift/route.tsx",
