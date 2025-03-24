@@ -16,6 +16,26 @@ export const Route = createFileRoute("/")({
 function Index() {
   return (
     <div className="flex flex-col gap-4 p-4 overflow-y-scroll">
+      <Card className="shadow-md shadow-rose-800">
+        <CardHeader>
+          <CardTitle>Drink Wheel</CardTitle>
+          <CardDescription>
+            Spin the wheel and let fate decide — drink, give sips, or take on
+            wild challenges. Quick, chaotic, and guaranteed to get the party
+            going! 🍻
+          </CardDescription>
+        </CardHeader>
+        <CardContent>
+          <img className="rounded-2xl" src="/images/drinkwheel.png" />
+        </CardContent>
+        <CardFooter className="flex flex-row justify-center items-center">
+          <Link to="/drinkwheel" className="w-1/2">
+            <Button className="bg-rose-300 shadow-md shadow-rose-800 w-full font-semibold text-neutral-700 text-lg tracking-wider active:scale-90 transition-all">
+              Play
+            </Button>
+          </Link>
+        </CardFooter>
+      </Card>
       <Card className="shadow-md shadow-yellow-800">
         <CardHeader>
           <CardTitle>Lift</CardTitle>
