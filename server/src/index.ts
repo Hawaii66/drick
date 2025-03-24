@@ -4,6 +4,7 @@ import { Server } from "socket.io";
 import cors from "cors";
 import { GameManager } from "./game/gameManager";
 import { generateSocketCallback } from "./game/socketCallback";
+import path from "path";
 
 const app = express();
 const server = createServer(app);
@@ -11,6 +12,12 @@ const io = new Server(server, {
   cors: {
     origin: "*",
   },
+});
+
+app.use(express.static(path.join(__dirname, "public")));
+
+app.get("*", (_, res) => {
+  res.sendFile(path.join(__dirname, "public", "index.html"));
 });
 
 app.use(

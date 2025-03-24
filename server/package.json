@@ -6,7 +6,8 @@
     "dev": "nodemon --exec npx tsx src/index.ts",
     "test-prompt-party": "nodemon --exec npx tsx src/test/promptParty.ts",
     "test-lift": "nodemon --exec npx tsx src/test/lift.ts",
-    "build": "tsc",
+    "build": "cd ../client && npm run build",
+    "start": "npx tsx src/index.ts",
     "type-check": "tsc --noEmit",
     "lint": "npx eslint .",
     "format": "npx prettier . --check"

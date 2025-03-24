@@ -17,4 +17,8 @@ export default defineConfig({
     },
     preserveSymlinks: true,
   },
+  build: {
+    outDir: path.resolve(__dirname, "../server/src/public"),
+    emptyOutDir: true,
+  },
 });
