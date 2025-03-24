@@ -90,6 +90,7 @@ export default function DrinkWheel({
                 setShowResult(true);
                 setMustSpin(false);
               }}
+              spinDuration={0.8}
             />
           </CardContent>
           {challenges.length === startChallenges.length && (

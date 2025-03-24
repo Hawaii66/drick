@@ -15,7 +15,7 @@ export default function Header() {
   const { isConnected } = useSocketData();
 
   return (
-    <div className="top-0 sticky shadow-md shadow-neutral-300 w-full">
+    <div className="top-0 z-50 sticky shadow-md shadow-neutral-300 w-full">
       <div className="flex flex-row justify-between items-center bg-white px-4 py-2 w-full">
         <Link to="/">
           <h1 className="font-semibold text-md text-purple-700 tracking-wider">
