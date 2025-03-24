@@ -49,6 +49,20 @@ export default function ScoreTop3({ players, result, onNext }: Props) {
               );
             })}
           <Separator />
+          <p>Worst times</p>
+          {result
+            .sort((a, b) => b.time - a.time)
+            .slice(0, 3)
+            .map((score, idx) => {
+              const player = players.find((i) => i.id === score.id);
+              return (
+                <p key={score.id}>
+                  {idx + 1}. {player?.name}: {score.time}ms → takes{" "}
+                  {drinks[2 - idx]} drinks
+                </p>
+              );
+            })}
+          <Separator />
           {own.time === -1 ? (
             <p>You released to early</p>
           ) : (
