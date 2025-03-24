@@ -1,0 +1,13 @@
+{
+  "name": "drick",
+  "version": "1.0.0",
+  "main": "",
+  "scripts": {
+    "build": "cd ./client && npm run build",
+    "start": "cd ./server && npx tsx src/index.ts"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": ""
+}
