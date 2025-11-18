@@ -14,6 +14,9 @@ if [ $? != 0 ]; then
   tmux new-window -t $SESSION_NAME -n server
   tmux send-keys -t $SESSION_NAME:server "pnpm dev" C-m
 
+  tmux new-window -t $SESSION_NAME -n convex
+  tmux send-keys -t $SESSION_NAME:convex "pnpx convex dev" C-m
+
   tmux new-window -t $SESSION_NAME -n cmd
 
   tmux select-window -t $SESSION_NAME:nvim

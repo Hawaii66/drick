@@ -10,33 +10,43 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as LocalChallengeIndexRouteImport } from './routes/local/challenge/index'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const LocalChallengeIndexRoute = LocalChallengeIndexRouteImport.update({
+  id: '/local/challenge/',
+  path: '/local/challenge/',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/local/challenge': typeof LocalChallengeIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/local/challenge': typeof LocalChallengeIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/local/challenge/': typeof LocalChallengeIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths: '/' | '/local/challenge'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to: '/' | '/local/challenge'
+  id: '__root__' | '/' | '/local/challenge/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  LocalChallengeIndexRoute: typeof LocalChallengeIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -48,11 +58,19 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/local/challenge/': {
+      id: '/local/challenge/'
+      path: '/local/challenge'
+      fullPath: '/local/challenge'
+      preLoaderRoute: typeof LocalChallengeIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  LocalChallengeIndexRoute: LocalChallengeIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
