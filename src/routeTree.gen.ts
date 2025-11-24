@@ -12,9 +12,11 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as LiveRouteRouteImport } from './routes/live/route'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as LocalWaterfallIndexRouteImport } from './routes/local/waterfall/index'
+import { Route as LocalSalenIndexRouteImport } from './routes/local/salen/index'
 import { Route as LocalChallengeIndexRouteImport } from './routes/local/challenge/index'
 import { Route as LiveAnonymousJoinRouteImport } from './routes/live/anonymous/join'
 import { Route as LiveAnonymousCreateRouteImport } from './routes/live/anonymous/create'
+import { Route as LocalSalenIdIndexRouteImport } from './routes/local/salen/$id/index'
 import { Route as LiveAnonymousIdIndexRouteImport } from './routes/live/anonymous/$id/index'
 
 const LiveRouteRoute = LiveRouteRouteImport.update({
@@ -32,6 +34,11 @@ const LocalWaterfallIndexRoute = LocalWaterfallIndexRouteImport.update({
   path: '/local/waterfall/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const LocalSalenIndexRoute = LocalSalenIndexRouteImport.update({
+  id: '/local/salen/',
+  path: '/local/salen/',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const LocalChallengeIndexRoute = LocalChallengeIndexRouteImport.update({
   id: '/local/challenge/',
   path: '/local/challenge/',
@@ -47,6 +54,11 @@ const LiveAnonymousCreateRoute = LiveAnonymousCreateRouteImport.update({
   path: '/anonymous/create',
   getParentRoute: () => LiveRouteRoute,
 } as any)
+const LocalSalenIdIndexRoute = LocalSalenIdIndexRouteImport.update({
+  id: '/local/salen/$id/',
+  path: '/local/salen/$id/',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const LiveAnonymousIdIndexRoute = LiveAnonymousIdIndexRouteImport.update({
   id: '/anonymous/$id/',
   path: '/anonymous/$id/',
@@ -59,8 +71,10 @@ export interface FileRoutesByFullPath {
   '/live/anonymous/create': typeof LiveAnonymousCreateRoute
   '/live/anonymous/join': typeof LiveAnonymousJoinRoute
   '/local/challenge': typeof LocalChallengeIndexRoute
+  '/local/salen': typeof LocalSalenIndexRoute
   '/local/waterfall': typeof LocalWaterfallIndexRoute
   '/live/anonymous/$id': typeof LiveAnonymousIdIndexRoute
+  '/local/salen/$id': typeof LocalSalenIdIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -68,8 +82,10 @@ export interface FileRoutesByTo {
   '/live/anonymous/create': typeof LiveAnonymousCreateRoute
   '/live/anonymous/join': typeof LiveAnonymousJoinRoute
   '/local/challenge': typeof LocalChallengeIndexRoute
+  '/local/salen': typeof LocalSalenIndexRoute
   '/local/waterfall': typeof LocalWaterfallIndexRoute
   '/live/anonymous/$id': typeof LiveAnonymousIdIndexRoute
+  '/local/salen/$id': typeof LocalSalenIdIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -78,8 +94,10 @@ export interface FileRoutesById {
   '/live/anonymous/create': typeof LiveAnonymousCreateRoute
   '/live/anonymous/join': typeof LiveAnonymousJoinRoute
   '/local/challenge/': typeof LocalChallengeIndexRoute
+  '/local/salen/': typeof LocalSalenIndexRoute
   '/local/waterfall/': typeof LocalWaterfallIndexRoute
   '/live/anonymous/$id/': typeof LiveAnonymousIdIndexRoute
+  '/local/salen/$id/': typeof LocalSalenIdIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -89,8 +107,10 @@ export interface FileRouteTypes {
     | '/live/anonymous/create'
     | '/live/anonymous/join'
     | '/local/challenge'
+    | '/local/salen'
     | '/local/waterfall'
     | '/live/anonymous/$id'
+    | '/local/salen/$id'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -98,8 +118,10 @@ export interface FileRouteTypes {
     | '/live/anonymous/create'
     | '/live/anonymous/join'
     | '/local/challenge'
+    | '/local/salen'
     | '/local/waterfall'
     | '/live/anonymous/$id'
+    | '/local/salen/$id'
   id:
     | '__root__'
     | '/'
@@ -107,15 +129,19 @@ export interface FileRouteTypes {
     | '/live/anonymous/create'
     | '/live/anonymous/join'
     | '/local/challenge/'
+    | '/local/salen/'
     | '/local/waterfall/'
     | '/live/anonymous/$id/'
+    | '/local/salen/$id/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   LiveRouteRoute: typeof LiveRouteRouteWithChildren
   LocalChallengeIndexRoute: typeof LocalChallengeIndexRoute
+  LocalSalenIndexRoute: typeof LocalSalenIndexRoute
   LocalWaterfallIndexRoute: typeof LocalWaterfallIndexRoute
+  LocalSalenIdIndexRoute: typeof LocalSalenIdIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -141,6 +167,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LocalWaterfallIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/local/salen/': {
+      id: '/local/salen/'
+      path: '/local/salen'
+      fullPath: '/local/salen'
+      preLoaderRoute: typeof LocalSalenIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/local/challenge/': {
       id: '/local/challenge/'
       path: '/local/challenge'
@@ -161,6 +194,13 @@ declare module '@tanstack/react-router' {
       fullPath: '/live/anonymous/create'
       preLoaderRoute: typeof LiveAnonymousCreateRouteImport
       parentRoute: typeof LiveRouteRoute
+    }
+    '/local/salen/$id/': {
+      id: '/local/salen/$id/'
+      path: '/local/salen/$id'
+      fullPath: '/local/salen/$id'
+      preLoaderRoute: typeof LocalSalenIdIndexRouteImport
+      parentRoute: typeof rootRouteImport
     }
     '/live/anonymous/$id/': {
       id: '/live/anonymous/$id/'
@@ -192,7 +232,9 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   LiveRouteRoute: LiveRouteRouteWithChildren,
   LocalChallengeIndexRoute: LocalChallengeIndexRoute,
+  LocalSalenIndexRoute: LocalSalenIndexRoute,
   LocalWaterfallIndexRoute: LocalWaterfallIndexRoute,
+  LocalSalenIdIndexRoute: LocalSalenIdIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
