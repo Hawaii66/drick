@@ -8,13 +8,19 @@
  * @module
  */
 
+import type * as live_anonymous from "../live/anonymous.js";
+import type * as live_game from "../live/game.js";
+
 import type {
   ApiFromModules,
   FilterApi,
   FunctionReference,
 } from "convex/server";
 
-declare const fullApi: ApiFromModules<{}>;
+declare const fullApi: ApiFromModules<{
+  "live/anonymous": typeof live_anonymous;
+  "live/game": typeof live_game;
+}>;
 
 /**
  * A utility for referencing Convex functions in your app's public API.

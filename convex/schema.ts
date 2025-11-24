@@ -2,13 +2,14 @@ import { defineSchema, defineTable } from 'convex/server'
 import { v } from 'convex/values'
 
 export default defineSchema({
-  products: defineTable({
-    title: v.string(),
-    imageId: v.string(),
-    price: v.number(),
-  }),
-  todos: defineTable({
-    text: v.string(),
-    completed: v.boolean(),
-  }),
+    games: defineTable({
+        pin: v.string(),
+        players: v.array(v.string()),
+        state: v.string(),
+        data: v.string(),
+        type: v.string(),
+        owner: v.string(),
+    }).index("by_pin",[
+        "pin"
+    ] ),
 })

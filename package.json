@@ -34,6 +34,8 @@
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "convex": "^1.27.3",
+    "convex-helpers": "^0.1.105",
+    "input-otp": "^1.4.2",
     "lucide-react": "^0.544.0",
     "nitro": "latest",
     "react": "^19.2.0",

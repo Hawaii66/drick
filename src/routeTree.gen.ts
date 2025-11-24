@@ -9,9 +9,18 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as LiveRouteRouteImport } from './routes/live/route'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as LocalChallengeIndexRouteImport } from './routes/local/challenge/index'
+import { Route as LiveAnonymousIndexRouteImport } from './routes/live/anonymous/index'
+import { Route as LiveAnonymousJoinRouteImport } from './routes/live/anonymous/join'
+import { Route as LiveAnonymousIdIndexRouteImport } from './routes/live/anonymous/$id/index'
 
+const LiveRouteRoute = LiveRouteRouteImport.update({
+  id: '/live',
+  path: '/live',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
@@ -22,35 +31,89 @@ const LocalChallengeIndexRoute = LocalChallengeIndexRouteImport.update({
   path: '/local/challenge/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const LiveAnonymousIndexRoute = LiveAnonymousIndexRouteImport.update({
+  id: '/anonymous/',
+  path: '/anonymous/',
+  getParentRoute: () => LiveRouteRoute,
+} as any)
+const LiveAnonymousJoinRoute = LiveAnonymousJoinRouteImport.update({
+  id: '/anonymous/join',
+  path: '/anonymous/join',
+  getParentRoute: () => LiveRouteRoute,
+} as any)
+const LiveAnonymousIdIndexRoute = LiveAnonymousIdIndexRouteImport.update({
+  id: '/anonymous/$id/',
+  path: '/anonymous/$id/',
+  getParentRoute: () => LiveRouteRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/live': typeof LiveRouteRouteWithChildren
+  '/live/anonymous/join': typeof LiveAnonymousJoinRoute
+  '/live/anonymous': typeof LiveAnonymousIndexRoute
   '/local/challenge': typeof LocalChallengeIndexRoute
+  '/live/anonymous/$id': typeof LiveAnonymousIdIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/live': typeof LiveRouteRouteWithChildren
+  '/live/anonymous/join': typeof LiveAnonymousJoinRoute
+  '/live/anonymous': typeof LiveAnonymousIndexRoute
   '/local/challenge': typeof LocalChallengeIndexRoute
+  '/live/anonymous/$id': typeof LiveAnonymousIdIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/live': typeof LiveRouteRouteWithChildren
+  '/live/anonymous/join': typeof LiveAnonymousJoinRoute
+  '/live/anonymous/': typeof LiveAnonymousIndexRoute
   '/local/challenge/': typeof LocalChallengeIndexRoute
+  '/live/anonymous/$id/': typeof LiveAnonymousIdIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/local/challenge'
+  fullPaths:
+    | '/'
+    | '/live'
+    | '/live/anonymous/join'
+    | '/live/anonymous'
+    | '/local/challenge'
+    | '/live/anonymous/$id'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/local/challenge'
-  id: '__root__' | '/' | '/local/challenge/'
+  to:
+    | '/'
+    | '/live'
+    | '/live/anonymous/join'
+    | '/live/anonymous'
+    | '/local/challenge'
+    | '/live/anonymous/$id'
+  id:
+    | '__root__'
+    | '/'
+    | '/live'
+    | '/live/anonymous/join'
+    | '/live/anonymous/'
+    | '/local/challenge/'
+    | '/live/anonymous/$id/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  LiveRouteRoute: typeof LiveRouteRouteWithChildren
   LocalChallengeIndexRoute: typeof LocalChallengeIndexRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/live': {
+      id: '/live'
+      path: '/live'
+      fullPath: '/live'
+      preLoaderRoute: typeof LiveRouteRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -65,11 +128,49 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LocalChallengeIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/live/anonymous/': {
+      id: '/live/anonymous/'
+      path: '/anonymous'
+      fullPath: '/live/anonymous'
+      preLoaderRoute: typeof LiveAnonymousIndexRouteImport
+      parentRoute: typeof LiveRouteRoute
+    }
+    '/live/anonymous/join': {
+      id: '/live/anonymous/join'
+      path: '/anonymous/join'
+      fullPath: '/live/anonymous/join'
+      preLoaderRoute: typeof LiveAnonymousJoinRouteImport
+      parentRoute: typeof LiveRouteRoute
+    }
+    '/live/anonymous/$id/': {
+      id: '/live/anonymous/$id/'
+      path: '/anonymous/$id'
+      fullPath: '/live/anonymous/$id'
+      preLoaderRoute: typeof LiveAnonymousIdIndexRouteImport
+      parentRoute: typeof LiveRouteRoute
+    }
   }
 }
 
+interface LiveRouteRouteChildren {
+  LiveAnonymousJoinRoute: typeof LiveAnonymousJoinRoute
+  LiveAnonymousIndexRoute: typeof LiveAnonymousIndexRoute
+  LiveAnonymousIdIndexRoute: typeof LiveAnonymousIdIndexRoute
+}
+
+const LiveRouteRouteChildren: LiveRouteRouteChildren = {
+  LiveAnonymousJoinRoute: LiveAnonymousJoinRoute,
+  LiveAnonymousIndexRoute: LiveAnonymousIndexRoute,
+  LiveAnonymousIdIndexRoute: LiveAnonymousIdIndexRoute,
+}
+
+const LiveRouteRouteWithChildren = LiveRouteRoute._addFileChildren(
+  LiveRouteRouteChildren,
+)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  LiveRouteRoute: LiveRouteRouteWithChildren,
   LocalChallengeIndexRoute: LocalChallengeIndexRoute,
 }
 export const routeTree = rootRouteImport
