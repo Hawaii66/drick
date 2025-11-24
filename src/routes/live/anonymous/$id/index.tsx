@@ -1,3 +1,4 @@
+import CenterScreen from '@/components/CenterScreen'
 import GameCompleted from '@/components/GameCompleted'
 import GameSceneSwitcher, { GameDataStateSwitch, GameStateSwitch } from '@/components/GameSceneSwitcher'
 import AnswerQuestions from '@/components/live/anonymous/AnswerQuestions'
@@ -31,7 +32,7 @@ function RouteComponent() {
         return <SelectPlayer game={game} />
     }
 
-    return <GameSceneSwitcher game={game}>
+    return <CenterScreen> <GameSceneSwitcher game={game}>
         <GameStateSwitch state={GameState.WAITING_FOR_PLAYERS}>
             <GameLobby game={game} />
         </GameStateSwitch>
@@ -46,5 +47,5 @@ function RouteComponent() {
                 <GameCompleted />
             </GameDataStateSwitch>
        </GameStateSwitch>
-    </GameSceneSwitcher>
+    </GameSceneSwitcher></CenterScreen>
 }

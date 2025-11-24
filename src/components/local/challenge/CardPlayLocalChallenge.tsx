@@ -3,7 +3,8 @@ import WheelLocalChallenge from "./WheelLocalChallenge";
 import { useState } from "react";
 import { Dialog, DialogClose, DialogContent, DialogFooter, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
-import CompletedLocalChallenge from "./CompletedLocalChallenge";
+import GameCompleted from "@/components/GameCompleted";
+import CenterScreen from "@/components/CenterScreen";
 
 type Props = {
     challenges: string[]
@@ -18,6 +19,10 @@ export default function CardPlayLocalChallenge({ challenges }: Props) {
         setWinningChallenge(null);
     }
 
+    if(challengesInPlay.length===0){
+        return <CenterScreen> <GameCompleted /></CenterScreen>
+    }
+
     return (
         <>
         <Card>
@@ -26,10 +31,9 @@ export default function CardPlayLocalChallenge({ challenges }: Props) {
                 <CardDescription>Spin the wheel to get the next challenge!</CardDescription>
             </CardHeader>
             <CardContent>
-                    {challengesInPlay.length===0? <CompletedLocalChallenge /> :
                 <WheelLocalChallenge challenges={challengesInPlay} onChalengeSelected={(challenge) => {
                     setWinningChallenge(challenge);
-                }} />}
+                }} />
             </CardContent>
         </Card>
         <Dialog open={winningChallenge !== null} onOpenChange={onNextChallenge}>
