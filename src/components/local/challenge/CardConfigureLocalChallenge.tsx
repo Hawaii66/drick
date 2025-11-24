@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
-import { Field, FieldDescription, FieldLabel, FieldSet } from "@/components/ui/field";
+import { Field, FieldDescription, FieldLabel, FieldGroup } from "@/components/ui/field";
 import { Slider } from "@/components/ui/slider";
 import { LocalChallengeConfig } from "@/types/local/challenge";
 import { useState } from "react";
@@ -19,7 +19,7 @@ export default function CardConfigureLocalChallenge({ onConfigured }: Props) {
             <CardDescription>Select number of players and number of challenges per player.</CardDescription>
         </CardHeader>
         <CardContent>
-            <FieldSet>
+            <FieldGroup>
                 <Field>
                     <FieldLabel>Number of Players</FieldLabel>
                     <Slider value={[numberOfPlayers]} onValueChange={(e) => setNumberOfPlayers(e[0])} min={2} max={20} step={1} />
@@ -32,7 +32,7 @@ export default function CardConfigureLocalChallenge({ onConfigured }: Props) {
                     <p className="text-center">{challengesPerPlayer}</p>
                     <FieldDescription>Select how many challenges each player will face.</FieldDescription>
                 </Field>
-            </FieldSet>
+            </FieldGroup>
         </CardContent>
         <CardFooter>
             <Button onClick={() => onConfigured({
