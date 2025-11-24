@@ -2,25 +2,7 @@ import { z } from "zod";
 import { Id } from "../_generated/dataModel";
 import { DatabaseReader, DatabaseWriter, mutation, query } from "../_generated/server";
 import { v } from "convex/values";
-
-export const GameState = {
-    WAITING_FOR_PLAYERS: "waiting_for_players",
-    IN_PROGRESS: "in_progress",
-}
-
-export const GameType = {
-    ANONYMOUS: "anonymous",
-}
-
-    export const GameSchema = z.object({
-        _id:z.string(),
-        pin: z.string().min(6).max(6),
-        owner: z.string(),
-        players: z.string().array(),
-        state:z.enum([GameState.WAITING_FOR_PLAYERS, GameState.IN_PROGRESS]),
-    type: z.enum([GameType.ANONYMOUS]),
-    });
-export type Game = z.infer<typeof GameSchema>;
+import { GameSchema, GameState } from "../types";
 
 export async function GetGame(id: Id<"games">,db:DatabaseReader) {
     const game = await db.get(id);

@@ -12,8 +12,8 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as LiveRouteRouteImport } from './routes/live/route'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as LocalChallengeIndexRouteImport } from './routes/local/challenge/index'
-import { Route as LiveAnonymousIndexRouteImport } from './routes/live/anonymous/index'
 import { Route as LiveAnonymousJoinRouteImport } from './routes/live/anonymous/join'
+import { Route as LiveAnonymousCreateRouteImport } from './routes/live/anonymous/create'
 import { Route as LiveAnonymousIdIndexRouteImport } from './routes/live/anonymous/$id/index'
 
 const LiveRouteRoute = LiveRouteRouteImport.update({
@@ -31,14 +31,14 @@ const LocalChallengeIndexRoute = LocalChallengeIndexRouteImport.update({
   path: '/local/challenge/',
   getParentRoute: () => rootRouteImport,
 } as any)
-const LiveAnonymousIndexRoute = LiveAnonymousIndexRouteImport.update({
-  id: '/anonymous/',
-  path: '/anonymous/',
-  getParentRoute: () => LiveRouteRoute,
-} as any)
 const LiveAnonymousJoinRoute = LiveAnonymousJoinRouteImport.update({
   id: '/anonymous/join',
   path: '/anonymous/join',
+  getParentRoute: () => LiveRouteRoute,
+} as any)
+const LiveAnonymousCreateRoute = LiveAnonymousCreateRouteImport.update({
+  id: '/anonymous/create',
+  path: '/anonymous/create',
   getParentRoute: () => LiveRouteRoute,
 } as any)
 const LiveAnonymousIdIndexRoute = LiveAnonymousIdIndexRouteImport.update({
@@ -50,16 +50,16 @@ const LiveAnonymousIdIndexRoute = LiveAnonymousIdIndexRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/live': typeof LiveRouteRouteWithChildren
+  '/live/anonymous/create': typeof LiveAnonymousCreateRoute
   '/live/anonymous/join': typeof LiveAnonymousJoinRoute
-  '/live/anonymous': typeof LiveAnonymousIndexRoute
   '/local/challenge': typeof LocalChallengeIndexRoute
   '/live/anonymous/$id': typeof LiveAnonymousIdIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/live': typeof LiveRouteRouteWithChildren
+  '/live/anonymous/create': typeof LiveAnonymousCreateRoute
   '/live/anonymous/join': typeof LiveAnonymousJoinRoute
-  '/live/anonymous': typeof LiveAnonymousIndexRoute
   '/local/challenge': typeof LocalChallengeIndexRoute
   '/live/anonymous/$id': typeof LiveAnonymousIdIndexRoute
 }
@@ -67,8 +67,8 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/live': typeof LiveRouteRouteWithChildren
+  '/live/anonymous/create': typeof LiveAnonymousCreateRoute
   '/live/anonymous/join': typeof LiveAnonymousJoinRoute
-  '/live/anonymous/': typeof LiveAnonymousIndexRoute
   '/local/challenge/': typeof LocalChallengeIndexRoute
   '/live/anonymous/$id/': typeof LiveAnonymousIdIndexRoute
 }
@@ -77,24 +77,24 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/live'
+    | '/live/anonymous/create'
     | '/live/anonymous/join'
-    | '/live/anonymous'
     | '/local/challenge'
     | '/live/anonymous/$id'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
     | '/live'
+    | '/live/anonymous/create'
     | '/live/anonymous/join'
-    | '/live/anonymous'
     | '/local/challenge'
     | '/live/anonymous/$id'
   id:
     | '__root__'
     | '/'
     | '/live'
+    | '/live/anonymous/create'
     | '/live/anonymous/join'
-    | '/live/anonymous/'
     | '/local/challenge/'
     | '/live/anonymous/$id/'
   fileRoutesById: FileRoutesById
@@ -128,18 +128,18 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LocalChallengeIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/live/anonymous/': {
-      id: '/live/anonymous/'
-      path: '/anonymous'
-      fullPath: '/live/anonymous'
-      preLoaderRoute: typeof LiveAnonymousIndexRouteImport
-      parentRoute: typeof LiveRouteRoute
-    }
     '/live/anonymous/join': {
       id: '/live/anonymous/join'
       path: '/anonymous/join'
       fullPath: '/live/anonymous/join'
       preLoaderRoute: typeof LiveAnonymousJoinRouteImport
+      parentRoute: typeof LiveRouteRoute
+    }
+    '/live/anonymous/create': {
+      id: '/live/anonymous/create'
+      path: '/anonymous/create'
+      fullPath: '/live/anonymous/create'
+      preLoaderRoute: typeof LiveAnonymousCreateRouteImport
       parentRoute: typeof LiveRouteRoute
     }
     '/live/anonymous/$id/': {
@@ -153,14 +153,14 @@ declare module '@tanstack/react-router' {
 }
 
 interface LiveRouteRouteChildren {
+  LiveAnonymousCreateRoute: typeof LiveAnonymousCreateRoute
   LiveAnonymousJoinRoute: typeof LiveAnonymousJoinRoute
-  LiveAnonymousIndexRoute: typeof LiveAnonymousIndexRoute
   LiveAnonymousIdIndexRoute: typeof LiveAnonymousIdIndexRoute
 }
 
 const LiveRouteRouteChildren: LiveRouteRouteChildren = {
+  LiveAnonymousCreateRoute: LiveAnonymousCreateRoute,
   LiveAnonymousJoinRoute: LiveAnonymousJoinRoute,
-  LiveAnonymousIndexRoute: LiveAnonymousIndexRoute,
   LiveAnonymousIdIndexRoute: LiveAnonymousIdIndexRoute,
 }
 
