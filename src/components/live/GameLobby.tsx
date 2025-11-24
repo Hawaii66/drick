@@ -27,6 +27,7 @@ export default function GameLobby({ game }: Props) {
         </CardHeader>
         <CardContent>
             <div>
+                <p className="font-semibold">Game PIN:</p>
                 <InputOTP maxLength={6} value={game.pin} disabled>
                     <InputOTPGroup>
                         <InputOTPSlot index={0} />
@@ -41,8 +42,9 @@ export default function GameLobby({ game }: Props) {
                 </InputOTP>
             </div>
             <div>
+                <p className="font-semibold mt-4">Players:</p>
                 {game.players.map((player, index) => (
-                    <p key={index}>{player}</p>
+                    <p className="pl-2" key={index}>- {player}</p>
                 ))}
             </div>
         </CardContent>

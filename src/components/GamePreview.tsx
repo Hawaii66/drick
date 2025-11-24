@@ -5,11 +5,18 @@ type Props = {
     name: string
     description: string
     image: string
+}
+
+type LiveProps = Props & {
     onJoinGame: () => void
     onCreateGame: () => void
 }
 
-export default function GamePreview({ name, description, image, onJoinGame, onCreateGame }: Props) {
+type LocalProps = Props & {
+    onStartGame: () => void
+}
+
+export function LiveGamePreview({ name, description, image, onJoinGame, onCreateGame }: LiveProps) {
     return (
         <Card>
             <CardHeader>
@@ -17,11 +24,28 @@ export default function GamePreview({ name, description, image, onJoinGame, onCr
                 <CardDescription>{description}</CardDescription>
             </CardHeader>
             <CardContent>
-                <img src={image} alt={name} />
+                <img className="w-full aspect-square rounded-base border-2 border-border shadow-shadow" src={image} alt={name} />
             </CardContent>
-            <CardFooter className="flex flex-col gap-4 items-start">
-                <Button onClick={onJoinGame}>Join Game</Button>
+            <CardFooter className="justify-between">
                 <Button variant="neutral" onClick={onCreateGame}>Create Game</Button>
+                <Button onClick={onJoinGame}>Join Game</Button>
+            </CardFooter>
+        </Card>
+    )
+}
+
+export function LocalGamePreview({image,description,name,onStartGame}:LocalProps) {
+    return (
+        <Card>
+            <CardHeader>
+                <CardTitle>{name}</CardTitle>
+                <CardDescription>{description}</CardDescription>
+            </CardHeader>
+            <CardContent>
+                <img className="w-full aspect-square rounded-base border-2 border-border shadow-shadow" src={image} alt={name} />
+            </CardContent>
+            <CardFooter className="justify-end">
+                <Button onClick={onStartGame}>Start Game</Button>
             </CardFooter>
         </Card>
     )
