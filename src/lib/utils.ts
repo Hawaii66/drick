@@ -15,32 +15,9 @@ export function shuffle<T>(array: T[]): T[] {
     return shuffledArray;
 }
 
-type Result<T> = {
-    data:T,
-    error:undefined
-} | {
-    data:null,
-    error:string
-}
-
-export async function tryCatch<T>(fn: Promise<T>,config:{
-    toast: boolean
-}={toast:true}): Promise<Result<T>> {
-    try {
-        const data = await fn;
-        return { error: undefined, data };
-    } catch (err) {
-        const message = err instanceof Error ? err.message : "An unknown error occurred";
-        if(config?.toast){
-            if(err instanceof Error)
-        {
-            toast.error(`Server Error: ${message}`);
-        }
-            else{
-                toast.error("An unknown error occurred");
-            }
-        }
-        return { error: message, data: null };
-
-    }
+export async function ToastError(cb:(e:unknown)=>void){
+    cb((e:unknown)=>{
+        const message = e instanceof Error ? e.message : "An unknown error occurred";
+        toast.error(`Server Error: ${message}`);
+    })
 }

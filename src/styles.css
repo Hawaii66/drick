@@ -19,6 +19,7 @@
   --chart-4: #FF4D50;
   --chart-5: #FACC00;
   --chart-active-dot: #000;
+  --text-red: #BF124D
 }
 
 .dark {
@@ -52,6 +53,7 @@
   --color-chart-3: var(--chart-3);
   --color-chart-4: var(--chart-4);
   --color-chart-5: var(--chart-5);
+  --color-red: var(--text-red);
 
   --spacing-boxShadowX: 4px;
   --spacing-boxShadowY: 4px;

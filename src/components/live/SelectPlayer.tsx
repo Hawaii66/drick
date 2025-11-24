@@ -17,7 +17,7 @@ export default function SelectPlayer({ game }: Props) {
         </CardHeader>
         <CardContent>
             {game.players.map((player) => (
-                <Button variant="ghost" onClick={() => {
+                <Button onClick={() => {
                     gameContext.setPlayer(player)
                 }}>
                     {player}

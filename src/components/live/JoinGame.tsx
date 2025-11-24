@@ -2,7 +2,6 @@ import { Button } from "../ui/button";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "../ui/card";
 import { Input } from "../ui/input";
 import { Label } from "../ui/label";
-import { useMutation } from "convex/react";
 import { api } from "convex/_generated/api";
 import { useRouter } from "@tanstack/react-router";
 import { InputOTP, InputOTPGroup, InputOTPSlot } from "../ui/input-otp";
@@ -12,7 +11,10 @@ import { standardSchemaResolver } from "@hookform/resolvers/standard-schema";
 import z from "zod";
 import { GameSchema } from "convex/types";
 import { FieldError } from "../ui/field";
-import { tryCatch } from "@/lib/utils";
+import { useConvexMutation } from "@convex-dev/react-query";
+import { ToastError } from "@/lib/utils";
+import { useMutation } from "@tanstack/react-query";
+import Pending from "../Pending";
 
 export default function JoinGame() {
     const { register, formState, handleSubmit, control } = useForm<{ name: string, pin: string }>({
@@ -26,7 +28,10 @@ export default function JoinGame() {
         }))
     })
 
-    const joinGameMutation = useMutation(api.live.game.joinGame)
+    const {mutate:joinGameMutation,isPending} = useMutation({
+        mutationFn: useConvexMutation(api.live.game.joinGame),
+        onError: ToastError
+    })
     const router = useRouter()
     const gameContext = useGameContext()
 
@@ -59,23 +64,22 @@ export default function JoinGame() {
             {formState.errors.pin && <FieldError>{formState.errors.pin.message}</FieldError>}
         </CardContent>
         <CardFooter>
-            <Button onClick={handleSubmit(async ({ name, pin }) => {
-                const { data: game, error } = await tryCatch(joinGameMutation({
-                    player: name,
-                    pin
-                }));
-                if (error !== undefined) {
-                    return
-                }
-
-                gameContext.setPlayer(name)
-                router.navigate({
-                    to: "/live/anonymous/$id",
-                    params: {
-                        id: game.id
-                    }
-                })
-            })}>Join Game</Button>
+            <Pending isPending={isPending} >
+            <Button onClick={handleSubmit(({ name, pin }) =>joinGameMutation({
+                player: name,
+                pin
+            },{
+                onSuccess: async({id})=>{
+                        gameContext.setPlayer(name)
+                        router.navigate({
+                            to: "/live/anonymous/$id",
+                            params: {
+                                id
+                            }
+                        })
+                }}))}
+            >Join Game</Button>
+                </Pending>
         </CardFooter>
     </Card>
 

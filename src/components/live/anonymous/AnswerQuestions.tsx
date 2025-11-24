@@ -1,10 +1,12 @@
 import EnsureGameOwner from "@/components/EnsureGameOwner";
+import Pending from "@/components/Pending";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
-import { tryCatch } from "@/lib/utils";
+import { ToastError } from "@/lib/utils";
+import { useConvexMutation } from "@convex-dev/react-query";
+import { useMutation } from "@tanstack/react-query";
 import { api } from "convex/_generated/api";
 import { Id } from "convex/_generated/dataModel";
-import { useMutation } from "convex/react";
 import { AnonymouseGame } from "convex/types";
 
 type Props = {
@@ -14,7 +16,10 @@ type Props = {
 export default function AnswerQuestions({ game }: Props) {
     const question = game.data.questions[game.data.questionIndex ?? 0];
 
-    const nextQuestionMutation = useMutation(api.live.anonymous.onNextQuestion)
+    const {mutate:nextQuestionMutation,isPending} = useMutation({
+        mutationFn:useConvexMutation(api.live.anonymous.onNextQuestion),
+        onError:ToastError
+    })
 
     return <Card>
         <CardHeader>
@@ -34,11 +39,13 @@ export default function AnswerQuestions({ game }: Props) {
         </CardContent>
         <CardFooter>
             <EnsureGameOwner game={game}>
+                <Pending isPending={isPending} >
                 <Button onClick={() =>
-                    tryCatch(nextQuestionMutation({ gameId: game._id as Id<"games"> }))
+                    (nextQuestionMutation({ gameId: game._id as Id<"games"> }))
                 }>
                     Next Question
                 </Button>
+                </Pending>
             </EnsureGameOwner>
         </CardFooter>
     </Card>

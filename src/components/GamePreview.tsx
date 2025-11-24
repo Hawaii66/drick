@@ -21,7 +21,7 @@ export default function GamePreview({ name, description, image, onJoinGame, onCr
             </CardContent>
             <CardFooter className="flex flex-col gap-4 items-start">
                 <Button onClick={onJoinGame}>Join Game</Button>
-                <Button variant="secondary" onClick={onCreateGame}>Create Game</Button>
+                <Button variant="neutral" onClick={onCreateGame}>Create Game</Button>
             </CardFooter>
         </Card>
     )
