@@ -1,10 +1,11 @@
+import EnsureGameOwner from "@/components/EnsureGameOwner";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
-import { useGameContext } from "@/lib/gameContext";
+import { tryCatch } from "@/lib/utils";
 import { api } from "convex/_generated/api";
 import { Id } from "convex/_generated/dataModel";
-import { AnonymouseGame } from "convex/live/anonymous"
 import { useMutation } from "convex/react";
+import { AnonymouseGame } from "convex/types";
 
 type Props = {
     game: AnonymouseGame
@@ -14,7 +15,6 @@ export default function AnswerQuestions({ game }: Props) {
     const question = game.data.questions[game.data.questionIndex ?? 0];
 
     const nextQuestionMutation = useMutation(api.live.anonymous.onNextQuestion)
-    const player = useGameContext().player
 
     return <Card>
         <CardHeader>
@@ -33,11 +33,13 @@ export default function AnswerQuestions({ game }: Props) {
             </div>
         </CardContent>
         <CardFooter>
-            {player === game.owner && <Button onClick={() => {
-                nextQuestionMutation({ gameId: game._id as Id<"games"> });
-            }}>
-                Next Question
-            </Button>}
+            <EnsureGameOwner game={game}>
+                <Button onClick={() =>
+                    tryCatch(nextQuestionMutation({ gameId: game._id as Id<"games"> }))
+                }>
+                    Next Question
+                </Button>
+            </EnsureGameOwner>
         </CardFooter>
     </Card>
 }

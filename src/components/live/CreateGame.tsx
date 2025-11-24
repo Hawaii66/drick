@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { Button } from "../ui/button";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "../ui/card";
 import { Input } from "../ui/input";
@@ -7,10 +6,22 @@ import { useMutation } from "convex/react";
 import { api } from "convex/_generated/api";
 import { useRouter } from "@tanstack/react-router";
 import { useGameContext } from "@/lib/gameContext";
+import { tryCatch } from "@/lib/utils";
+import { useForm } from "react-hook-form";
+import { standardSchemaResolver } from "@hookform/resolvers/standard-schema";
+import { GameSchema } from "convex/types";
+import z from "zod";
+import { FieldError } from "../ui/field";
 
 export default function CreateGame() {
-    const [name, setName] = useState("")
-    const [error, setError] = useState<null | string>(null)
+    const { register, formState, handleSubmit } = useForm<{name:string}>({
+        defaultValues:{
+            name:""
+        },
+        resolver: standardSchemaResolver(z.object({
+            name:GameSchema.shape.players.element,
+        }))
+    })
 
     const createGameMutation = useMutation(api.live.anonymous.createGame)
     const router = useRouter()
@@ -23,26 +34,23 @@ export default function CreateGame() {
         </CardHeader>
         <CardContent>
             <Label>Name:</Label>
-            <Input value={name} onChange={e => setName(e.target.value)} />
-            {error && <p className="text-red-500">{error}</p>}
+            <Input {...register("name")} />
+            {formState.errors.name && <FieldError>{formState.errors.name.message}</FieldError>}
         </CardContent>
         <CardFooter>
-            <Button onClick={async () => {
-                if (name.trim() === "") {
-                    setError("Name cannot be empty");
-                    return;
+            <Button onClick={handleSubmit(async ({name}) => {
+                const {data:id,error} = await tryCatch(createGameMutation({ player: name }));
+                if(error !== undefined){
+                    return
                 }
-                setError(null);
-                const id = await createGameMutation({ player: name });
+
                 gameContext.setPlayer(name)
                 router.navigate({
                     to:"/live/anonymous/$id",
                     params:{id}
                 })
-            }}>Create Game</Button>
-
+            })}>Create Game</Button>
         </CardFooter>
-
     </Card>
 
 }

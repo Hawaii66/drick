@@ -1,5 +1,5 @@
 import GameCompleted from '@/components/GameCompleted'
-import GameError from '@/components/GameError'
+import GameSceneSwitcher, { GameDataStateSwitch, GameStateSwitch } from '@/components/GameSceneSwitcher'
 import AnswerQuestions from '@/components/live/anonymous/AnswerQuestions'
 import EnterQuestion from '@/components/live/anonymous/EnterQuestion'
 import GameLobby from '@/components/live/GameLobby'
@@ -8,9 +8,8 @@ import { useGameContext } from '@/lib/gameContext'
 import { createFileRoute } from '@tanstack/react-router'
 import { api } from 'convex/_generated/api'
 import { Id } from 'convex/_generated/dataModel'
-import { AnonymouseGameState } from 'convex/live/anonymous'
-import { GameState } from 'convex/live/game'
 import { useQuery } from 'convex/react'
+import { AnonymouseGameState, GameState } from 'convex/types'
 
 export const Route = createFileRoute('/live/anonymous/$id/')({
     component: RouteComponent,
@@ -28,25 +27,24 @@ function RouteComponent() {
         </div>
     }
 
-    if(!player){
+    if (!player) {
         return <SelectPlayer game={game} />
     }
 
-    if(game.state === GameState.WAITING_FOR_PLAYERS){
-        return <GameLobby game={game} />
-    }
-
-    if(game.data.state === AnonymouseGameState.ENTER_QUESTIONS){
-        return <EnterQuestion game={game} />
-    }
-
-    if(game.data.state === AnonymouseGameState.ANSWER_QUESTIONS){
-        return <AnswerQuestions game={game} />
-    }
-
-    if(game.data.state === AnonymouseGameState.FINISHED){
-        return <GameCompleted />
-    }
-
-    return <GameError />
+    return <GameSceneSwitcher game={game}>
+        <GameStateSwitch state={GameState.WAITING_FOR_PLAYERS}>
+            <GameLobby game={game} />
+        </GameStateSwitch>
+        <GameStateSwitch state={GameState.IN_PROGRESS}>
+            <GameDataStateSwitch state={AnonymouseGameState.ENTER_QUESTIONS}>
+                <EnterQuestion game={game} />
+            </GameDataStateSwitch>
+            <GameDataStateSwitch state={AnonymouseGameState.ANSWER_QUESTIONS}>
+                <AnswerQuestions game={game} /> 
+            </GameDataStateSwitch>
+            <GameDataStateSwitch state={AnonymouseGameState.FINISHED}>
+                <GameCompleted />
+            </GameDataStateSwitch>
+       </GameStateSwitch>
+    </GameSceneSwitcher>
 }

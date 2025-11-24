@@ -1,19 +1,19 @@
-import { Game } from "convex/live/game";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "../ui/card";
 import { InputOTP, InputOTPGroup, InputOTPSlot } from "../ui/input-otp";
 import { Button } from "../ui/button";
 import { useMutation } from "convex/react";
 import { api } from "convex/_generated/api";
 import { Id } from "convex/_generated/dataModel";
-import { useGameContext } from "@/lib/gameContext";
+import { Game } from "convex/types";
+import EnsureGameOwner from "../EnsureGameOwner";
+import { tryCatch } from "@/lib/utils";
 
 type Props = {
-    game:Game
+    game: Game
 }
 
-export default function GameLobby({ game}: Props) {
+export default function GameLobby({ game }: Props) {
     const startEnteringQuestionsMutation = useMutation(api.live.anonymous.startEnteringQuestions)
-    const player = useGameContext().player;
 
     return <Card>
         <CardHeader>
@@ -42,14 +42,16 @@ export default function GameLobby({ game}: Props) {
             </div>
         </CardContent>
         <CardFooter>
-            {game.players.length < 2 ? <p>Waiting for more players to join...</p>: <>
-                {game.owner === player? <Button onClick={()=>startEnteringQuestionsMutation({
-                gameId: game._id as Id<"games">,
-            })}>
-
-                Start Game</Button>:<p>Only the owner can start the game</p>}
+            {game.players.length < 2 ? <p>Waiting for more players to join...</p> : <>
+                <EnsureGameOwner game={game}>
+                    <Button onClick={async() =>tryCatch(startEnteringQuestionsMutation({
+                        gameId: game._id as Id<"games">,
+                    }))}>
+                        Start Game
+                    </Button> 
+                </EnsureGameOwner>
 
             </>}
         </CardFooter>
-    </Card>; 
+    </Card>;
 }

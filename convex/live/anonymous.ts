@@ -1,29 +1,8 @@
-import z from "zod";
-import { GameSchema, GameState } from "./game";
+import { AnonymouseGame, AnonymouseGameSchema, AnonymouseGameState, AnonymousQuestion, GameState } from "../types";
 import { Id } from "../_generated/dataModel"
 import { DatabaseReader, mutation, query } from "../_generated/server"
 import { v } from "convex/values";
-
-export const AnonymousQuestionSchema = z.object({
-    question: z.string(),
-    targetPlayer: z.string()
-});
-export type AnonymousQuestion = z.infer<typeof AnonymousQuestionSchema>;
-
-export const AnonymouseGameState = {
-    ENTER_QUESTIONS: "enter_questions",
-    ANSWER_QUESTIONS: "answer_questions",
-    FINISHED: "finished",
-}
-
-export const AnonymouseGameSchema = GameSchema.extend({
-    data: z.object({
-        questions: AnonymousQuestionSchema.array(),
-        questionIndex:z.number().nullable(),
-        state:z.enum([AnonymouseGameState.ENTER_QUESTIONS, AnonymouseGameState.ANSWER_QUESTIONS, AnonymouseGameState.FINISHED]),
-    }),
-});
-export type AnonymouseGame = z.infer<typeof AnonymouseGameSchema>;
+import { PatchGameData, ThrowIfWrongGameState } from "../utils";
 
 export async function GetAnonymouseGame(id:Id<"games">, db:DatabaseReader){
     const game = await db.get(id);
@@ -88,10 +67,7 @@ export const addQuestion = mutation({
     },
     handler:async(ctx,args)=>{
         const game = await GetAnonymouseGame(args.gameId, ctx.db);
-
-        if(game.data.state !== AnonymouseGameState.ENTER_QUESTIONS){
-            throw new Error("Game not accepting questions");
-        }
+        ThrowIfWrongGameState(game, AnonymouseGameState.ENTER_QUESTIONS);
 
         const newQuestion:AnonymousQuestion= {
             question: args.question,
@@ -103,9 +79,7 @@ export const addQuestion = mutation({
             questions: [...game.data.questions, newQuestion],
         }
 
-        await ctx.db.patch(args.gameId, {
-            data:  JSON.stringify(newData),       
-        });
+        await PatchGameData(args.gameId, newData, ctx.db);
     }
 })
 
@@ -115,21 +89,17 @@ export const startEnteringQuestions = mutation({
     },
     handler:async(ctx,args)=>{
         const game = await GetAnonymouseGame(args.gameId, ctx.db);
-        
-        if(game.data.state !== AnonymouseGameState.ENTER_QUESTIONS){
-            throw new Error("Game not in question entry state");
-        }
-
+        ThrowIfWrongGameState(game, AnonymouseGameState.ENTER_QUESTIONS);
+       
         const newData:AnonymouseGame["data"] = {
             ...game.data,
             state: AnonymouseGameState.ENTER_QUESTIONS,
         }
 
-        await ctx.db.patch(args.gameId, {
-            data:  JSON.stringify(newData),       
+        await PatchGameData(args.gameId, newData, ctx.db,{
             state:GameState.IN_PROGRESS,
         });
-    }
+   }
 })
 
 export const startAnsweringQuestions = mutation({
@@ -138,20 +108,15 @@ export const startAnsweringQuestions = mutation({
     },
     handler:async(ctx,args)=>{
         const game = await GetAnonymouseGame(args.gameId, ctx.db);
-        
-        if(game.data.state !== AnonymouseGameState.ENTER_QUESTIONS){
-            throw new Error("Game not in question entry state");
-        }
-
+        ThrowIfWrongGameState(game, AnonymouseGameState.ENTER_QUESTIONS);
+       
         const newData:AnonymouseGame["data"] = {
             ...game.data,
             questionIndex: 0,
             state: AnonymouseGameState.ANSWER_QUESTIONS,
         }
 
-        await ctx.db.patch(args.gameId, {
-            data: JSON.stringify(newData),       
-        });
+        await PatchGameData(args.gameId, newData, ctx.db);
     }
 })
 
@@ -161,10 +126,7 @@ export const onNextQuestion = mutation({
     },
     handler:async(ctx,args)=>{
         const game = await GetAnonymouseGame(args.gameId, ctx.db);
-        
-        if(game.data.state !== AnonymouseGameState.ANSWER_QUESTIONS){
-            throw new Error("Game not in answer question state");
-        }
+        ThrowIfWrongGameState(game, AnonymouseGameState.ANSWER_QUESTIONS);
 
         const newData:AnonymouseGame["data"] = {
             ...game.data,
@@ -175,8 +137,6 @@ export const onNextQuestion = mutation({
             newData.state = AnonymouseGameState.FINISHED;
         }
 
-        await ctx.db.patch(args.gameId, {
-            data: JSON.stringify(newData),       
-        });
+        await PatchGameData(args.gameId, newData, ctx.db);
     }
 })
