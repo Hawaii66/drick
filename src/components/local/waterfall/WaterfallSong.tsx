@@ -1,3 +1,4 @@
+import SpotifyTrack from "@/components/SpotifyTrack";
 import type { WaterfallSong } from "@/types/local/waterfall";
 
 type Props = {
@@ -5,12 +6,5 @@ type Props = {
 };
 
 export default function WaterfallSong({ song }: Props) {
-    return (
-               <iframe
-                    style={{ borderRadius: "8px" }}
-                    src={`https://open.spotify.com/embed/track/${song.trackId}?utm_source=generator`}
-                    allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
-                    loading="lazy"
-                />
-    );
+    return <SpotifyTrack trackId={song.trackId} />
 }

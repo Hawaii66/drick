@@ -35,6 +35,14 @@ function App() {
                     to: '/local/waterfall',
                 })}
             />       
+              <LocalGamePreview
+                name="Allsång i Sälen🍺"
+                description="Sing along to classic hits with a twist! Only those who've actually done it can join the chorus. If not drink!"
+                image="/allsang-i-salen.png"
+                onStartGame={() => router.navigate({
+                    to: '/local/salen',
+                })}
+            />       
         </div>
     </div>
 }
