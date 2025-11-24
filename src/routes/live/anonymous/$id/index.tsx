@@ -29,7 +29,7 @@ function RouteComponent() {
     }
 
     if (!player) {
-        return <SelectPlayer game={game} />
+        return <CenterScreen> <SelectPlayer game={game} /></CenterScreen>
     }
 
     return <CenterScreen> <GameSceneSwitcher game={game}>

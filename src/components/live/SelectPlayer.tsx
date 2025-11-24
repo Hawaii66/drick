@@ -13,9 +13,9 @@ export default function SelectPlayer({ game }: Props) {
     return <Card>
         <CardHeader>
             <CardTitle>Select Player</CardTitle>
-            <CardDescription>Select your player from the list to continue.</CardDescription>
+            <CardDescription>You disconnected, select your player from the list to continue.</CardDescription>
         </CardHeader>
-        <CardContent>
+        <CardContent className="flex flex-col gap-2">
             {game.players.map((player) => (
                 <Button onClick={() => {
                     gameContext.setPlayer(player)

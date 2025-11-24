@@ -27,6 +27,14 @@ function App() {
                     to: '/local/challenge',
                 })}
             />
+             <LocalGamePreview
+                name="Waterfall"
+                description="The ultimate drinking chain reaction. Drink after the person before you when the song hits a special word. Keep the cascade flowing!"
+                image="/waterfall.png"
+                onStartGame={() => router.navigate({
+                    to: '/local/challenge',
+                })}
+            />       
         </div>
     </div>
 }
