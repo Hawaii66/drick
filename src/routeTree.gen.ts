@@ -11,6 +11,7 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as LiveRouteRouteImport } from './routes/live/route'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as LocalWaterfallIndexRouteImport } from './routes/local/waterfall/index'
 import { Route as LocalChallengeIndexRouteImport } from './routes/local/challenge/index'
 import { Route as LiveAnonymousJoinRouteImport } from './routes/live/anonymous/join'
 import { Route as LiveAnonymousCreateRouteImport } from './routes/live/anonymous/create'
@@ -24,6 +25,11 @@ const LiveRouteRoute = LiveRouteRouteImport.update({
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LocalWaterfallIndexRoute = LocalWaterfallIndexRouteImport.update({
+  id: '/local/waterfall/',
+  path: '/local/waterfall/',
   getParentRoute: () => rootRouteImport,
 } as any)
 const LocalChallengeIndexRoute = LocalChallengeIndexRouteImport.update({
@@ -53,6 +59,7 @@ export interface FileRoutesByFullPath {
   '/live/anonymous/create': typeof LiveAnonymousCreateRoute
   '/live/anonymous/join': typeof LiveAnonymousJoinRoute
   '/local/challenge': typeof LocalChallengeIndexRoute
+  '/local/waterfall': typeof LocalWaterfallIndexRoute
   '/live/anonymous/$id': typeof LiveAnonymousIdIndexRoute
 }
 export interface FileRoutesByTo {
@@ -61,6 +68,7 @@ export interface FileRoutesByTo {
   '/live/anonymous/create': typeof LiveAnonymousCreateRoute
   '/live/anonymous/join': typeof LiveAnonymousJoinRoute
   '/local/challenge': typeof LocalChallengeIndexRoute
+  '/local/waterfall': typeof LocalWaterfallIndexRoute
   '/live/anonymous/$id': typeof LiveAnonymousIdIndexRoute
 }
 export interface FileRoutesById {
@@ -70,6 +78,7 @@ export interface FileRoutesById {
   '/live/anonymous/create': typeof LiveAnonymousCreateRoute
   '/live/anonymous/join': typeof LiveAnonymousJoinRoute
   '/local/challenge/': typeof LocalChallengeIndexRoute
+  '/local/waterfall/': typeof LocalWaterfallIndexRoute
   '/live/anonymous/$id/': typeof LiveAnonymousIdIndexRoute
 }
 export interface FileRouteTypes {
@@ -80,6 +89,7 @@ export interface FileRouteTypes {
     | '/live/anonymous/create'
     | '/live/anonymous/join'
     | '/local/challenge'
+    | '/local/waterfall'
     | '/live/anonymous/$id'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -88,6 +98,7 @@ export interface FileRouteTypes {
     | '/live/anonymous/create'
     | '/live/anonymous/join'
     | '/local/challenge'
+    | '/local/waterfall'
     | '/live/anonymous/$id'
   id:
     | '__root__'
@@ -96,6 +107,7 @@ export interface FileRouteTypes {
     | '/live/anonymous/create'
     | '/live/anonymous/join'
     | '/local/challenge/'
+    | '/local/waterfall/'
     | '/live/anonymous/$id/'
   fileRoutesById: FileRoutesById
 }
@@ -103,6 +115,7 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   LiveRouteRoute: typeof LiveRouteRouteWithChildren
   LocalChallengeIndexRoute: typeof LocalChallengeIndexRoute
+  LocalWaterfallIndexRoute: typeof LocalWaterfallIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -119,6 +132,13 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/local/waterfall/': {
+      id: '/local/waterfall/'
+      path: '/local/waterfall'
+      fullPath: '/local/waterfall'
+      preLoaderRoute: typeof LocalWaterfallIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/local/challenge/': {
@@ -172,6 +192,7 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   LiveRouteRoute: LiveRouteRouteWithChildren,
   LocalChallengeIndexRoute: LocalChallengeIndexRoute,
+  LocalWaterfallIndexRoute: LocalWaterfallIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

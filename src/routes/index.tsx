@@ -32,7 +32,7 @@ function App() {
                 description="The ultimate drinking chain reaction. Drink after the person before you when the song hits a special word. Keep the cascade flowing!"
                 image="/waterfall.png"
                 onStartGame={() => router.navigate({
-                    to: '/local/challenge',
+                    to: '/local/waterfall',
                 })}
             />       
         </div>
