@@ -27,8 +27,8 @@ export default function CardPlayLocalChallenge({ challenges }: Props) {
         <>
         <Card>
             <CardHeader>
-                <CardTitle>Spin the wheel</CardTitle>
-                <CardDescription>Spin the wheel to get the next challenge!</CardDescription>
+                <CardTitle>Snurra Hjulet</CardTitle>
+                <CardDescription>Snurra hjulet för att få nästa utmaning!</CardDescription>
             </CardHeader>
             <CardContent>
                 <WheelLocalChallenge challenges={challengesInPlay} onChalengeSelected={(challenge) => {
@@ -39,12 +39,12 @@ export default function CardPlayLocalChallenge({ challenges }: Props) {
         <Dialog open={winningChallenge !== null} onOpenChange={onNextChallenge}>
                 <DialogContent>
                         <DialogHeader>
-                            <DialogTitle>Challenge Selected!</DialogTitle>
+                            <DialogTitle>Utmaning Vald!</DialogTitle>
                         </DialogHeader>
                     <p>{winningChallenge}</p>
                     <DialogFooter>
                         <DialogClose>
-                            <Button>Next Challenge</Button>
+                            <Button>Nästa Utmaning</Button>
                         </DialogClose>
                     </DialogFooter>
                 </DialogContent>

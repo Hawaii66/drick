@@ -27,8 +27,8 @@ export function LiveGamePreview({ name, description, image, onJoinGame, onCreate
                 <img className="w-full aspect-square rounded-base border-2 border-border shadow-shadow" src={image} alt={name} />
             </CardContent>
             <CardFooter className="justify-between">
-                <Button variant="neutral" onClick={onCreateGame}>Create Game</Button>
-                <Button onClick={onJoinGame}>Join Game</Button>
+                <Button variant="neutral" onClick={onCreateGame}>Skapa Spel</Button>
+                <Button onClick={onJoinGame}>Gå med i Spel</Button>
             </CardFooter>
         </Card>
     )
@@ -45,7 +45,7 @@ export function LocalGamePreview({image,description,name,onStartGame}:LocalProps
                 <img className="w-full aspect-square rounded-base border-2 border-border shadow-shadow" src={image} alt={name} />
             </CardContent>
             <CardFooter className="justify-end">
-                <Button onClick={onStartGame}>Start Game</Button>
+                <Button onClick={onStartGame}>Starta Spelet</Button>
             </CardFooter>
         </Card>
     )

@@ -14,13 +14,13 @@ export default function CardSelectPeklek({ onConfigured }: Props) {
 
     return <Card className="w-full max-w-md">
         <CardHeader>
-            <CardTitle>Who Is?</CardTitle>
-            <CardDescription>Who is most likely to ...</CardDescription>
+            <CardTitle>Pekleken</CardTitle>
+            <CardDescription>Peka på den som är mest trolig att.</CardDescription>
         </CardHeader>
         <CardContent>
             <FieldGroup>
                <Field>
-                    <FieldLabel>Select Mode</FieldLabel>
+                    <FieldLabel>Välj läge</FieldLabel>
                     <Select value={mode} onValueChange={(value) => setMode(value as typeof PeklekTypes[number])}>
                         <SelectTrigger>
                             <SelectValue />
@@ -33,13 +33,13 @@ export default function CardSelectPeklek({ onConfigured }: Props) {
                             ))}
                         </SelectContent>
                     </Select>
-                    <FieldDescription>Select the mode for the challenges</FieldDescription>
+                    <FieldDescription>Välj vilken typ av frågor som ska ställas</FieldDescription>
                 </Field>
             </FieldGroup>
         </CardContent>
         <CardFooter>
             <Button onClick={() => onConfigured(mode)}>
-                Start Challenges
+                Start Utmaningar
             </Button>
         </CardFooter>
     </Card>

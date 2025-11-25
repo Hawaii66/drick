@@ -15,13 +15,13 @@ export default function CardSelectSong({ onConfigured }: Props) {
 
     return <Card className="w-full max-w-md">
         <CardHeader>
-            <CardTitle>Song</CardTitle>
-            <CardDescription>Welcome To Sälen</CardDescription>
+            <CardTitle>Allsång i Sälen🍺</CardTitle>
+            <CardDescription>Välkommen till Sälen, här går det undan.</CardDescription>
         </CardHeader>
         <CardContent>
             <FieldGroup>
                <Field>
-                    <FieldLabel>Select Song</FieldLabel>
+                    <FieldLabel>Välj låt</FieldLabel>
                     <Select value={song} onValueChange={(value) => setSong(value as SalenSong["name"])}>
                         <SelectTrigger>
                             <SelectValue />
@@ -34,13 +34,13 @@ export default function CardSelectSong({ onConfigured }: Props) {
                             ))}
                         </SelectContent>
                     </Select>
-                    <FieldDescription>Select the song with challenges</FieldDescription>
+                    <FieldDescription>Välj allsångs låt</FieldDescription>
                 </Field>
             </FieldGroup>
         </CardContent>
         <CardFooter>
             <Button onClick={() => onConfigured(song)}>
-                Start Challenges
+                Börja Sjunga!
             </Button>
         </CardFooter>
     </Card>

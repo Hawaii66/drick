@@ -22,12 +22,12 @@ export default function GameLobby({ game }: Props) {
 
     return <Card>
         <CardHeader>
-            <CardTitle>Game Lobby</CardTitle>
-            <CardDescription>Waiting for players to join...</CardDescription>
+            <CardTitle>Spel Lobby</CardTitle>
+            <CardDescription>Väntar på fler spelare...</CardDescription>
         </CardHeader>
         <CardContent>
             <div>
-                <p className="font-semibold">Game PIN:</p>
+                <p className="font-semibold">Spel PIN:</p>
                 <InputOTP maxLength={6} value={game.pin} disabled>
                     <InputOTPGroup>
                         <InputOTPSlot index={0} />
@@ -42,20 +42,20 @@ export default function GameLobby({ game }: Props) {
                 </InputOTP>
             </div>
             <div>
-                <p className="font-semibold mt-4">Players:</p>
+                <p className="font-semibold mt-4">Spelare:</p>
                 {game.players.map((player, index) => (
                     <p className="pl-2" key={index}>- {player}</p>
                 ))}
             </div>
         </CardContent>
         <CardFooter>
-            {game.players.length < 2 ? <p>Waiting for more players to join...</p> : <>
+            {game.players.length < 2 ? <p>Väntar på fler spelare...</p> : <>
                 <EnsureGameOwner game={game}>
                     <Pending isPending={isPending}>
                     <Button onClick={() =>startEnteringQuestionsMutation({
                         gameId: game._id as Id<"games">,
                     })}>
-                        Start Game
+                        Starta Spelet
                     </Button> 
                     </Pending>
                 </EnsureGameOwner>

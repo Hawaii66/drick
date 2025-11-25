@@ -37,16 +37,16 @@ export default function JoinGame() {
 
     return <Card>
         <CardHeader>
-            <CardTitle>Join Game</CardTitle>
+            <CardTitle>Gå med i spel</CardTitle>
             <CardDescription>
-                Join an existing game to start playing with friends!
+                Gå med i ett befintligt spel för att börja spela med vänner!
             </CardDescription>
         </CardHeader>
         <CardContent>
-            <Label>Name:</Label>
+            <Label>Namn:</Label>
             <Input {...register("name")} />
             {formState.errors.name && <FieldError>{formState.errors.name.message}</FieldError>}
-            <Label>Game PIN:</Label>
+            <Label>Spel PIN:</Label>
             <Controller control={control} name="pin" render={({ field: { onChange, value } }) =>
                 <InputOTP maxLength={6} value={value} onChange={onChange}>
                     <InputOTPGroup>
@@ -78,7 +78,7 @@ export default function JoinGame() {
                             }
                         })
                 }}))}
-            >Join Game</Button>
+            >Gå med</Button>
                 </Pending>
         </CardFooter>
     </Card>

@@ -34,11 +34,11 @@ export default function CreateGame() {
 
     return <Card>
         <CardHeader>
-            <CardTitle>Create Game</CardTitle>
-            <CardDescription>   Create a new game to start playing with friends!</CardDescription>
+            <CardTitle>Skapa spel</CardTitle>
+            <CardDescription>Skapa ett nytt spel med dina vänner!</CardDescription>
         </CardHeader>
         <CardContent>
-            <Label>Name:</Label>
+            <Label>Ditt namn:</Label>
             <Input {...register("name")} />
             {formState.errors.name && <FieldError>{formState.errors.name.message}</FieldError>}
         </CardContent>
@@ -54,7 +54,7 @@ export default function CreateGame() {
                             })
                         }
                     })
-            )}>Create Game</Button>
+            )}>Skapa Spel</Button>
             </Pending>
         </CardFooter>
     </Card>

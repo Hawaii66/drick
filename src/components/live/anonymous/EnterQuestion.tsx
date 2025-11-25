@@ -38,15 +38,15 @@ export default function EnterQuestion({ game }: Props) {
 
     return <Card>
         <CardHeader>
-            <CardTitle>Enter Question</CardTitle>
+            <CardTitle>Skriv frågor</CardTitle>
             <CardDescription>
-                Please enter your question and the target player.
+                Skriv roliga frågor att ställa till spelarna.
             </CardDescription>
         </CardHeader>
         <CardContent>
             <FieldGroup>
                 <Field>
-                <FieldLabel>Target Player:</FieldLabel>
+                <FieldLabel>Spelare:</FieldLabel>
                 <Controller control={control} name="targetPlayer" render={({ field: { onChange, value } }) =>
                     <Select value={value} onValueChange={onChange}>
                         <SelectTrigger>
@@ -54,13 +54,13 @@ export default function EnterQuestion({ game }: Props) {
                         </SelectTrigger>
                         <SelectContent>
                             <SelectGroup>
-                                <SelectLabel>General</SelectLabel>
-                                <SelectItem value="Everyone">Everyone</SelectItem>
-                                <SelectItem value="Boys">Boys</SelectItem>
-                                <SelectItem value="Girls">Girls</SelectItem>
+                                <SelectLabel>Generella</SelectLabel>
+                                <SelectItem value="Alla">Alla</SelectItem>
+                                <SelectItem value="Killar">Killar</SelectItem>
+                                <SelectItem value="Tjejer">Tjejer</SelectItem>
                             </SelectGroup>
                             <SelectGroup >
-                                <SelectLabel>Players</SelectLabel>
+                                <SelectLabel>Spelare</SelectLabel>
                                 {game.players.map((p) => (
                                     <SelectItem key={p} value={p}>
                                         {p}
@@ -72,14 +72,14 @@ export default function EnterQuestion({ game }: Props) {
                 {formState.errors.targetPlayer && <FieldError>{formState.errors.targetPlayer.message}</FieldError>}
                 </Field>
                 <Field>
-                <FieldLabel>Question:</FieldLabel>
+                <FieldLabel>Fråga:</FieldLabel>
                 <Input {...register("question")} />
                 {formState.errors.question && <FieldError>{formState.errors.question.message}</FieldError>}
             </Field>
             </FieldGroup>
         </CardContent>
         <CardFooter className="flex flex-col gap-8 items-start">
-            <p>Total questions submitted: {game.data.questions.length}</p>
+            <p>Antal inskickade frågor: {game.data.questions.length}</p>
             <Pending isPending={isPendingEnterQuestion}>
             <Button onClick={handleSubmit(async ({ question, targetPlayer }) => {
                 enterQuestionMutation({
@@ -88,7 +88,7 @@ export default function EnterQuestion({ game }: Props) {
                     targetPlayer
                 })
            })}>
-                Submit Question
+                Skicka in fråga
             </Button>
             </Pending>
             <Pending isPending={isPendingStartAnswering}>
@@ -98,7 +98,7 @@ export default function EnterQuestion({ game }: Props) {
                         gameId: game._id as Id<"games">,
                     })
                 }>
-                    Start Game
+                    Starta Spelet
                 </Button>
             </EnsureGameOwner>
             </Pending>

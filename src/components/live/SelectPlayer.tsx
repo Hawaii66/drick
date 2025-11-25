@@ -12,8 +12,8 @@ export default function SelectPlayer({ game }: Props) {
 
     return <Card>
         <CardHeader>
-            <CardTitle>Select Player</CardTitle>
-            <CardDescription>You disconnected, select your player from the list to continue.</CardDescription>
+            <CardTitle>Välj Spelare</CardTitle>
+            <CardDescription>Du kopplades ifrån, välj dig i listan nedan.</CardDescription>
         </CardHeader>
         <CardContent className="flex flex-col gap-2">
             {game.players.map((player) => (

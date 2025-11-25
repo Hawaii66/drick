@@ -9,8 +9,8 @@ function App() {
     return <div>
        <div className="flex flex-col items-center justify-center min-h-screen p-4 gap-8">
             <LiveGamePreview
-                name="Whisper Network"
-                description="Ask anything, anonymously. Direct questions to one person, all guys, all girls, or everyone. Prepare for surprising answers!"
+                name="Pandoras Ask🤫"
+                description="Fråga vad du vill, anonymt. Rikta frågor till en person, alla killar, alla tjejer, eller alla. Förbered dig på överraskande svar!"
                 image="/whisper-network.png"
                 onJoinGame={() => router.navigate({
                     to: '/live/anonymous/join',
@@ -20,16 +20,16 @@ function App() {
                 })}
             />
             <LocalGamePreview
-                name="Dare Spin"
-                description="Endless challenges. Spin the wheel to receive your next unexpected dare. Get ready for instant, unfiltered fun with friends!"
+                name="Snurra Hjulet🎡"
+                description="Oändliga utmaningar. Snurra hjulet för att få nästa oväntade vågspel. Gör dig redo för omedelbar, ofiltrerad underhållning med vänner!"
                 image="/dare-spin.png"
                 onStartGame={() => router.navigate({
                     to: '/local/challenge',
                 })}
             />
              <LocalGamePreview
-                name="Waterfall"
-                description="The ultimate drinking chain reaction. Drink after the person before you when the song hits a special word. Keep the cascade flowing!"
+                name="Vattenfall💧"
+                description="Den ultimata drickkedjereaktionen. Drick efter den före dig när låten når ett specifikt ord. Håll kaskaden flödande!"
                 image="/waterfall.png"
                 onStartGame={() => router.navigate({
                     to: '/local/waterfall',
@@ -37,20 +37,20 @@ function App() {
             />       
               <LocalGamePreview
                 name="Allsång i Sälen🍺"
-                description="Sing along to classic hits with a twist! Only those who've actually done it can join the chorus. If not drink!"
+                description="Sjung med i klassiska hits – med en twist! Bara de som *verkligen* har gjort det får sjunga med. Om inte, drick!"
                 image="/allsang-i-salen.png"
                 onStartGame={() => router.navigate({
                     to: '/local/salen',
                 })}
             />       
                <LocalGamePreview
-                name="Who Is"
-                description="Time to point fingers! A statement is read, and everyone points to who it best describes. No talking, just hilarious, silent accusations!"
+                name="Peklek👈"
+                description="Dags att peka finger! Ett påstående läses upp, och alla pekar på den det bäst beskriver. Ingen som pratar, bara roliga, tysta anklagelser!"
                 image="/peklek.png"
                 onStartGame={() => router.navigate({
                     to: '/local/peklek',
                 })}
-            />          
-        </div>
+            />
+           </div>
     </div>
 }

@@ -17,7 +17,7 @@ export default function CardSong({ song }: Props) {
         </CardHeader>
         <CardContent>
             <div>
-                <p>Press the cover to play the song:</p>
+                <p>Klicka på låtens bild för att spela låten:</p>
                 <SpotifyTrack trackId={song.trackId} />
             </div>
             <Accordion onValueChange={setValues} value={values} type="multiple" className="gap-2 flex flex-col">

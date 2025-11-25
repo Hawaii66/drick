@@ -24,7 +24,7 @@ function RouteComponent() {
 
     if (!game) {
         return <div className="flex justify-center items-center h-full p-4">
-            <div>Loading...</div>
+            <div>Laddar...</div>
         </div>
     }
 
