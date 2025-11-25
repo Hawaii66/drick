@@ -6,11 +6,11 @@ export default function CardWaterfall() {
 
     return <Card>
         <CardHeader>
-            <CardTitle>Waterfall</CardTitle>
+            <CardTitle>Vattenfall</CardTitle>
             <CardDescription>
-                The ultimate drinking chain reaction. Drink after the person before you when the song hits a special word. Keep the cascade flowing!"
+                De ultimata drick-kedjereaktionen. Drick efter personen före dig när låten träffar ett speciellt ord. Håll kaskaden flödande!
             </CardDescription>
-            <CardDescription>Select the song to use</CardDescription>
+            <CardDescription>Välj låt att använda</CardDescription>
         </CardHeader>
             <CardContent className="w-full flex flex-col items-center">
                 {WaterfallSongs.map(song=><WaterfallSong song={song} />)}

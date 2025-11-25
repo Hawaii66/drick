@@ -60,7 +60,7 @@ export default function WheelLocalChallenge({ challenges, onChalengeSelected }: 
                 }}
                 spinDuration={0.6}
             />
-            <Button onClick={onSpin}>Spin</Button>
+            <Button onClick={onSpin}>Snurra</Button>
         </div>
     )
 }

@@ -13,8 +13,8 @@ export default function CardPeklek({ challenges }: Props) {
 
     return <Card>
         <CardHeader>
-            <CardTitle>Who Is?</CardTitle>
-            <CardDescription>Who is most likely to ...</CardDescription>
+            <CardTitle>Pekleken</CardTitle>
+            <CardDescription>Peka på den som är mest trolig att.</CardDescription>
         </CardHeader>
         <CardContent className="flex flex-col gap-3">
             {challenges.slice(page * PAGE_SIZE, (page + 1) * PAGE_SIZE).map((challenge, index) => (
@@ -25,10 +25,10 @@ export default function CardPeklek({ challenges }: Props) {
         </CardContent>
         <CardFooter className="justify-between">
             <Button disabled={page === 0} onClick={() => setPage((p) => p - 1)}>
-                Previous
+              Förra 
             </Button>
             <Button disabled={(page + 1) * PAGE_SIZE >= challenges.length} onClick={() => setPage((p) => p + 1)}>
-                Next
+                Nästa
             </Button>
         </CardFooter>
     </Card>

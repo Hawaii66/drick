@@ -17,25 +17,25 @@ export default function CardConfigureLocalChallenge({ onConfigured }: Props) {
 
     return <Card className="w-full max-w-md">
         <CardHeader>
-            <CardTitle>Challenges</CardTitle>
-            <CardDescription>Select number of players and number of challenges per player.</CardDescription>
+            <CardTitle>Utmaningar</CardTitle>
+            <CardDescription>Välj antal spelare, frågor och typ av frågor.</CardDescription>
         </CardHeader>
         <CardContent>
             <FieldGroup>
                 <Field>
-                    <FieldLabel>Number of Players</FieldLabel>
+                    <FieldLabel>Antal spelare</FieldLabel>
                     <Slider value={[numberOfPlayers]} onValueChange={(e) => setNumberOfPlayers(e[0])} min={2} max={20} step={1} />
                     <p className="text-center">{numberOfPlayers}</p>
-                    <FieldDescription>Select how many players will participate in the challenge.</FieldDescription>
+                    <FieldDescription>Välj hur många spelare som ska vara med i spelet.</FieldDescription>
                 </Field>
                 <Field>
-                    <FieldLabel>Challenges per Player</FieldLabel>
+                    <FieldLabel>Utmaningar per person</FieldLabel>
                     <Slider value={[challengesPerPlayer]} onValueChange={(e) => setChallengesPerPlayer(e[0])} min={1} max={5} step={1} />
                     <p className="text-center">{challengesPerPlayer}</p>
-                    <FieldDescription>Select how many challenges each player will face.</FieldDescription>
+                    <FieldDescription>Välj antalet utmaningar varje person ska göra</FieldDescription>
                 </Field>
                 <Field>
-                    <FieldLabel>Play Mode</FieldLabel>
+                    <FieldLabel>Typ av frågor</FieldLabel>
                     <Select value={mode} onValueChange={(value) => setMode(value as LocalChallengeConfig["mode"])}>
                         <SelectTrigger>
                             <SelectValue />
@@ -48,19 +48,17 @@ export default function CardConfigureLocalChallenge({ onConfigured }: Props) {
                             ))}
                         </SelectContent>
                     </Select>
-                    <FieldDescription>Select what type of challenges/questions you want.</FieldDescription>
+                    <FieldDescription>Välj vilken typ av frågor/utmaningar som ska visas</FieldDescription>
                 </Field>
             </FieldGroup>
         </CardContent>
         <CardFooter>
-            <Button onClick={() =>{
-                console.log(mode)
-
+            <Button onClick={() =>
             onConfigured({
                 numberOfPlayers,
                 challengesPerPlayer,
                 mode
-            })}}>Start Challenges</Button>
+            })}>Starta Utmaningar</Button>
         </CardFooter>
     </Card>
 

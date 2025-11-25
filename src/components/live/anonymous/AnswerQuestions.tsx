@@ -23,14 +23,14 @@ export default function AnswerQuestions({ game }: Props) {
 
     return <Card>
         <CardHeader>
-            <CardTitle>Answer Questions</CardTitle>
-            <CardDescription>Answer the questions submitted by players.</CardDescription>
+            <CardTitle>Svara på frågorna</CardTitle>
+            <CardDescription>Svara på alla frågor som skickats in.</CardDescription>
         </CardHeader>
         <CardContent>
             <div>
-                <p className="font-semibold">Questions</p>
-                <p>Total questions to answer: {game.data.questions.length}</p>
-                <p>Current question: {(game.data.questionIndex ?? 0) + 1}</p>
+                <p className="font-semibold">Frågor</p>
+                <p>Totalt: {game.data.questions.length}</p>
+                <p>Nuvarande: {(game.data.questionIndex ?? 0) + 1}</p>
             </div>
 
             <div className="py-4 px-2 text-center flex flex-col mt-16 gap-2 items-center rounded-base justify-center border-border border-2 bg-secondary-background ">
@@ -44,7 +44,7 @@ export default function AnswerQuestions({ game }: Props) {
                 <Button onClick={() =>
                     nextQuestionMutation({ gameId: game._id as Id<"games"> })
                 }>
-                        {game.data.questionIndex === game.data.questions.length- 1?"Finish Game":"Next Question"}
+                        {game.data.questionIndex === game.data.questions.length- 1?"Klar":"Nästa fråga"}
                 </Button>
                 </Pending>
             </EnsureGameOwner>
