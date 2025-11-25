@@ -28,16 +28,16 @@ function App() {
                     keywords={['sanning eller konsekvens', 'frågesport', 'sanning', 'frågor', 'sanning eller drink']}
                 />
                 <LiveGamePreview
-                    name="🤫 Pandoras Ask"
-                    description="Fråga vad du vill, anonymt. Rikta frågor till en person, alla killar, alla tjejer, eller alla. Förbered dig på överraskande svar!"
-                    image="/whisper-network.png"
+                    name="⚡ Reaktions Tid"
+                    description="Reflexer på prov! Vänta på den gröna rutan, klicka snabbast. Enkel utmaning för dig och vännerna – vem är snabbast på avtryckaren?"
+                    image="/reaction-time.png"
                     onJoinGame={() => router.navigate({
                         to: '/live/reaction-time/join',
                     })}
                     onCreateGame={() => router.navigate({
                         to: '/live/reaction-time/create',
                     })}
-                    keywords={['sanning eller konsekvens', 'frågesport', 'sanning', 'frågor', 'sanning eller drink']}
+                    keywords={['reaktion', 'tid', 'snabbast']}
                 />
                 <LocalGamePreview
                     name="🎡 Snurra Hjulet"
