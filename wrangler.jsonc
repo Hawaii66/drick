@@ -8,5 +8,15 @@
     "main": "@tanstack/react-start/server-entry",
     "observability": {
         "enabled": true
-    }
+    },
+    "routes": [
+        {
+            "pattern": "drickspel.com",
+            "custom_domain": true
+        },
+        {
+            "pattern": "www.drickspel.com",
+            "custom_domain": true
+        }
+    ]
 }
