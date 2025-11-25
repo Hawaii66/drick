@@ -31,11 +31,11 @@ export default function CardViewOtherPlayers({ game }:Props){
 
     return <Card>
         <CardHeader>
-            <CardTitle>Who Is Play</CardTitle>
-            <CardDescription>Each player can not see their own person</CardDescription>
-            <CardDescription>Each player can ask one question at a time</CardDescription>
-            <CardDescription>For each question take one sip</CardDescription>
-            <CardDescription>First to guess their person wins</CardDescription>
+            <CardTitle>Gissa Etiketten</CardTitle>
+            <CardDescription>Varje spelare kan se alla andras etiketter.</CardDescription>
+            <CardDescription>Varje spelare ställer en fråga i taget.</CardDescription>
+            <CardDescription>För varje fråga måste man dricka.</CardDescription>
+            <CardDescription>Först att gissa sin etikett vinner.</CardDescription>
         </CardHeader>
         <CardContent>
             <Accordion onValueChange={setValues} value={values} type="multiple" className="gap-2 flex flex-col">
@@ -54,19 +54,19 @@ export default function CardViewOtherPlayers({ game }:Props){
                 <AlertDialog>
                 <AlertDialogTrigger asChild>
                     <Button>
-                        Game Completed
+                        Avsluta Spelet
                     </Button>
             </AlertDialogTrigger>
             <AlertDialogContent>
                         <AlertDialogHeader>
-                            <AlertDialogTitle>Finish game</AlertDialogTitle>
-                            <AlertDialogDescription>Have everyone guessed the person</AlertDialogDescription>
+                            <AlertDialogTitle>Avsluta Spelet</AlertDialogTitle>
+                            <AlertDialogDescription>Har alla gissat sin person?</AlertDialogDescription>
                         </AlertDialogHeader>
                         <AlertDialogFooter>
-                            <AlertDialogCancel>Cancel</AlertDialogCancel>
+                            <AlertDialogCancel>Tillbaka</AlertDialogCancel>
                             <AlertDialogAction onClick={()=>onFinishGameMutation({
                                 gameId:game._id as Id<"games">
-                            })}>Finish</AlertDialogAction>
+                            })}>Avsluta</AlertDialogAction>
                         </AlertDialogFooter>
             </AlertDialogContent>
             </AlertDialog>

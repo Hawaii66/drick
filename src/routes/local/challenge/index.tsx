@@ -1,3 +1,4 @@
+import CenterScreen from '@/components/CenterScreen'
 import LocalChallenge from '@/components/local/challenge/LocalChallenge'
 import { createFileRoute } from '@tanstack/react-router'
 
@@ -6,7 +7,7 @@ export const Route = createFileRoute('/local/challenge/')({
 })
 
 function RouteComponent() {
-    return <div className="flex justify-center items-center h-full p-4">
+    return <CenterScreen>
         <LocalChallenge />
-    </div>
+    </CenterScreen>
 }

@@ -42,20 +42,20 @@ export default function CardEnterPerson({game}:Props){
 
     return <Card>
         <CardHeader>
-            <CardTitle>Who Is</CardTitle>
-            <CardDescription>Enter a person someone else will have to guess</CardDescription>
-            <CardDescription>If you enter a player as well, that person will probably get the person you write</CardDescription>
+            <CardTitle>Blind Etikett</CardTitle>
+            <CardDescription>Skriv något/någon som en annan person ska gissa</CardDescription>
+            <CardDescription>Om du väljer en spelare kommer den att få ditt val</CardDescription>
         </CardHeader>
         <CardContent>
             <FieldGroup>
                 <Field>
-                    <Label>Who Is Person</Label>
+                    <Label>Etikett</Label>
                     <Input {...register("person")} />
-                    <FieldDescription>Enter a person the other player will have to guess</FieldDescription>
+                    <FieldDescription>Skriv vad någon anna ska gissa.</FieldDescription>
                     {formState.errors.person&&<FieldError>{formState.errors.person.message}</FieldError>}
                 </Field>
                 <Field>
-                    <Label>Target Player</Label>
+                    <Label>Spelare</Label>
                 <Controller control={control} name="player" render={({ field: { onChange, value } }) =>
                     <Select value={value} onValueChange={onChange}>
                         <SelectTrigger>
@@ -63,7 +63,7 @@ export default function CardEnterPerson({game}:Props){
                         </SelectTrigger>
                         <SelectContent>
                            <SelectGroup>
-                                <SelectItem value="|none|" >None</SelectItem>
+                                <SelectItem value="|none|" >Ingen</SelectItem>
                                 {game.players.filter(i=>i!==player).map((p) => (
                                     <SelectItem key={p} value={p}>
                                         {p}
@@ -84,7 +84,7 @@ export default function CardEnterPerson({game}:Props){
                     player,
                     preferedPlayer
                 }))}>
-                Submit Person
+                    Skicka Etikett
             </Button>
 </Pending>
         </CardFooter>

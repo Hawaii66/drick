@@ -27,16 +27,18 @@ export default function CardWaiting({game}:Props) {
 
     return <Card>
         <CardHeader>
-            <CardTitle>Waiting</CardTitle>
-            <CardDescription>Waiting for other players to enter their person</CardDescription>
+            <CardTitle>Väntar</CardTitle>
+            <CardDescription>Väntar på att alla spelare ska ha skrivit en etikett</CardDescription>
         </CardHeader>
         <CardFooter>
             <EnsureGameOwner game={game}>
+                {game.players.length === Object.keys(game.data.hasEnteredPerson).length ?
                 <Pending isPending={isPending}>
                     <Button onClick={()=>onStartGuessMutation({gameId:game._id as Id<"games">})}>
-                    Start Guessing
+                        Börja Gissa
                     </Button>
-                </Pending>
+                </Pending>:<p>Börja när alla skrivit en ettikett</p>
+                }
             </EnsureGameOwner>
         </CardFooter>
     </Card>

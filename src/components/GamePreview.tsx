@@ -6,7 +6,7 @@ type Props = {
     name: string
     description: string
     image: string
-    keywords:string[]
+    keywords: string[]
 }
 
 type LiveProps = Props & {
@@ -21,7 +21,7 @@ type LocalProps = Props & {
 export function LiveGamePreview({ name, description, image, onJoinGame, onCreateGame, keywords }: LiveProps) {
     const query = useGameSelectKeyword()
 
-    if(IsGameSelected(query, [name,description,...keywords]) === false){
+    if (IsGameSelected(query, [name, description, ...keywords]) === false) {
         return null
     }
 
@@ -42,10 +42,10 @@ export function LiveGamePreview({ name, description, image, onJoinGame, onCreate
     )
 }
 
-export function LocalGamePreview({image,description,name,onStartGame,keywords}:LocalProps) {
+export function LocalGamePreview({ image, description, name, onStartGame, keywords }: LocalProps) {
     const query = useGameSelectKeyword()
 
-    if(IsGameSelected(query, [name,description,...keywords]) === false){
+    if (IsGameSelected(query, [name, description, ...keywords]) === false) {
         return null
     }
 
