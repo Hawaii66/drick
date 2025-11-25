@@ -18,5 +18,9 @@
             "pattern": "www.drickspel.com",
             "custom_domain": true
         }
-    ]
+    ],
+    "vars": {
+        "VITE_CONVEX_URL":"https://lovable-mammoth-183.convex.cloud"
+
+    }
 }

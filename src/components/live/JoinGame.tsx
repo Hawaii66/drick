@@ -3,7 +3,6 @@ import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle }
 import { Input } from "../ui/input";
 import { Label } from "../ui/label";
 import { api } from "convex/_generated/api";
-import { useRouter } from "@tanstack/react-router";
 import { InputOTP, InputOTPGroup, InputOTPSlot } from "../ui/input-otp";
 import { useGameContext } from "@/lib/gameContext";
 import { Controller, useForm } from "react-hook-form";
@@ -16,7 +15,11 @@ import { ToastError } from "@/lib/utils";
 import { useMutation } from "@tanstack/react-query";
 import Pending from "../Pending";
 
-export default function JoinGame() {
+type Props = {
+    onJoin: (gameId: string) => void
+}
+
+export default function JoinGame({ onJoin }: Props) {
     const { register, formState, handleSubmit, control } = useForm<{ name: string, pin: string }>({
         defaultValues: {
             name: "",
@@ -28,11 +31,10 @@ export default function JoinGame() {
         }))
     })
 
-    const {mutate:joinGameMutation,isPending} = useMutation({
+    const { mutate: joinGameMutation, isPending } = useMutation({
         mutationFn: useConvexMutation(api.live.game.joinGame),
         onError: ToastError
     })
-    const router = useRouter()
     const gameContext = useGameContext()
 
     return <Card>
@@ -65,21 +67,17 @@ export default function JoinGame() {
         </CardContent>
         <CardFooter>
             <Pending isPending={isPending} >
-            <Button onClick={handleSubmit(({ name, pin }) =>joinGameMutation({
-                player: name,
-                pin
-            },{
-                onSuccess: async({id})=>{
+                <Button onClick={handleSubmit(({ name, pin }) => joinGameMutation({
+                    player: name,
+                    pin
+                }, {
+                    onSuccess: async ({ id }) => {
                         gameContext.setPlayer(name)
-                        router.navigate({
-                            to: "/live/anonymous/$id",
-                            params: {
-                                id
-                            }
-                        })
-                }}))}
-            >Gå med</Button>
-                </Pending>
+                        onJoin(id)
+                   }
+                }))}
+                >Gå med</Button>
+            </Pending>
         </CardFooter>
     </Card>
 

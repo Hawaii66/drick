@@ -15,10 +15,13 @@ import { Route as LocalWaterfallIndexRouteImport } from './routes/local/waterfal
 import { Route as LocalSalenIndexRouteImport } from './routes/local/salen/index'
 import { Route as LocalPeklekIndexRouteImport } from './routes/local/peklek/index'
 import { Route as LocalChallengeIndexRouteImport } from './routes/local/challenge/index'
+import { Route as LiveReactionTimeJoinRouteImport } from './routes/live/reaction-time/join'
+import { Route as LiveReactionTimeCreateRouteImport } from './routes/live/reaction-time/create'
 import { Route as LiveAnonymousJoinRouteImport } from './routes/live/anonymous/join'
 import { Route as LiveAnonymousCreateRouteImport } from './routes/live/anonymous/create'
 import { Route as LocalSalenIdIndexRouteImport } from './routes/local/salen/$id/index'
 import { Route as LocalPeklekModeIndexRouteImport } from './routes/local/peklek/$mode/index'
+import { Route as LiveReactionTimeIdIndexRouteImport } from './routes/live/reaction-time/$id/index'
 import { Route as LiveAnonymousIdIndexRouteImport } from './routes/live/anonymous/$id/index'
 
 const LiveRouteRoute = LiveRouteRouteImport.update({
@@ -51,6 +54,16 @@ const LocalChallengeIndexRoute = LocalChallengeIndexRouteImport.update({
   path: '/local/challenge/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const LiveReactionTimeJoinRoute = LiveReactionTimeJoinRouteImport.update({
+  id: '/reaction-time/join',
+  path: '/reaction-time/join',
+  getParentRoute: () => LiveRouteRoute,
+} as any)
+const LiveReactionTimeCreateRoute = LiveReactionTimeCreateRouteImport.update({
+  id: '/reaction-time/create',
+  path: '/reaction-time/create',
+  getParentRoute: () => LiveRouteRoute,
+} as any)
 const LiveAnonymousJoinRoute = LiveAnonymousJoinRouteImport.update({
   id: '/anonymous/join',
   path: '/anonymous/join',
@@ -71,6 +84,11 @@ const LocalPeklekModeIndexRoute = LocalPeklekModeIndexRouteImport.update({
   path: '/local/peklek/$mode/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const LiveReactionTimeIdIndexRoute = LiveReactionTimeIdIndexRouteImport.update({
+  id: '/reaction-time/$id/',
+  path: '/reaction-time/$id/',
+  getParentRoute: () => LiveRouteRoute,
+} as any)
 const LiveAnonymousIdIndexRoute = LiveAnonymousIdIndexRouteImport.update({
   id: '/anonymous/$id/',
   path: '/anonymous/$id/',
@@ -82,11 +100,14 @@ export interface FileRoutesByFullPath {
   '/live': typeof LiveRouteRouteWithChildren
   '/live/anonymous/create': typeof LiveAnonymousCreateRoute
   '/live/anonymous/join': typeof LiveAnonymousJoinRoute
+  '/live/reaction-time/create': typeof LiveReactionTimeCreateRoute
+  '/live/reaction-time/join': typeof LiveReactionTimeJoinRoute
   '/local/challenge': typeof LocalChallengeIndexRoute
   '/local/peklek': typeof LocalPeklekIndexRoute
   '/local/salen': typeof LocalSalenIndexRoute
   '/local/waterfall': typeof LocalWaterfallIndexRoute
   '/live/anonymous/$id': typeof LiveAnonymousIdIndexRoute
+  '/live/reaction-time/$id': typeof LiveReactionTimeIdIndexRoute
   '/local/peklek/$mode': typeof LocalPeklekModeIndexRoute
   '/local/salen/$id': typeof LocalSalenIdIndexRoute
 }
@@ -95,11 +116,14 @@ export interface FileRoutesByTo {
   '/live': typeof LiveRouteRouteWithChildren
   '/live/anonymous/create': typeof LiveAnonymousCreateRoute
   '/live/anonymous/join': typeof LiveAnonymousJoinRoute
+  '/live/reaction-time/create': typeof LiveReactionTimeCreateRoute
+  '/live/reaction-time/join': typeof LiveReactionTimeJoinRoute
   '/local/challenge': typeof LocalChallengeIndexRoute
   '/local/peklek': typeof LocalPeklekIndexRoute
   '/local/salen': typeof LocalSalenIndexRoute
   '/local/waterfall': typeof LocalWaterfallIndexRoute
   '/live/anonymous/$id': typeof LiveAnonymousIdIndexRoute
+  '/live/reaction-time/$id': typeof LiveReactionTimeIdIndexRoute
   '/local/peklek/$mode': typeof LocalPeklekModeIndexRoute
   '/local/salen/$id': typeof LocalSalenIdIndexRoute
 }
@@ -109,11 +133,14 @@ export interface FileRoutesById {
   '/live': typeof LiveRouteRouteWithChildren
   '/live/anonymous/create': typeof LiveAnonymousCreateRoute
   '/live/anonymous/join': typeof LiveAnonymousJoinRoute
+  '/live/reaction-time/create': typeof LiveReactionTimeCreateRoute
+  '/live/reaction-time/join': typeof LiveReactionTimeJoinRoute
   '/local/challenge/': typeof LocalChallengeIndexRoute
   '/local/peklek/': typeof LocalPeklekIndexRoute
   '/local/salen/': typeof LocalSalenIndexRoute
   '/local/waterfall/': typeof LocalWaterfallIndexRoute
   '/live/anonymous/$id/': typeof LiveAnonymousIdIndexRoute
+  '/live/reaction-time/$id/': typeof LiveReactionTimeIdIndexRoute
   '/local/peklek/$mode/': typeof LocalPeklekModeIndexRoute
   '/local/salen/$id/': typeof LocalSalenIdIndexRoute
 }
@@ -124,11 +151,14 @@ export interface FileRouteTypes {
     | '/live'
     | '/live/anonymous/create'
     | '/live/anonymous/join'
+    | '/live/reaction-time/create'
+    | '/live/reaction-time/join'
     | '/local/challenge'
     | '/local/peklek'
     | '/local/salen'
     | '/local/waterfall'
     | '/live/anonymous/$id'
+    | '/live/reaction-time/$id'
     | '/local/peklek/$mode'
     | '/local/salen/$id'
   fileRoutesByTo: FileRoutesByTo
@@ -137,11 +167,14 @@ export interface FileRouteTypes {
     | '/live'
     | '/live/anonymous/create'
     | '/live/anonymous/join'
+    | '/live/reaction-time/create'
+    | '/live/reaction-time/join'
     | '/local/challenge'
     | '/local/peklek'
     | '/local/salen'
     | '/local/waterfall'
     | '/live/anonymous/$id'
+    | '/live/reaction-time/$id'
     | '/local/peklek/$mode'
     | '/local/salen/$id'
   id:
@@ -150,11 +183,14 @@ export interface FileRouteTypes {
     | '/live'
     | '/live/anonymous/create'
     | '/live/anonymous/join'
+    | '/live/reaction-time/create'
+    | '/live/reaction-time/join'
     | '/local/challenge/'
     | '/local/peklek/'
     | '/local/salen/'
     | '/local/waterfall/'
     | '/live/anonymous/$id/'
+    | '/live/reaction-time/$id/'
     | '/local/peklek/$mode/'
     | '/local/salen/$id/'
   fileRoutesById: FileRoutesById
@@ -214,6 +250,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LocalChallengeIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/live/reaction-time/join': {
+      id: '/live/reaction-time/join'
+      path: '/reaction-time/join'
+      fullPath: '/live/reaction-time/join'
+      preLoaderRoute: typeof LiveReactionTimeJoinRouteImport
+      parentRoute: typeof LiveRouteRoute
+    }
+    '/live/reaction-time/create': {
+      id: '/live/reaction-time/create'
+      path: '/reaction-time/create'
+      fullPath: '/live/reaction-time/create'
+      preLoaderRoute: typeof LiveReactionTimeCreateRouteImport
+      parentRoute: typeof LiveRouteRoute
+    }
     '/live/anonymous/join': {
       id: '/live/anonymous/join'
       path: '/anonymous/join'
@@ -242,6 +292,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LocalPeklekModeIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/live/reaction-time/$id/': {
+      id: '/live/reaction-time/$id/'
+      path: '/reaction-time/$id'
+      fullPath: '/live/reaction-time/$id'
+      preLoaderRoute: typeof LiveReactionTimeIdIndexRouteImport
+      parentRoute: typeof LiveRouteRoute
+    }
     '/live/anonymous/$id/': {
       id: '/live/anonymous/$id/'
       path: '/anonymous/$id'
@@ -255,13 +312,19 @@ declare module '@tanstack/react-router' {
 interface LiveRouteRouteChildren {
   LiveAnonymousCreateRoute: typeof LiveAnonymousCreateRoute
   LiveAnonymousJoinRoute: typeof LiveAnonymousJoinRoute
+  LiveReactionTimeCreateRoute: typeof LiveReactionTimeCreateRoute
+  LiveReactionTimeJoinRoute: typeof LiveReactionTimeJoinRoute
   LiveAnonymousIdIndexRoute: typeof LiveAnonymousIdIndexRoute
+  LiveReactionTimeIdIndexRoute: typeof LiveReactionTimeIdIndexRoute
 }
 
 const LiveRouteRouteChildren: LiveRouteRouteChildren = {
   LiveAnonymousCreateRoute: LiveAnonymousCreateRoute,
   LiveAnonymousJoinRoute: LiveAnonymousJoinRoute,
+  LiveReactionTimeCreateRoute: LiveReactionTimeCreateRoute,
+  LiveReactionTimeJoinRoute: LiveReactionTimeJoinRoute,
   LiveAnonymousIdIndexRoute: LiveAnonymousIdIndexRoute,
+  LiveReactionTimeIdIndexRoute: LiveReactionTimeIdIndexRoute,
 }
 
 const LiveRouteRouteWithChildren = LiveRouteRoute._addFileChildren(
