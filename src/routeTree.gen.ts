@@ -13,10 +13,12 @@ import { Route as LiveRouteRouteImport } from './routes/live/route'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as LocalWaterfallIndexRouteImport } from './routes/local/waterfall/index'
 import { Route as LocalSalenIndexRouteImport } from './routes/local/salen/index'
+import { Route as LocalPeklekIndexRouteImport } from './routes/local/peklek/index'
 import { Route as LocalChallengeIndexRouteImport } from './routes/local/challenge/index'
 import { Route as LiveAnonymousJoinRouteImport } from './routes/live/anonymous/join'
 import { Route as LiveAnonymousCreateRouteImport } from './routes/live/anonymous/create'
 import { Route as LocalSalenIdIndexRouteImport } from './routes/local/salen/$id/index'
+import { Route as LocalPeklekModeIndexRouteImport } from './routes/local/peklek/$mode/index'
 import { Route as LiveAnonymousIdIndexRouteImport } from './routes/live/anonymous/$id/index'
 
 const LiveRouteRoute = LiveRouteRouteImport.update({
@@ -39,6 +41,11 @@ const LocalSalenIndexRoute = LocalSalenIndexRouteImport.update({
   path: '/local/salen/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const LocalPeklekIndexRoute = LocalPeklekIndexRouteImport.update({
+  id: '/local/peklek/',
+  path: '/local/peklek/',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const LocalChallengeIndexRoute = LocalChallengeIndexRouteImport.update({
   id: '/local/challenge/',
   path: '/local/challenge/',
@@ -59,6 +66,11 @@ const LocalSalenIdIndexRoute = LocalSalenIdIndexRouteImport.update({
   path: '/local/salen/$id/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const LocalPeklekModeIndexRoute = LocalPeklekModeIndexRouteImport.update({
+  id: '/local/peklek/$mode/',
+  path: '/local/peklek/$mode/',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const LiveAnonymousIdIndexRoute = LiveAnonymousIdIndexRouteImport.update({
   id: '/anonymous/$id/',
   path: '/anonymous/$id/',
@@ -71,9 +83,11 @@ export interface FileRoutesByFullPath {
   '/live/anonymous/create': typeof LiveAnonymousCreateRoute
   '/live/anonymous/join': typeof LiveAnonymousJoinRoute
   '/local/challenge': typeof LocalChallengeIndexRoute
+  '/local/peklek': typeof LocalPeklekIndexRoute
   '/local/salen': typeof LocalSalenIndexRoute
   '/local/waterfall': typeof LocalWaterfallIndexRoute
   '/live/anonymous/$id': typeof LiveAnonymousIdIndexRoute
+  '/local/peklek/$mode': typeof LocalPeklekModeIndexRoute
   '/local/salen/$id': typeof LocalSalenIdIndexRoute
 }
 export interface FileRoutesByTo {
@@ -82,9 +96,11 @@ export interface FileRoutesByTo {
   '/live/anonymous/create': typeof LiveAnonymousCreateRoute
   '/live/anonymous/join': typeof LiveAnonymousJoinRoute
   '/local/challenge': typeof LocalChallengeIndexRoute
+  '/local/peklek': typeof LocalPeklekIndexRoute
   '/local/salen': typeof LocalSalenIndexRoute
   '/local/waterfall': typeof LocalWaterfallIndexRoute
   '/live/anonymous/$id': typeof LiveAnonymousIdIndexRoute
+  '/local/peklek/$mode': typeof LocalPeklekModeIndexRoute
   '/local/salen/$id': typeof LocalSalenIdIndexRoute
 }
 export interface FileRoutesById {
@@ -94,9 +110,11 @@ export interface FileRoutesById {
   '/live/anonymous/create': typeof LiveAnonymousCreateRoute
   '/live/anonymous/join': typeof LiveAnonymousJoinRoute
   '/local/challenge/': typeof LocalChallengeIndexRoute
+  '/local/peklek/': typeof LocalPeklekIndexRoute
   '/local/salen/': typeof LocalSalenIndexRoute
   '/local/waterfall/': typeof LocalWaterfallIndexRoute
   '/live/anonymous/$id/': typeof LiveAnonymousIdIndexRoute
+  '/local/peklek/$mode/': typeof LocalPeklekModeIndexRoute
   '/local/salen/$id/': typeof LocalSalenIdIndexRoute
 }
 export interface FileRouteTypes {
@@ -107,9 +125,11 @@ export interface FileRouteTypes {
     | '/live/anonymous/create'
     | '/live/anonymous/join'
     | '/local/challenge'
+    | '/local/peklek'
     | '/local/salen'
     | '/local/waterfall'
     | '/live/anonymous/$id'
+    | '/local/peklek/$mode'
     | '/local/salen/$id'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -118,9 +138,11 @@ export interface FileRouteTypes {
     | '/live/anonymous/create'
     | '/live/anonymous/join'
     | '/local/challenge'
+    | '/local/peklek'
     | '/local/salen'
     | '/local/waterfall'
     | '/live/anonymous/$id'
+    | '/local/peklek/$mode'
     | '/local/salen/$id'
   id:
     | '__root__'
@@ -129,9 +151,11 @@ export interface FileRouteTypes {
     | '/live/anonymous/create'
     | '/live/anonymous/join'
     | '/local/challenge/'
+    | '/local/peklek/'
     | '/local/salen/'
     | '/local/waterfall/'
     | '/live/anonymous/$id/'
+    | '/local/peklek/$mode/'
     | '/local/salen/$id/'
   fileRoutesById: FileRoutesById
 }
@@ -139,8 +163,10 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   LiveRouteRoute: typeof LiveRouteRouteWithChildren
   LocalChallengeIndexRoute: typeof LocalChallengeIndexRoute
+  LocalPeklekIndexRoute: typeof LocalPeklekIndexRoute
   LocalSalenIndexRoute: typeof LocalSalenIndexRoute
   LocalWaterfallIndexRoute: typeof LocalWaterfallIndexRoute
+  LocalPeklekModeIndexRoute: typeof LocalPeklekModeIndexRoute
   LocalSalenIdIndexRoute: typeof LocalSalenIdIndexRoute
 }
 
@@ -174,6 +200,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LocalSalenIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/local/peklek/': {
+      id: '/local/peklek/'
+      path: '/local/peklek'
+      fullPath: '/local/peklek'
+      preLoaderRoute: typeof LocalPeklekIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/local/challenge/': {
       id: '/local/challenge/'
       path: '/local/challenge'
@@ -200,6 +233,13 @@ declare module '@tanstack/react-router' {
       path: '/local/salen/$id'
       fullPath: '/local/salen/$id'
       preLoaderRoute: typeof LocalSalenIdIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/local/peklek/$mode/': {
+      id: '/local/peklek/$mode/'
+      path: '/local/peklek/$mode'
+      fullPath: '/local/peklek/$mode'
+      preLoaderRoute: typeof LocalPeklekModeIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/live/anonymous/$id/': {
@@ -232,8 +272,10 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   LiveRouteRoute: LiveRouteRouteWithChildren,
   LocalChallengeIndexRoute: LocalChallengeIndexRoute,
+  LocalPeklekIndexRoute: LocalPeklekIndexRoute,
   LocalSalenIndexRoute: LocalSalenIndexRoute,
   LocalWaterfallIndexRoute: LocalWaterfallIndexRoute,
+  LocalPeklekModeIndexRoute: LocalPeklekModeIndexRoute,
   LocalSalenIdIndexRoute: LocalSalenIdIndexRoute,
 }
 export const routeTree = rootRouteImport

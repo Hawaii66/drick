@@ -43,6 +43,14 @@ function App() {
                     to: '/local/salen',
                 })}
             />       
+               <LocalGamePreview
+                name="Who Is"
+                description="Time to point fingers! A statement is read, and everyone points to who it best describes. No talking, just hilarious, silent accusations!"
+                image="/peklek.png"
+                onStartGame={() => router.navigate({
+                    to: '/local/peklek',
+                })}
+            />          
         </div>
     </div>
 }
