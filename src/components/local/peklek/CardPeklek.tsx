@@ -19,7 +19,7 @@ export default function CardPeklek({ challenges }: Props) {
         <CardContent className="flex flex-col gap-3">
             {challenges.slice(page * PAGE_SIZE, (page + 1) * PAGE_SIZE).map((challenge, index) => (
                 <p key={index}>
-                    {challenge}
+                   {index + 1}. {challenge}
                 </p>
             ))}
         </CardContent>

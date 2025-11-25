@@ -1,3 +1,4 @@
+import { IsGameSelected, useGameSelectKeyword } from "./GameSelectSearch"
 import { Button } from "./ui/button"
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "./ui/card"
 
@@ -5,6 +6,7 @@ type Props = {
     name: string
     description: string
     image: string
+    keywords:string[]
 }
 
 type LiveProps = Props & {
@@ -16,7 +18,13 @@ type LocalProps = Props & {
     onStartGame: () => void
 }
 
-export function LiveGamePreview({ name, description, image, onJoinGame, onCreateGame }: LiveProps) {
+export function LiveGamePreview({ name, description, image, onJoinGame, onCreateGame, keywords }: LiveProps) {
+    const query = useGameSelectKeyword()
+
+    if(IsGameSelected(query, [name,description,...keywords]) === false){
+        return null
+    }
+
     return (
         <Card>
             <CardHeader>
@@ -34,7 +42,13 @@ export function LiveGamePreview({ name, description, image, onJoinGame, onCreate
     )
 }
 
-export function LocalGamePreview({image,description,name,onStartGame}:LocalProps) {
+export function LocalGamePreview({image,description,name,onStartGame,keywords}:LocalProps) {
+    const query = useGameSelectKeyword()
+
+    if(IsGameSelected(query, [name,description,...keywords]) === false){
+        return null
+    }
+
     return (
         <Card>
             <CardHeader>
