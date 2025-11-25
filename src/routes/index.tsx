@@ -1,0 +1,69 @@
+import { LiveGamePreview, LocalGamePreview } from '@/components/GamePreview'
+import GameSelectSearch from '@/components/GameSelectSearch'
+import { createFileRoute, useRouter } from '@tanstack/react-router'
+
+export const Route = createFileRoute('/')({ component: App })
+
+function App() {
+    const router = useRouter()
+
+    return <div className="py-4">
+        <h1 className="text-3xl font-bold text-center py-4 tracking-wider bg-gradient-to-tr from-[#f06a47] to-[#eaae13] bg-clip-text text-transparent">
+            drickspel.com
+        </h1>
+
+        <h2 className="text-center font-bold text-2xl">Välj Spel</h2>
+        <GameSelectSearch>
+       <div className="flex flex-col items-center p-4 gap-8">
+            <LiveGamePreview
+                name="🤫 Pandoras Ask"
+                description="Fråga vad du vill, anonymt. Rikta frågor till en person, alla killar, alla tjejer, eller alla. Förbered dig på överraskande svar!"
+                image="/whisper-network.png"
+                onJoinGame={() => router.navigate({
+                    to: '/live/anonymous/join',
+                })}
+                onCreateGame={() => router.navigate({
+                    to: '/live/anonymous/create',
+                })}
+                keywords={['sanning eller konsekvens', 'frågesport', 'sanning', 'frågor', 'sanning eller drink']}
+            />
+            <LocalGamePreview
+                name="🎡 Snurra Hjulet"
+                description="Oändliga utmaningar. Snurra hjulet för att få nästa oväntade vågspel. Gör dig redo för omedelbar, ofiltrerad underhållning med vänner!"
+                image="/dare-spin.png"
+                onStartGame={() => router.navigate({
+                    to: '/local/challenge',
+                })}
+                keywords={['sanning eller konsekvens', 'utmaning', 'våga eller drick']}
+            />
+             <LocalGamePreview
+                name="🌊 Vattenfall"
+                description="Den ultimata drickkedjereaktionen. Drick efter den före dig när låten når ett specifikt ord. Håll kaskaden flödande!"
+                image="/waterfall.png"
+                onStartGame={() => router.navigate({
+                    to: '/local/waterfall',
+                })}
+                keywords={['drickspel', 'musikspel', 'karaoke']}
+            />       
+              <LocalGamePreview
+                name="🍺 Allsång i Sälen"
+                description="Sjung med i klassiska hits – med en twist! Bara de som *verkligen* har gjort det får sjunga med. Om inte, drick!"
+                image="/allsang-i-salen.png"
+                onStartGame={() => router.navigate({
+                    to: '/local/salen',
+                })}
+                keywords={['karaoke', 'musikspel', 'drickspel']}
+            />       
+               <LocalGamePreview
+                name="👈 Peklek"
+                description="Dags att peka finger! Ett påstående läses upp, och alla pekar på den det bäst beskriver. Ingen som pratar, bara roliga, tysta anklagelser!"
+                image="/peklek.png"
+                onStartGame={() => router.navigate({
+                    to: '/local/peklek',
+                })}
+                keywords={['sanning eller konsekvens', 'rolig lek', 'festlek',"snusdosan"]}
+            />
+           </div>
+    </GameSelectSearch>
+    </div>
+}
