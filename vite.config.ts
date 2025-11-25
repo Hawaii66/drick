@@ -5,23 +5,24 @@ import viteReact from '@vitejs/plugin-react'
 import viteTsConfigPaths from 'vite-tsconfig-paths'
 import tailwindcss from '@tailwindcss/vite'
 import { nitro } from 'nitro/vite'
+import { cloudflare } from '@cloudflare/vite-plugin'
 
 const config = defineConfig({
-  plugins: [
-    devtools(),
-    nitro(),
-    // this is the plugin that enables path aliases
-    viteTsConfigPaths({
-      projects: ['./tsconfig.json'],
-    }),
-    tailwindcss(),
-    tanstackStart(),
-    viteReact({
-      babel: {
-        plugins: ['babel-plugin-react-compiler'],
-      },
-    }),
-  ],
+    plugins: [
+        devtools(),
+        nitro(),
+        viteTsConfigPaths({
+            projects: ['./tsconfig.json'],
+        }),
+        tailwindcss(),
+        cloudflare({ viteEnvironment: { name: "ssr" } }),
+        tanstackStart(),
+        viteReact({
+            babel: {
+                plugins: ['babel-plugin-react-compiler'],
+            },
+        }),
+    ],
 })
 
 export default config
