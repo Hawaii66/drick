@@ -18,17 +18,23 @@ export const Route = createRootRoute({
                 content: 'width=device-width, initial-scale=1',
             },
             {
-                title: 'TanStack Start Starter',
+                title: 'DrickSpel.com',
             },
+            {
+                    content: 'DrickSpel.com - Hemsidan för roliga drickspel spela alla utmaningar, frågor och tester.',
+            }
         ],
         links: [
             {
                 rel: 'stylesheet',
                 href: appCss,
             },
+            {
+                rel: 'icon',
+                href: '/icon.png',
+            }
         ],
     }),
-
     shellComponent: RootDocument,
 })
 
