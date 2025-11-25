@@ -4,7 +4,7 @@ import { DatabaseReader, mutation, query } from "../_generated/server";
 import { GameState, ReactionTimeGame, ReactionTimeGameSchema, ReactionTimeGameState } from "../types";
 import { PatchGameData, ThrowIfWrongGameState } from "../utils";
 
-function GetRandomDelayMs(minMs: number=500, maxMs: number=5000): number {
+function GetRandomDelayMs(minMs: number=1000, maxMs: number=5000): number {
     return Math.floor(Math.random() * (maxMs - minMs + 1)) + minMs;
 }
 
@@ -94,7 +94,6 @@ export const onReact = mutation({
         const game = await GetReactionTimeGame(args.gameId, ctx.db);
         ThrowIfWrongGameState(game, ReactionTimeGameState.REACTING);
 
-        const currentRound = game.data.currentRound;
         const playerScores = game.data.scores;
         if(playerScores[args.player] !== undefined){
             throw new Error("Player has already reacted this round");

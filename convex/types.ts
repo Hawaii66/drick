@@ -7,7 +7,8 @@ export const GameState = {
 
 export const GameType = {
     ANONYMOUS: "anonymous",
-    REACTION_TIME:"reactionTime"
+    REACTION_TIME:"reactionTime",
+    WHO_IS:"whoIs"
 }
 
 export const GameSchema = z.object({
@@ -16,7 +17,7 @@ export const GameSchema = z.object({
     owner: z.string(),
     players: z.string().array(),
     state: z.enum([GameState.WAITING_FOR_PLAYERS, GameState.IN_PROGRESS]),
-    type: z.enum([GameType.ANONYMOUS,GameType.REACTION_TIME]),
+    type: z.enum([GameType.ANONYMOUS,GameType.REACTION_TIME,GameType.WHO_IS]),
 });
 export type Game = z.infer<typeof GameSchema>;
 
@@ -58,3 +59,19 @@ export const ReactionTimeGameSchema = GameSchema.extend({
     })
 })
 export type ReactionTimeGame = z.infer<typeof ReactionTimeGameSchema>;
+
+export const WhoIsGameState = {
+    ENTER_PERSON:"enter_person",
+    VIEW_OTHER_PLAYERS:"view_other_players",
+    FINISHED:"finished"
+}
+
+export const WhoIsGameSchema = GameSchema.extend({
+    data:z.object({
+        state:z.enum([WhoIsGameState.ENTER_PERSON,WhoIsGameState.VIEW_OTHER_PLAYERS,WhoIsGameState.FINISHED]),
+        persons:z.record(z.string(),z.string().nullable()),
+        hasEnteredPerson:z.record(z.string(),z.string()),
+        playerToPerson:z.record(z.string(),z.string())
+    })
+})
+export type WhoIsGame = z.infer<typeof WhoIsGameSchema>

@@ -28,16 +28,28 @@ function App() {
                     keywords={['sanning eller konsekvens', 'frågesport', 'sanning', 'frågor', 'sanning eller drink']}
                 />
                 <LiveGamePreview
-                    name="🤫 Pandoras Ask"
-                    description="Fråga vad du vill, anonymt. Rikta frågor till en person, alla killar, alla tjejer, eller alla. Förbered dig på överraskande svar!"
-                    image="/whisper-network.png"
+                    name="⚡ Reaktions Tid"
+                    description="Reflexer på prov! Vänta på den gröna rutan, klicka snabbast. Enkel utmaning för dig och vännerna – vem är snabbast på avtryckaren?"
+                    image="/reaction-time.png"
                     onJoinGame={() => router.navigate({
                         to: '/live/reaction-time/join',
                     })}
                     onCreateGame={() => router.navigate({
                         to: '/live/reaction-time/create',
                     })}
-                    keywords={['sanning eller konsekvens', 'frågesport', 'sanning', 'frågor', 'sanning eller drink']}
+                    keywords={['reaktion', 'tid', 'snabbast']}
+                />
+                <LiveGamePreview
+                    name="🏷️ Gissa Etikett" 
+                    description="Vem eller vad är du? Varje spelare får en hemlig etikett med en person, sak eller koncept som ni väljer. Ställ ja- och nej-frågor till de andra för att lista ut din egen etikett. Först att gissa vinner"
+                    image="/whois.png"
+                    onJoinGame={() => router.navigate({
+                        to: '/live/whois/join', 
+                    })}
+                    onCreateGame={() => router.navigate({
+                        to: '/live/whois/create',
+                    })}
+                    keywords={['gissningslek', 'identitet', 'vem är jag', 'vad är jag', 'socialt spel', 'rollspel']}
                 />
                 <LocalGamePreview
                     name="🎡 Snurra Hjulet"
