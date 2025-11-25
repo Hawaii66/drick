@@ -39,6 +39,18 @@ function App() {
                     })}
                     keywords={['reaktion', 'tid', 'snabbast']}
                 />
+                 <LiveGamePreview
+                    name="⚡ Reaktions Tid"
+                    description="Reflexer på prov! Vänta på den gröna rutan, klicka snabbast. Enkel utmaning för dig och vännerna – vem är snabbast på avtryckaren?"
+                    image="/reaction-time.png"
+                    onJoinGame={() => router.navigate({
+                        to: '/live/whois/join',
+                    })}
+                    onCreateGame={() => router.navigate({
+                        to: '/live/whois/create',
+                    })}
+                    keywords={['reaktion', 'tid', 'snabbast']}
+                />
                 <LocalGamePreview
                     name="🎡 Snurra Hjulet"
                     description="Oändliga utmaningar. Snurra hjulet för att få nästa oväntade vågspel. Gör dig redo för omedelbar, ofiltrerad underhållning med vänner!"

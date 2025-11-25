@@ -15,9 +15,12 @@ export function shuffle<T>(array: T[]): T[] {
     return shuffledArray;
 }
 
-export async function ToastError(cb:(e:unknown)=>void){
-    cb((e:unknown)=>{
+export function ToastError(e: unknown) {
+    const message = e instanceof Error ? e.message : "An unknown error occurred";
+    toast.error(`Server Error: ${message}`);
+
+    return (e: unknown) => {
         const message = e instanceof Error ? e.message : "An unknown error occurred";
         toast.error(`Server Error: ${message}`);
-    })
+    }
 }

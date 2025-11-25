@@ -94,7 +94,6 @@ export const onReact = mutation({
         const game = await GetReactionTimeGame(args.gameId, ctx.db);
         ThrowIfWrongGameState(game, ReactionTimeGameState.REACTING);
 
-        const currentRound = game.data.currentRound;
         const playerScores = game.data.scores;
         if(playerScores[args.player] !== undefined){
             throw new Error("Player has already reacted this round");

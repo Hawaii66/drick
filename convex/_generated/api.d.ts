@@ -11,6 +11,7 @@
 import type * as live_anonymous from "../live/anonymous.js";
 import type * as live_game from "../live/game.js";
 import type * as live_reactionTime from "../live/reactionTime.js";
+import type * as live_whoIs from "../live/whoIs.js";
 import type * as types from "../types.js";
 import type * as utils from "../utils.js";
 
@@ -24,6 +25,7 @@ declare const fullApi: ApiFromModules<{
   "live/anonymous": typeof live_anonymous;
   "live/game": typeof live_game;
   "live/reactionTime": typeof live_reactionTime;
+  "live/whoIs": typeof live_whoIs;
   types: typeof types;
   utils: typeof utils;
 }>;
