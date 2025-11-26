@@ -19,12 +19,15 @@ import { Route as LiveWhoisJoinRouteImport } from './routes/live/whois/join'
 import { Route as LiveWhoisCreateRouteImport } from './routes/live/whois/create'
 import { Route as LiveReactionTimeJoinRouteImport } from './routes/live/reaction-time/join'
 import { Route as LiveReactionTimeCreateRouteImport } from './routes/live/reaction-time/create'
+import { Route as LiveImpostorJoinRouteImport } from './routes/live/impostor/join'
+import { Route as LiveImpostorCreateRouteImport } from './routes/live/impostor/create'
 import { Route as LiveAnonymousJoinRouteImport } from './routes/live/anonymous/join'
 import { Route as LiveAnonymousCreateRouteImport } from './routes/live/anonymous/create'
 import { Route as LocalSalenIdIndexRouteImport } from './routes/local/salen/$id/index'
 import { Route as LocalPeklekModeIndexRouteImport } from './routes/local/peklek/$mode/index'
 import { Route as LiveWhoisIdIndexRouteImport } from './routes/live/whois/$id/index'
 import { Route as LiveReactionTimeIdIndexRouteImport } from './routes/live/reaction-time/$id/index'
+import { Route as LiveImpostorIdIndexRouteImport } from './routes/live/impostor/$id/index'
 import { Route as LiveAnonymousIdIndexRouteImport } from './routes/live/anonymous/$id/index'
 
 const LiveRouteRoute = LiveRouteRouteImport.update({
@@ -77,6 +80,16 @@ const LiveReactionTimeCreateRoute = LiveReactionTimeCreateRouteImport.update({
   path: '/reaction-time/create',
   getParentRoute: () => LiveRouteRoute,
 } as any)
+const LiveImpostorJoinRoute = LiveImpostorJoinRouteImport.update({
+  id: '/impostor/join',
+  path: '/impostor/join',
+  getParentRoute: () => LiveRouteRoute,
+} as any)
+const LiveImpostorCreateRoute = LiveImpostorCreateRouteImport.update({
+  id: '/impostor/create',
+  path: '/impostor/create',
+  getParentRoute: () => LiveRouteRoute,
+} as any)
 const LiveAnonymousJoinRoute = LiveAnonymousJoinRouteImport.update({
   id: '/anonymous/join',
   path: '/anonymous/join',
@@ -107,6 +120,11 @@ const LiveReactionTimeIdIndexRoute = LiveReactionTimeIdIndexRouteImport.update({
   path: '/reaction-time/$id/',
   getParentRoute: () => LiveRouteRoute,
 } as any)
+const LiveImpostorIdIndexRoute = LiveImpostorIdIndexRouteImport.update({
+  id: '/impostor/$id/',
+  path: '/impostor/$id/',
+  getParentRoute: () => LiveRouteRoute,
+} as any)
 const LiveAnonymousIdIndexRoute = LiveAnonymousIdIndexRouteImport.update({
   id: '/anonymous/$id/',
   path: '/anonymous/$id/',
@@ -118,6 +136,8 @@ export interface FileRoutesByFullPath {
   '/live': typeof LiveRouteRouteWithChildren
   '/live/anonymous/create': typeof LiveAnonymousCreateRoute
   '/live/anonymous/join': typeof LiveAnonymousJoinRoute
+  '/live/impostor/create': typeof LiveImpostorCreateRoute
+  '/live/impostor/join': typeof LiveImpostorJoinRoute
   '/live/reaction-time/create': typeof LiveReactionTimeCreateRoute
   '/live/reaction-time/join': typeof LiveReactionTimeJoinRoute
   '/live/whois/create': typeof LiveWhoisCreateRoute
@@ -127,6 +147,7 @@ export interface FileRoutesByFullPath {
   '/local/salen': typeof LocalSalenIndexRoute
   '/local/waterfall': typeof LocalWaterfallIndexRoute
   '/live/anonymous/$id': typeof LiveAnonymousIdIndexRoute
+  '/live/impostor/$id': typeof LiveImpostorIdIndexRoute
   '/live/reaction-time/$id': typeof LiveReactionTimeIdIndexRoute
   '/live/whois/$id': typeof LiveWhoisIdIndexRoute
   '/local/peklek/$mode': typeof LocalPeklekModeIndexRoute
@@ -137,6 +158,8 @@ export interface FileRoutesByTo {
   '/live': typeof LiveRouteRouteWithChildren
   '/live/anonymous/create': typeof LiveAnonymousCreateRoute
   '/live/anonymous/join': typeof LiveAnonymousJoinRoute
+  '/live/impostor/create': typeof LiveImpostorCreateRoute
+  '/live/impostor/join': typeof LiveImpostorJoinRoute
   '/live/reaction-time/create': typeof LiveReactionTimeCreateRoute
   '/live/reaction-time/join': typeof LiveReactionTimeJoinRoute
   '/live/whois/create': typeof LiveWhoisCreateRoute
@@ -146,6 +169,7 @@ export interface FileRoutesByTo {
   '/local/salen': typeof LocalSalenIndexRoute
   '/local/waterfall': typeof LocalWaterfallIndexRoute
   '/live/anonymous/$id': typeof LiveAnonymousIdIndexRoute
+  '/live/impostor/$id': typeof LiveImpostorIdIndexRoute
   '/live/reaction-time/$id': typeof LiveReactionTimeIdIndexRoute
   '/live/whois/$id': typeof LiveWhoisIdIndexRoute
   '/local/peklek/$mode': typeof LocalPeklekModeIndexRoute
@@ -157,6 +181,8 @@ export interface FileRoutesById {
   '/live': typeof LiveRouteRouteWithChildren
   '/live/anonymous/create': typeof LiveAnonymousCreateRoute
   '/live/anonymous/join': typeof LiveAnonymousJoinRoute
+  '/live/impostor/create': typeof LiveImpostorCreateRoute
+  '/live/impostor/join': typeof LiveImpostorJoinRoute
   '/live/reaction-time/create': typeof LiveReactionTimeCreateRoute
   '/live/reaction-time/join': typeof LiveReactionTimeJoinRoute
   '/live/whois/create': typeof LiveWhoisCreateRoute
@@ -166,6 +192,7 @@ export interface FileRoutesById {
   '/local/salen/': typeof LocalSalenIndexRoute
   '/local/waterfall/': typeof LocalWaterfallIndexRoute
   '/live/anonymous/$id/': typeof LiveAnonymousIdIndexRoute
+  '/live/impostor/$id/': typeof LiveImpostorIdIndexRoute
   '/live/reaction-time/$id/': typeof LiveReactionTimeIdIndexRoute
   '/live/whois/$id/': typeof LiveWhoisIdIndexRoute
   '/local/peklek/$mode/': typeof LocalPeklekModeIndexRoute
@@ -178,6 +205,8 @@ export interface FileRouteTypes {
     | '/live'
     | '/live/anonymous/create'
     | '/live/anonymous/join'
+    | '/live/impostor/create'
+    | '/live/impostor/join'
     | '/live/reaction-time/create'
     | '/live/reaction-time/join'
     | '/live/whois/create'
@@ -187,6 +216,7 @@ export interface FileRouteTypes {
     | '/local/salen'
     | '/local/waterfall'
     | '/live/anonymous/$id'
+    | '/live/impostor/$id'
     | '/live/reaction-time/$id'
     | '/live/whois/$id'
     | '/local/peklek/$mode'
@@ -197,6 +227,8 @@ export interface FileRouteTypes {
     | '/live'
     | '/live/anonymous/create'
     | '/live/anonymous/join'
+    | '/live/impostor/create'
+    | '/live/impostor/join'
     | '/live/reaction-time/create'
     | '/live/reaction-time/join'
     | '/live/whois/create'
@@ -206,6 +238,7 @@ export interface FileRouteTypes {
     | '/local/salen'
     | '/local/waterfall'
     | '/live/anonymous/$id'
+    | '/live/impostor/$id'
     | '/live/reaction-time/$id'
     | '/live/whois/$id'
     | '/local/peklek/$mode'
@@ -216,6 +249,8 @@ export interface FileRouteTypes {
     | '/live'
     | '/live/anonymous/create'
     | '/live/anonymous/join'
+    | '/live/impostor/create'
+    | '/live/impostor/join'
     | '/live/reaction-time/create'
     | '/live/reaction-time/join'
     | '/live/whois/create'
@@ -225,6 +260,7 @@ export interface FileRouteTypes {
     | '/local/salen/'
     | '/local/waterfall/'
     | '/live/anonymous/$id/'
+    | '/live/impostor/$id/'
     | '/live/reaction-time/$id/'
     | '/live/whois/$id/'
     | '/local/peklek/$mode/'
@@ -314,6 +350,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LiveReactionTimeCreateRouteImport
       parentRoute: typeof LiveRouteRoute
     }
+    '/live/impostor/join': {
+      id: '/live/impostor/join'
+      path: '/impostor/join'
+      fullPath: '/live/impostor/join'
+      preLoaderRoute: typeof LiveImpostorJoinRouteImport
+      parentRoute: typeof LiveRouteRoute
+    }
+    '/live/impostor/create': {
+      id: '/live/impostor/create'
+      path: '/impostor/create'
+      fullPath: '/live/impostor/create'
+      preLoaderRoute: typeof LiveImpostorCreateRouteImport
+      parentRoute: typeof LiveRouteRoute
+    }
     '/live/anonymous/join': {
       id: '/live/anonymous/join'
       path: '/anonymous/join'
@@ -356,6 +406,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LiveReactionTimeIdIndexRouteImport
       parentRoute: typeof LiveRouteRoute
     }
+    '/live/impostor/$id/': {
+      id: '/live/impostor/$id/'
+      path: '/impostor/$id'
+      fullPath: '/live/impostor/$id'
+      preLoaderRoute: typeof LiveImpostorIdIndexRouteImport
+      parentRoute: typeof LiveRouteRoute
+    }
     '/live/anonymous/$id/': {
       id: '/live/anonymous/$id/'
       path: '/anonymous/$id'
@@ -369,11 +426,14 @@ declare module '@tanstack/react-router' {
 interface LiveRouteRouteChildren {
   LiveAnonymousCreateRoute: typeof LiveAnonymousCreateRoute
   LiveAnonymousJoinRoute: typeof LiveAnonymousJoinRoute
+  LiveImpostorCreateRoute: typeof LiveImpostorCreateRoute
+  LiveImpostorJoinRoute: typeof LiveImpostorJoinRoute
   LiveReactionTimeCreateRoute: typeof LiveReactionTimeCreateRoute
   LiveReactionTimeJoinRoute: typeof LiveReactionTimeJoinRoute
   LiveWhoisCreateRoute: typeof LiveWhoisCreateRoute
   LiveWhoisJoinRoute: typeof LiveWhoisJoinRoute
   LiveAnonymousIdIndexRoute: typeof LiveAnonymousIdIndexRoute
+  LiveImpostorIdIndexRoute: typeof LiveImpostorIdIndexRoute
   LiveReactionTimeIdIndexRoute: typeof LiveReactionTimeIdIndexRoute
   LiveWhoisIdIndexRoute: typeof LiveWhoisIdIndexRoute
 }
@@ -381,11 +441,14 @@ interface LiveRouteRouteChildren {
 const LiveRouteRouteChildren: LiveRouteRouteChildren = {
   LiveAnonymousCreateRoute: LiveAnonymousCreateRoute,
   LiveAnonymousJoinRoute: LiveAnonymousJoinRoute,
+  LiveImpostorCreateRoute: LiveImpostorCreateRoute,
+  LiveImpostorJoinRoute: LiveImpostorJoinRoute,
   LiveReactionTimeCreateRoute: LiveReactionTimeCreateRoute,
   LiveReactionTimeJoinRoute: LiveReactionTimeJoinRoute,
   LiveWhoisCreateRoute: LiveWhoisCreateRoute,
   LiveWhoisJoinRoute: LiveWhoisJoinRoute,
   LiveAnonymousIdIndexRoute: LiveAnonymousIdIndexRoute,
+  LiveImpostorIdIndexRoute: LiveImpostorIdIndexRoute,
   LiveReactionTimeIdIndexRoute: LiveReactionTimeIdIndexRoute,
   LiveWhoisIdIndexRoute: LiveWhoisIdIndexRoute,
 }

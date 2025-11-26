@@ -8,8 +8,10 @@
  * @module
  */
 
+import type * as data_impostor from "../data/impostor.js";
 import type * as live_anonymous from "../live/anonymous.js";
 import type * as live_game from "../live/game.js";
+import type * as live_impostor from "../live/impostor.js";
 import type * as live_reactionTime from "../live/reactionTime.js";
 import type * as live_whoIs from "../live/whoIs.js";
 import type * as types from "../types.js";
@@ -22,8 +24,10 @@ import type {
 } from "convex/server";
 
 declare const fullApi: ApiFromModules<{
+  "data/impostor": typeof data_impostor;
   "live/anonymous": typeof live_anonymous;
   "live/game": typeof live_game;
+  "live/impostor": typeof live_impostor;
   "live/reactionTime": typeof live_reactionTime;
   "live/whoIs": typeof live_whoIs;
   types: typeof types;

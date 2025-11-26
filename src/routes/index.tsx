@@ -40,6 +40,30 @@ function App() {
                     keywords={['reaktion', 'tid', 'snabbast']}
                 />
                 <LiveGamePreview
+    name="🕵️ Impostor"
+    description="Alla utom en får samma fråga. Impostorn får en annorlunda fråga. Svara på din fråga och gissa sedan vem som är impostorn!"
+    image="/impostor.png"
+    onJoinGame={() => router.navigate({
+        to: '/live/impostor/join',
+    })}
+    onCreateGame={() => router.navigate({
+        to: '/live/impostor/create',
+    })}
+    keywords={['impostor', 'bluffa', 'gissa', 'socialt spel', 'misstänksamhet']}
+/>
+                 <LiveGamePreview
+                    name="⚡ Reaktions Tid"
+                    description="Reflexer på prov! Vänta på den gröna rutan, klicka snabbast. Enkel utmaning för dig och vännerna – vem är snabbast på avtryckaren?"
+                    image="/reaction-time.png"
+                    onJoinGame={() => router.navigate({
+                        to: '/live/impostor/join',
+                    })}
+                    onCreateGame={() => router.navigate({
+                        to: '/live/impostor/create',
+                    })}
+                    keywords={['reaktion', 'tid', 'snabbast']}
+                />
+                <LiveGamePreview
                     name="🏷️ Gissa Etikett" 
                     description="Vem eller vad är du? Varje spelare får en hemlig etikett med en person, sak eller koncept som ni väljer. Ställ ja- och nej-frågor till de andra för att lista ut din egen etikett. Först att gissa vinner"
                     image="/whois.png"
