@@ -8,7 +8,8 @@ export const GameState = {
 export const GameType = {
     ANONYMOUS: "anonymous",
     REACTION_TIME:"reactionTime",
-    WHO_IS:"whoIs"
+    WHO_IS:"whoIs",
+    IMPOSTOR:"impostor"
 }
 
 export const GameSchema = z.object({
@@ -17,7 +18,7 @@ export const GameSchema = z.object({
     owner: z.string(),
     players: z.string().array(),
     state: z.enum([GameState.WAITING_FOR_PLAYERS, GameState.IN_PROGRESS]),
-    type: z.enum([GameType.ANONYMOUS,GameType.REACTION_TIME,GameType.WHO_IS]),
+    type: z.enum([GameType.ANONYMOUS,GameType.REACTION_TIME,GameType.WHO_IS,GameType.IMPOSTOR]),
 });
 export type Game = z.infer<typeof GameSchema>;
 
@@ -75,3 +76,27 @@ export const WhoIsGameSchema = GameSchema.extend({
     })
 })
 export type WhoIsGame = z.infer<typeof WhoIsGameSchema>
+
+export const ImpostorGameState = {
+    ENTER_ANSWER:"enter_answer",
+    VIEW_ANSWERS:"view_answers",
+    IMPOSTOR_REVEAL:"impostor_reveal",
+    FINISHED:"finished"
+}
+
+export const ImpostorGameSchema = GameSchema.extend({
+    data:z.object({
+        impostor:z.string(),
+        previousImpostors:z.string().array(),
+        state:z.enum([ImpostorGameState.ENTER_ANSWER,ImpostorGameState.VIEW_ANSWERS,ImpostorGameState.IMPOSTOR_REVEAL,ImpostorGameState.FINISHED]),
+        answers:z.record(z.string(),z.string()),
+        currentRound:z.number(),
+        rounds:z.number(),
+        question:z.object({
+            normal:z.string(),
+            impostor:z.string(),
+        }),
+        mode:z.enum(["normal","spicy"])
+    })
+})
+export type ImpostorGame = z.infer<typeof ImpostorGameSchema>
