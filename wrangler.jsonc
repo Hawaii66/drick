@@ -21,6 +21,5 @@
     ],
     "vars": {
         "VITE_CONVEX_URL":"https://lovable-mammoth-183.convex.cloud"
-
     }
 }
