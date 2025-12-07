@@ -27,7 +27,7 @@ export default function GameSelectSearch({ children }: PropsWithChildren) {
     return <GameSelectSearchContext.Provider value={query}>
         <Card className="m-4">
             <CardContent>
-                <Input placeholder="Search..." value={query} onChange={e => setQuery(e.target.value)} />
+                <Input placeholder="Sök..." value={query} onChange={e => setQuery(e.target.value)} />
             </CardContent>
         </Card>
         {children}
